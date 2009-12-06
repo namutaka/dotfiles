@@ -10,6 +10,8 @@ alias ll='ls -l'
 alias la='ls -la'
 
 alias rm='rm -i'
+alias cp='cp -i'
+
 
 # Google App Engine SDK for JAVA
 GAE_JAVA_SDK=/Users/namu/dev/appengine-java-sdk
