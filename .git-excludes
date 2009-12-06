@@ -1,0 +1,6 @@
+#git all ignore patterns
+
+.*.swp
+*~
+
+
