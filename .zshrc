@@ -16,6 +16,5 @@ GAE_JAVA_SDK=/Users/namu/dev/appengine-java-sdk
 PATH="$PATH:$GAE_JAVA_SDK/bin"
 
 # JAVA
-export JAVA_OPTS="-Dfile.encoding=UTF-8"
-
+export _JAVA_OPTIONS="-Dfile.encoding=UTF-8"
 
