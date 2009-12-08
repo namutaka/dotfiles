@@ -16,3 +16,6 @@ set mouse=a
 " screen対応
 set ttymouse=xterm2
 
+
+au! BufNewFile,BufRead *.gv setf groovy
+
