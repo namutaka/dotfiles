@@ -15,3 +15,11 @@ Public/
 Sites/
 dev/
 Library/
+.macports/
+.m2/
+.cpan/
+.gem/
+.ssh/
+.subversion/
+.vim/
+.groovy/
