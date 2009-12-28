@@ -3,3 +3,11 @@
 	name = namu
 [core]
 	excludesfile = /Users/namu/.git-excludes
+[alias]
+	co = checkout
+    br = branch
+    ci = commit
+    st = status
+    di = diff --color
+    last = log -1 HEAD
+
