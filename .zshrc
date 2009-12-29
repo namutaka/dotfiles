@@ -5,7 +5,7 @@
 PROMPT='%n@%m:[%24<..<%~]%# '
 
 # my aliases
-alias ls='ls -F'
+alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -la'
 
