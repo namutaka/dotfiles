@@ -5,6 +5,7 @@
 PROMPT='%n@%m:[%24<..<%~]%# '
 
 # my aliases
+export LSCOLORS=cxfxcxdxbxegedabagacad
 alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -la'
