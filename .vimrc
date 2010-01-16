@@ -20,7 +20,8 @@ autocmd BufNewFile,BufRead *.gv setf groovy
 
 
 "行頭のスペースの連続をハイライトさせる
-"Tab文字も区別されずにハイライトされるので、区別したいときはTab文字の表示を別に
+"Tab文字も区別されずにハイライトされるので、
+"区別したいときはTab文字の表示を別に
 "設定する必要がある。
 function! SOLSpaceHilight()
 	syntax match SOLSpace "^\s\+" display containedin=ALL
