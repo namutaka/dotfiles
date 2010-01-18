@@ -13,7 +13,19 @@ alias la='ls -la'
 alias rm='rm -i'
 alias cp='cp -i'
 
-alias mvi='mvim --remote-tab-silent'
+#mvim
+function mvi() {
+  if [ $# != 0 ]; then
+    mvim --remote-tab-silent $@ 2> /dev/null
+  else
+    srvs=`mvim --serverlist 2> /dev/null`
+    if [ "$srvs" != "" ]; then
+      mvim --remote-send ":tabnew<CR>"
+    else
+      mvim
+    fi
+  fi
+}
 
 
 # Google App Engine SDK for JAVA
