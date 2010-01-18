@@ -11,6 +11,9 @@
     ci = commit
     st = status
     last = log -1 HEAD
+	ds = diff --stat
+	ca = diff --cached
+	cs = diff --cached --stat
 
 [diff]
     external=git_diff_macvim
