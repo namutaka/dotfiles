@@ -1,7 +1,9 @@
 "gvimrc
 
 if has('gui_macvim')
-	colorscheme desert
+	colorscheme macvim
+	set background=light
+	hi SpecialKey guifg=#aaaaaa
 
     set showtabline=2 " タブを常に表示
     set imdisable " IMを無効化
