@@ -10,7 +10,11 @@ set incsearch
 set hlsearch
 set nowrap
 
+" バックアップなし
+set nobackup
+
 " ステータスバー
+set cmdheight=1
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
