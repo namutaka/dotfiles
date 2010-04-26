@@ -35,3 +35,4 @@ PATH="$PATH:$GAE_JAVA_SDK/bin"
 # JAVA
 export JAVA_OPTS="-Dfile.encoding=UTF-8"
 export GROOVY_HOME=/opt/local/share/java/groovy
+
