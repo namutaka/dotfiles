@@ -21,5 +21,10 @@ if has('gui_macvim')
 	map <silent> <C-e> :tabclose<CR>
 
 	call g:restore_window_size()
+
+	" ime設定
+	set noimdisable
+
+	set guioptions-=T
 endif
 
