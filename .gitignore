@@ -8,6 +8,8 @@ Public/
 Sites/
 Library/
 dev/
+tags
+yankring_history_v2.txt
 
 .*
 !.git-excludes
@@ -21,4 +23,3 @@ dev/
 !.zshrc
 !.profile
 !.screenrc
-

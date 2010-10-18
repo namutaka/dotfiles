@@ -5,8 +5,8 @@ if has('gui_macvim')
 	set background=light
 	hi SpecialKey guifg=#aaaaaa
 
-	set guifont=Menlo:h12
-	set guifontwide=Menlo:h12
+	set guifont=Monaco:h11
+	set guifontwide=Monaco:h11
 
 	set cmdheight=1
 	set showtabline=2 " タブを常に表示
