@@ -4,6 +4,13 @@
 
 PROMPT='%n@%m:[%24<..<%~]%# '
 
+ISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt hist_ignore_dups     # ignore duplication command history list
+setopt share_history        # share command history data
+
+
 # my aliases
 export LSCOLORS=cxfxcxdxbxegedabagacad
 alias ls='ls -GF'
@@ -29,10 +36,12 @@ function mvi() {
 
 
 # Google App Engine SDK for JAVA
-GAE_JAVA_SDK=/Users/namu/dev/appengine-java-sdk
+GAE_JAVA_SDK=~/dev/google/appengine-java-sdk
 PATH="$PATH:$GAE_JAVA_SDK/bin"
+export APPENGINE_HOME=$GAE_JAVA_SDK
 
 # JAVA
-export JAVA_OPTS="-Dfile.encoding=UTF-8"
+export JAVA_OPTS='-Dgroovy.source.encoding=UTF-8 -Dfile.encoding=UTF-8'
 export GROOVY_HOME=/opt/local/share/java/groovy
+export _JAVA_OPTIONS='-Dfile.encoding=UTF-8'
 

@@ -9,6 +9,8 @@ set smartindent
 set incsearch
 set hlsearch
 set nowrap
+set hidden
+let g:netrw_liststyle=3
 
 " バックアップなし
 set nobackup
@@ -16,7 +18,7 @@ set nobackup
 " ステータスバー
 set cmdheight=1
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%y%=%l,%c%V%8P
 
 " 特殊文字
 set list
@@ -29,12 +31,18 @@ set ttymouse=xterm2
 
 
 autocmd FileType make setlocal noexpandtab
-autocmd BufNewFile,BufRead *.gv setf groovy
+au QuickfixCmdPost make,grep,grepadd,vimgrep copen
+
+
+" miniBuf
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBuffs = 1
 
 
 
 
-
+" FuzyFinder
 nnoremap <unique> <silent> <space>fb :FufBuffer!<CR>
 nnoremap <unique> <silent> <space>ff :FufFile!<CR>
 nnoremap <unique> <silent> <space>fm :FufMruFile!<CR>
@@ -46,4 +54,11 @@ let g:fuf_mrufile_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
 let g:fuf_mrufile_maxItem = 100
 let g:fuf_enumeratingLimit = 20
 let g:fuf_file_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
+
+" Ruby
+au FileType ruby set ts=2 sw=2 expandtab
+
+" Objcpp
+au FileType objcpp set comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+
 
