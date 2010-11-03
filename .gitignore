@@ -1,15 +1,4 @@
-Desktop/
-Downloads/
-Documents/
-Movies/
-Music/
-Pictures/
-Public/
-Sites/
-Library/
-dev/
-tags
-yankring_history_v2.txt
+*
 
 .*
 !.git-excludes

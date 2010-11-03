@@ -15,10 +15,10 @@ if has('gui_macvim')
 	map <silent> gw :macaction selectNextWindow:<CR>
 	map <silent> gW :macaction selectPreviousWindow:<CR>
 
-	map <silent> gt :tabnext<CR>
-	map <silent> gT :tabprev<CR>
-
-	map <silent> <C-e> :tabclose<CR>
+  map <silent> gt :tabnext<CR>
+  map <silent> gT :tabprev<CR>
+  map <silent> <C-Tab> :bn<CR>
+  map <silent> <C-S-Tab> :bp<CR>
 
 	call g:restore_window_size()
 
