@@ -1,14 +1,14 @@
 *
 
-.*
 !.git-excludes
 !.gitconfig
 !.gitignore
 
 !.gvimrc
-!.vim
+!.vim/
 !.vimrc
 
 !.zshrc
 !.profile
 !.screenrc
+

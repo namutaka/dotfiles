@@ -10,21 +10,10 @@ if has('gui_macvim')
 
 	set cmdheight=1
 	set showtabline=2 " タブを常に表示
-	set imdisable " IMを無効化
 	set transparency=0 " 透明度を指定
-	map <silent> gw :macaction selectNextWindow:<CR>
-	map <silent> gW :macaction selectPreviousWindow:<CR>
-
-  map <silent> gt :tabnext<CR>
-  map <silent> gT :tabprev<CR>
-  map <silent> <C-Tab> :bn<CR>
-  map <silent> <C-S-Tab> :bp<CR>
+	set noimdisable " ime設定
+	set guioptions-=T
 
 	call g:restore_window_size()
-
-	" ime設定
-	set noimdisable
-
-	set guioptions-=T
 endif
 

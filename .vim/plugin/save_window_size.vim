@@ -2,7 +2,7 @@
 " 2010/04/08
 " origin:http://vim-users.jp/2010/01/hack120/
 
-let g:save_window_file = expand('~/.vimwinpos')
+let g:save_window_file = expand('~/.vim/tmp/.vimwinpos')
 augroup SaveWindow
   autocmd!
   autocmd VimLeavePre * call s:save_window()
