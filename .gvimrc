@@ -11,7 +11,6 @@ if has('gui_macvim')
 	set cmdheight=1
 	set showtabline=2 " タブを常に表示
 	set transparency=0 " 透明度を指定
-	set noimdisable " ime設定
 	set guioptions-=T
 
 	call g:restore_window_size()
