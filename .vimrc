@@ -19,30 +19,37 @@ filetype plugin on
 
 syntax on
 let mapleader = ","              " キーマップリーダー
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set softtabstop=0
-set number
-set smartindent
-set nowrap
 set hidden
-set path+=~/
 set nobackup
-set cursorline
-set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
+set noimdisable " ime設定
+set path+=~/
 let g:netrw_liststyle=3
 set mouse=a  " screenからのマウス操作
 set ttymouse=xterm2
+set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
+
+" 表示
+set number
+set nowrap
+set cursorline
+set list " 特殊文字
+set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
+set showmatch         " 括弧の対応をハイライト
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match ZenkakuSpace /　/
+
+" インデント
+set tabstop=2
+set shiftwidth=2
+set softtabstop=0
+set expandtab
+set smartindent
 
 " ステータスバー
 set cmdheight=1
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%y%=%l,%c%V%8P
-
-" 特殊文字
-set list
-set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
 
 " Man
 runtime! ftplugin/man.vim
@@ -52,74 +59,14 @@ autocmd BufWritePre * :%s/\s\+$//ge
 
 
 "------------------------------------
-" Quickfix
-"------------------------------------
-autocmd FileType make setlocal noexpandtab
-au QuickfixCmdPost make,grep,grepadd,vimgrep copen
-
-"------------------------------------
-" grep.vim settings
-"------------------------------------
-let Grep_Find_Use_Xargs = 0
-
-"------------------------------------
-" MiniBufExplorer
-"------------------------------------
-"set minibfexp
-let g:miniBufExplMapWindowNavVim=1 "hjklで移動
-let g:miniBufExplSplitBelow=0  " Put new window above
-let g:miniBufExplMapWindowNavArrows=1
-let g:miniBufExplMapCTabSwitchBufs=1
-let g:miniBufExplModSelTarget=1
-let g:miniBufExplSplitToEdge=1
-let g:miniBufExplMaxSize = 10
-
-":MtでMiniBufExplorerの表示トグル
-command! Mt :TMiniBufExplorer
-
-
-"------------------------------------
-" FuzyFinder
-"------------------------------------
-"nnoremap <unique> <silent> <Leader>fb :FufBuffer!<CR>
-"nnoremap <unique> <silent> <Leader>ff :FufFile!<CR>
-"nnoremap <unique> <silent> <Leader>fm :FufMruFile!<CR>
-"nnoremap <unique> <silent> <Leader>fc :FufRenewCache<CR>
-"autocmd FileType fuf nmap <C-c> <ESC>
-"let g:fuf_patternSeparator = ' '
-"let g:fuf_modesDisable = ['mrucmd']
-"let g:fuf_mrufile_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
-"let g:fuf_mrufile_maxItem = 100
-"let g:fuf_enumeratingLimit = 20
-"let g:fuf_file_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
-"
-
-
-
-"------------------------------------
 " Key map
 "------------------------------------
-
-map <silent> gw :macaction selectNextWindow:<CR>
-map <silent> gW :macaction selectPreviousWindow:<CR>
-map <silent> gt :tabnext<CR>
-map <silent> gT :tabprev<CR>
-map <silent> <C-Tab> :bn<CR>
 
 " CTRL-hjklでウィンドウ移動
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
-
-map <silent> <C-S-Tab> :bp<CR>
-" spaceで次のbufferへ。back-spaceで前のbufferへ
-nmap <Space> :MBEbn<CR>
-nmap <BS> :MBEbp<CR>
-
-" s, ssで選択範囲を指定文字でくくる
-nmap s <Plug>Ysurround
-nmap ss <Plug>Yssurround
 
 " カーソルを表示行で移動する。論理行移動は<C-n>,<C-p>
 nnoremap h <Left>
@@ -129,16 +76,21 @@ nnoremap l <Right>
 nnoremap <Down> gj
 nnoremap <Up>   gk
 
-" F2で前のバッファ
-map <F2> <ESC>:bp<CR>
-" F3で次のバッファ
-map <F3> <ESC>:bn<CR>
-" F4でバッファを削除する
-map <F4> <ESC>:bw<CR>
-
 " ウインドウサイズ変更
 nnoremap + <C-w>+
 nnoremap - <C-w>-
+
+" ウインドウ／タブ切り換え
+map <silent> gw :macaction selectNextWindow:<CR>
+map <silent> gW :macaction selectPreviousWindow:<CR>
+map <silent> gt :tabnext<CR>
+map <silent> gT :tabprev<CR>
+map <silent> <C-Tab> :bn<CR>
+map <silent> <C-S-Tab> :bp<CR>
+map <F2> <ESC>:bp<CR> " F2で前のバッファ
+map <F3> <ESC>:bn<CR> " F3で次のバッファ
+map <F4> <ESC>:bw<CR> " F4でバッファを削除する
+
 
 "-------------------------------------------------------------------------------
 " 検索設定 Search
@@ -284,4 +236,57 @@ function! s:unite_my_settings()"{{{
 endfunction"}}}
 
 let g:unite_source_file_mru_limit = 200
+
+"------------------------------------
+" Quickfix
+"------------------------------------
+autocmd FileType make setlocal noexpandtab
+au QuickfixCmdPost make,grep,grepadd,vimgrep copen
+
+"------------------------------------
+" grep.vim settings
+"------------------------------------
+let Grep_Find_Use_Xargs = 0
+
+"------------------------------------
+" MiniBufExplorer
+"------------------------------------
+"set minibfexp
+let g:miniBufExplMapWindowNavVim=1 "hjklで移動
+let g:miniBufExplSplitBelow=0  " Put new window above
+let g:miniBufExplMapWindowNavArrows=1
+let g:miniBufExplMapCTabSwitchBufs=1
+let g:miniBufExplModSelTarget=1
+let g:miniBufExplSplitToEdge=1
+let g:miniBufExplMaxSize = 10
+
+":MtでMiniBufExplorerの表示トグル
+command! Mt :TMiniBufExplorer
+
+" spaceで次のbufferへ。back-spaceで前のbufferへ
+nmap <Space> :MBEbn<CR>
+nmap <BS> :MBEbp<CR>
+
+"------------------------------------
+" Ysurround
+"------------------------------------
+" s, ssで選択範囲を指定文字でくくる
+nmap s <Plug>Ysurround
+nmap ss <Plug>Yssurround
+
+"------------------------------------
+" FuzyFinder
+"------------------------------------
+"nnoremap <unique> <silent> <Leader>fb :FufBuffer!<CR>
+"nnoremap <unique> <silent> <Leader>ff :FufFile!<CR>
+"nnoremap <unique> <silent> <Leader>fm :FufMruFile!<CR>
+"nnoremap <unique> <silent> <Leader>fc :FufRenewCache<CR>
+"autocmd FileType fuf nmap <C-c> <ESC>
+"let g:fuf_patternSeparator = ' '
+"let g:fuf_modesDisable = ['mrucmd']
+"let g:fuf_mrufile_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
+"let g:fuf_mrufile_maxItem = 100
+"let g:fuf_enumeratingLimit = 20
+"let g:fuf_file_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
+
 
