@@ -16,7 +16,7 @@
 	cs = diff --cached --stat
 
 [diff]
-    external=git_diff_macvim
+#    external=git_diff_macvim
 
 [pager]
     diff =
