@@ -1,0 +1,19 @@
+./bufexplorer
+./cocoa.vim git://github.com/msanders/cocoa.vim.git
+./hatena-vim git://github.com/motemen/hatena-vim.git
+./neocomplcache git://github.com/Shougo/neocomplcache.git
+./nerdcommenter git://github.com/scrooloose/nerdcommenter.git
+./open-browser.vim git://github.com/tyru/open-browser.vim.git
+./project-1.4.1
+./unite.vim git://github.com/Shougo/unite.vim.git
+./urilib.vim git://github.com/tyru/urilib.vim.git
+./vim-autocomplpop
+./vim-operator-replace git://github.com/kana/vim-operator-replace.git
+./vim-operator-user git://github.com/kana/vim-operator-user.git
+./vim-quickrun git://github.com/thinca/vim-quickrun.git
+./vim-ref git://github.com/thinca/vim-ref.git
+./vim-surround git://github.com/tpope/vim-surround.git
+./vimproc git://github.com/Shougo/vimproc.git
+./vimshell git://github.com/Shougo/vimshell.git
+./yankring_100
+
