@@ -112,9 +112,9 @@ vnoremap /r "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
 nnoremap <expr> s* ':%substitute/\<' . expand('<cword>') . '\>/'
 
 " Ctrl-iでヘルプ
-nnoremap <C-S-i>  :<C-u>help<Space>
+nnoremap <Leader><C-i>  :<C-u>help<Space>
 " カーソル下のキーワードをヘルプでひく
-nnoremap <C-S-i><C-S-i> :<C-u>help<Space><C-r><C-w><Enter>
+nnoremap <Leader><C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
 
 " :Gb <args> でGrepBufferする
 command! -nargs=1 Gb :GrepBuffer <args>
