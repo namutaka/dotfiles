@@ -12,6 +12,8 @@ set helpfile=$VIMRUNTIME/doc/help.txt
 " ファイルタイプ判定をon
 filetype plugin on
 
+" 標準プラグインの制御
+let plugin_dicwin_disable=1
 
 "------------------------------------
 " 表示設定
@@ -35,9 +37,6 @@ set cursorline
 set list " 特殊文字
 set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
 set showmatch         " 括弧の対応をハイライト
-" 全角スペースの表示
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-match ZenkakuSpace /　/
 
 " インデント
 set tabstop=2
@@ -113,9 +112,9 @@ vnoremap /r "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
 nnoremap <expr> s* ':%substitute/\<' . expand('<cword>') . '\>/'
 
 " Ctrl-iでヘルプ
-nnoremap <C-i>  :<C-u>help<Space>
+nnoremap <C-S-i>  :<C-u>help<Space>
 " カーソル下のキーワードをヘルプでひく
-nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
+nnoremap <C-S-i><C-S-i> :<C-u>help<Space><C-r><C-w><Enter>
 
 " :Gb <args> でGrepBufferする
 command! -nargs=1 Gb :GrepBuffer <args>
@@ -128,7 +127,7 @@ nnoremap <C-g><C-b> :<C-u>GrepBuffer<Space><C-r><C-w><Enter>
 "------------------------------------
 
 " バッファを閉じる
-noremap <Leader>w :Kwbd<CR>
+nnoremap <Leader>w :Kwbd<CR>
 
 "------------------------------------
 " YankRing.vim
@@ -259,6 +258,7 @@ let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplModSelTarget=1
 let g:miniBufExplSplitToEdge=1
 let g:miniBufExplMaxSize = 10
+let g:miniBufExplUseSingleClick=1
 
 ":MtでMiniBufExplorerの表示トグル
 command! Mt :TMiniBufExplorer
@@ -273,20 +273,5 @@ nmap <BS> :MBEbp<CR>
 " s, ssで選択範囲を指定文字でくくる
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
-
-"------------------------------------
-" FuzyFinder
-"------------------------------------
-"nnoremap <unique> <silent> <Leader>fb :FufBuffer!<CR>
-"nnoremap <unique> <silent> <Leader>ff :FufFile!<CR>
-"nnoremap <unique> <silent> <Leader>fm :FufMruFile!<CR>
-"nnoremap <unique> <silent> <Leader>fc :FufRenewCache<CR>
-"autocmd FileType fuf nmap <C-c> <ESC>
-"let g:fuf_patternSeparator = ' '
-"let g:fuf_modesDisable = ['mrucmd']
-"let g:fuf_mrufile_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
-"let g:fuf_mrufile_maxItem = 100
-"let g:fuf_enumeratingLimit = 20
-"let g:fuf_file_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
 
 
