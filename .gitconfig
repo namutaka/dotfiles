@@ -1,26 +1,24 @@
 [user]
-	email = namutaka+g@gmail.com
-	name = namu
+  email = namutaka+g@gmail.com
+  name = namu
 
 [core]
-	excludesfile = /Users/namu/.git-excludes
+  excludesfile = /Users/namu/.git-excludes
 
 [alias]
-	co = checkout
-    br = branch
-    ci = commit
-    st = status
-    last = log -1 HEAD
-	ds = diff --stat
-	ca = diff --cached
-	cs = diff --cached --stat
-
-[diff]
-#    external=git_diff_macvim
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  last = log -1 HEAD
+  ds = diff --stat
+  ca = diff --cached
+  cs = diff --cached --stat
+  vd = !git -c diff.external=git_diff_macvim diff
 
 [pager]
-    diff =
+  diff =
 
 [color]
-	ui = auto
+  ui = auto
 
