@@ -132,6 +132,9 @@ nnoremap <Leader>w :Kwbd<CR>
 "------------------------------------
 " YankRing.vim
 "------------------------------------
+let g:yankring_history_dir = '$HOME/.vim/tmp/'
+let g:yankring_history_file = '.yankring_history'
+
 " Yankの履歴参照
 nmap <Leader>y :YRShow<CR>
 
@@ -155,7 +158,7 @@ nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 " operator-replace.vim
 "------------------------------------
 " RwなどでYankしてるもので置き換える
-map R <Plug>(operator-replace)
+map <Leader>r <Plug>(operator-replace)
 
 "------------------------------------
 " vimshell
@@ -178,19 +181,7 @@ else
   call vimshell#set_execute_file('tbz,bz2', 'bzcat')
 endif
 
-function! g:my_chpwd(args, context)
-  call vimshell#execute('echo "chpwd"')
-endfunction
-function! g:my_emptycmd(cmdline, context)
-  call vimshell#execute('echo "emptycmd"')
-  return a:cmdline
-endfunction
-function! g:my_preprompt(args, context)
-  call vimshell#execute('echo "preprompt"')
-endfunction
 function! g:my_preexec(cmdline, context)
-  call vimshell#execute('echo "preexec"')
-
   if a:cmdline =~# '^\s*diff\>'
     call vimshell#set_syntax('diff')
   endif
@@ -202,9 +193,6 @@ autocmd FileType vimshell
 \| call vimshell#altercmd#define('i', 'iexe')
 \| call vimshell#altercmd#define('l', 'll')
 \| call vimshell#altercmd#define('ll', 'ls -l')
-\| call vimshell#hook#set('chpwd', ['g:my_chpwd'])
-\| call vimshell#hook#set('emptycmd', ['g:my_emptycmd'])
-\| call vimshell#hook#set('preprompt', ['g:my_preprompt'])
 \| call vimshell#hook#set('preexec', ['g:my_preexec'])
 
 command! Vs :VimShell
