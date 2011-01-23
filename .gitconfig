@@ -14,10 +14,16 @@
   ds = diff --stat
   ca = diff --cached
   cs = diff --cached --stat
-  vd = !git -c diff.external=git_diff_macvim diff
+  vd = difftool -t macvimdiff
+  df = !git --no-pager diff
+
+[difftool]
+  prompt = false
+
+[difftool "macvimdiff"]
+  cmd = "git_diff_macvim \"$LOCAL\" \"$REMOTE\""
 
 [pager]
-  diff =
 
 [color]
   ui = auto
