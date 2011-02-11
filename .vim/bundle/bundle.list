@@ -16,4 +16,5 @@
 ./vimproc git://github.com/Shougo/vimproc.git
 ./vimshell git://github.com/Shougo/vimshell.git
 ./yankring_100
+./vimball http://www.vim.org/scripts/script.php?script_id=294
 
