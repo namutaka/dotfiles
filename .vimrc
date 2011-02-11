@@ -23,12 +23,19 @@ syntax on
 let mapleader = ","              " キーマップリーダー
 set hidden
 set nobackup
-set noimdisable " ime設定
+"set noimdisable " ime設定
 set path+=~/
 let g:netrw_liststyle=3
 set mouse=a  " screenからのマウス操作
 set ttymouse=xterm2
 set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
+set splitbelow
+set splitright
+let g:vimball_home = expand("~/.vim/bundle/vimball")
+let &grepprg="grep -n -r --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $* /dev/null"
+set virtualedit=block
+let g:Align_xstrlen = 3
+let g:buffer_close_after_buf = -1
 
 " 表示
 set number
@@ -38,17 +45,38 @@ set list " 特殊文字
 set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
 set showmatch         " 括弧の対応をハイライト
 
+" 配色
+set background=light
+highlight Folded ctermfg=0
+highlight Statement cterm=bold ctermfg=90
+highlight LineNr ctermfg=250 ctermbg=240
+highlight Identifier ctermfg=darkblue
+highlight Comment ctermfg=34
+highlight CursorLine cterm=NONE ctermbg=235
+highlight Constant ctermfg=32
+highlight rubySymbol ctermfg=9 cterm=bold
+highlight Pmenu ctermfg=0 ctermbg=225
+highlight Pmenu ctermfg=0 ctermbg=225
+highlight PmenuSel    ctermfg=0 ctermbg=7
+highlight PmenuSbar   ctermfg=0 ctermbg=248
+highlight PmenuThumb  cterm=reverse
+highlight DiffAdd ctermbg=60
+highlight DiffChange ctermbg=245
+highlight DiffDelete ctermbg=250
+highlight DiffText cterm=NONE ctermbg=239
+
 " インデント
 set tabstop=2
 set shiftwidth=2
 set softtabstop=0
 set expandtab
 set smartindent
+set autoindent
 
 " ステータスバー
 set cmdheight=1
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%y%=%l,%c%V%8P
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%y\ %{cfi#format('<%s()>','')}%=%l,%c%V%8P
 
 " Man
 runtime! ftplugin/man.vim
@@ -56,6 +84,9 @@ runtime! ftplugin/man.vim
 " 保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\s\+$//ge
 
+" .vimrcを開く
+command! Vimrc edit ~/.vimrc
+nmap <F2> :wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
 
 "------------------------------------
 " Key map
@@ -78,6 +109,8 @@ nnoremap <Up>   gk
 " ウインドウサイズ変更
 nnoremap + <C-w>+
 nnoremap - <C-w>-
+nnoremap <F7> :wincmd ><CR>
+nnoremap <F8> :wincmd <lt><CR>
 
 " ウインドウ／タブ切り換え
 map <silent> gw :macaction selectNextWindow:<CR>
@@ -86,10 +119,10 @@ map <silent> gt :tabnext<CR>
 map <silent> gT :tabprev<CR>
 map <silent> <C-Tab> :bn<CR>
 map <silent> <C-S-Tab> :bp<CR>
-map <F2> <ESC>:bp<CR> " F2で前のバッファ
-map <F3> <ESC>:bn<CR> " F3で次のバッファ
-map <F4> <ESC>:bw<CR> " F4でバッファを削除する
 
+" 頻出文字入力
+nmap <Space> a<Space><ESC>
+nmap <CR> o<ESC>
 
 "-------------------------------------------------------------------------------
 " 検索設定 Search
@@ -121,13 +154,14 @@ command! -nargs=1 Gb :GrepBuffer <args>
 " カーソル下の単語をGrepBufferする
 nnoremap <C-g><C-b> :<C-u>GrepBuffer<Space><C-r><C-w><Enter>
 
+nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
 
 "------------------------------------
 " Kwbd.vim
 "------------------------------------
 
 " バッファを閉じる
-nnoremap <Leader>w :Kwbd<CR>
+nnoremap <Leader>w :BufferClose<CR>
 
 "------------------------------------
 " YankRing.vim
@@ -158,13 +192,13 @@ nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 " operator-replace.vim
 "------------------------------------
 " RwなどでYankしてるもので置き換える
-map <Leader>r <Plug>(operator-replace)
+"nmap <C-p> <Plug>(operator-replace)
 
 "------------------------------------
 " vimshell
 "------------------------------------
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
+"let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+"let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_enable_smart_case = 1
 
 if has('win32') || has('win64')
@@ -196,6 +230,20 @@ autocmd FileType vimshell
 \| call vimshell#hook#set('preexec', ['g:my_preexec'])
 
 command! Vs :VimShell
+command! -nargs=? -complete=dir Vsi :VimShellInteractive <args>
+
+" <Leader>is: シェルを起動
+nnoremap <silent> <Leader>is :VimShell<CR>
+" <Leader>ipy: pythonを非同期で起動
+nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
+" <Leader>irb: irbを非同期で起動
+nnoremap <silent> <Leader>irb :VimShellInteractive irb<CR>
+" <Leader>ss: 非同期で開いたインタプリタに現在の行を評価させる
+nnoremap <silent> <Leader>ss <S-v>:VimShellSendString<CR>
+" 選択中に<Leader>ss: 非同期で開いたインタプリタに選択行を評価させる
+vmap <silent> <Leader>ss :VimShellSendString<CR>
+
+
 
 "------------------------------------
 " unite.vim
@@ -252,8 +300,14 @@ let g:miniBufExplUseSingleClick=1
 command! Mt :TMiniBufExplorer
 
 " spaceで次のbufferへ。back-spaceで前のbufferへ
-nmap <Space> :MBEbn<CR>
-nmap <BS> :MBEbp<CR>
+nmap <Leader><Space> :MBEbn<CR>
+nmap <Leader><BS> :MBEbp<CR>
+
+hi MBENormal ctermfg=0 ctermbg=255
+hi MBEChanged ctermfg=0 ctermbg=255
+hi MBEVisibleNormal  ctermfg=255 ctermbg=0 cterm=bold
+hi MBEVisibleChanged ctermfg=255 ctermbg=0 cterm=bold
+autocmd BufNew -MiniBufExplorer- setl nocursorline
 
 "------------------------------------
 " Ysurround
@@ -262,4 +316,24 @@ nmap <BS> :MBEbp<CR>
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
 
+
+"------------------------------------
+" QuickRun
+"------------------------------------
+
+let g:quickrun_config = {}
+let g:quickrun_config['_'] = {'split' : ''}
+let g:quickrun_config['ruby.rspec'] = {'command': 'spec'}
+let g:quickrun_config['ruby.test'] = {'command': 'ruby', 'cmdopt': '-I test', 'runmode' : 'async:vimproc'}
+let g:quickrun_config['ruby.runner'] = {'command': 'ruby', 'cmdopt': './script/runner', 'runmode' : 'async:vimproc'}
+augroup RubyTest
+  autocmd!
+  autocmd BufWinEnter,BufNewFile *_test.rb set filetype=ruby.test
+augroup END
+
+
+"------------------------------------
+" DirDiff
+"------------------------------------
+let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
 
