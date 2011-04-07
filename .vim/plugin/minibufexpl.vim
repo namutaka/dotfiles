@@ -663,6 +663,8 @@ function! <SID>StartExplorer(sticky, delBufNum)
     endif
   endif
   setl nocursorline
+  setl statusline=%(%)
+
   " If you press return in the -MiniBufExplorer- then try
   " to open the selected buffer in the previous window.
   nnoremap <buffer> <CR> :call <SID>MBESelectBuffer()<CR>:<BS>
