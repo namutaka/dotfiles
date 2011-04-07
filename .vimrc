@@ -101,8 +101,8 @@ map <silent> <C-Tab> :bn<CR>
 map <silent> <C-S-Tab> :bp<CR>
 
 " 頻出文字入力
-nmap <Space> a<Space><ESC>
-nmap <CR> o<ESC>
+nmap <C-Space> a<Space><ESC>
+nmap <C-CR> o<ESC>
 
 "-------------------------------------------------------------------------------
 " 検索設定 Search
@@ -230,7 +230,7 @@ vmap <silent> <Leader>ss :VimShellSendString<CR>
 "------------------------------------
 " The prefix key.
 nnoremap    [unite]   <Nop>
-nmap    f [unite]
+nmap    <C-f> [unite]
 
 nnoremap [unite]u  :<C-u>Unite<Space>
 nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
@@ -280,8 +280,8 @@ let g:miniBufExplUseSingleClick=1
 command! Mt :TMiniBufExplorer
 
 " spaceで次のbufferへ。back-spaceで前のbufferへ
-nmap <Leader><Space> :MBEbn<CR>
-nmap <Leader><BS> :MBEbp<CR>
+nmap <Space> :MBEbn<CR>
+nmap <BS> :MBEbp<CR>
 
 hi MBENormal ctermfg=0 ctermbg=255
 hi MBEChanged ctermfg=0 ctermbg=255
