@@ -1,6 +1,6 @@
 #.screenrc
 
-escape f
+escape 
 shell /bin/zsh
 
 defscrollback 10000
@@ -9,7 +9,7 @@ defkanji utf-8
 autodetach on
 vbell on
 startup_message off
-hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
+hardstatus alwayslastline " %{=b kR}[%L=$HOST%+010=]%{-} %`%-w%{=b bw}%n %t%{-}%+w %=[%y/%02m/%02d %02c] "
 
 
 #setting for mouse
@@ -18,7 +18,8 @@ termcapinfo xterm* ti@:te@
 #setting for 256color
 defbce "on"
 term xterm-256color
-termcapinfo xterm-256color 'is=rmJH?7h?1;4;6l'
+attrcolor b ".I"
+termcapinfo xterm* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
 
 #key settings
@@ -29,4 +30,6 @@ bind -c resize k eval 'resize -1' 'command -c resize'
 
 bind l windowlist
 
+# automatically set title
+setenv SCREENTITLE auto
 

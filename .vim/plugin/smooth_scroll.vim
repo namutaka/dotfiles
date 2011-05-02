@@ -19,6 +19,13 @@
 "
 " Written by Brad Phelan 2006
 " http://xtargets.com
+"
+"
+"
+if has('gui_macvim')
+  finish
+endif
+
 let g:scroll_factor = 5000
 let g:scroll_skip_size = 1
 function! SmoothScroll(dir, windiv, factor)
