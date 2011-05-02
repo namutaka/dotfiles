@@ -1,4 +1,7 @@
 ".vimrc
+set runtimepath+=$HOME/.vim
+set winaltkeys=no
+set clipboard=unnamed
 
 "------------------------------------
 " pathogen
@@ -23,6 +26,7 @@ syntax on
 let mapleader = ","              " キーマップリーダー
 set hidden
 set nobackup
+set noswapfile
 "set noimdisable " ime設定
 set path+=~/
 let g:netrw_liststyle=3
@@ -32,10 +36,14 @@ set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらな
 set splitbelow
 set splitright
 let g:vimball_home = expand("~/.vim/bundle/vimball")
-let &grepprg="grep -n -r --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $* /dev/null"
+let &grepprg="grep -n -r --exclude-dir='.git' --exclude-dir=docs --exclude='*\\tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $*"
 set virtualedit=block
 let g:Align_xstrlen = 3
 let g:buffer_close_after_buf = -1
+set foldmethod=syntax
+set tags+=../../../tags
+set tags+=../../tags
+set tags+=../tags
 
 " 表示
 set number
@@ -101,8 +109,8 @@ map <silent> <C-Tab> :bn<CR>
 map <silent> <C-S-Tab> :bp<CR>
 
 " 頻出文字入力
-nmap <Space> a<Space><ESC>
-nmap <CR> o<ESC>
+nmap <Leader><Space> a<Space><ESC>
+nmap <Leader><CR> o<ESC>
 
 "-------------------------------------------------------------------------------
 " 検索設定 Search
@@ -146,7 +154,7 @@ nnoremap <Leader>w :BufferClose<CR>
 "------------------------------------
 " YankRing.vim
 "------------------------------------
-let g:yankring_history_dir = '$HOME/.vim/tmp/'
+let g:yankring_history_dir = '~/.vim/tmp/'
 let g:yankring_history_file = '.yankring_history'
 
 " Yankの履歴参照
@@ -172,7 +180,7 @@ nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 " operator-replace.vim
 "------------------------------------
 " RwなどでYankしてるもので置き換える
-"nmap <C-p> <Plug>(operator-replace)
+nmap <C-p> <Plug>(operator-replace)
 
 "------------------------------------
 " vimshell
@@ -280,8 +288,8 @@ let g:miniBufExplUseSingleClick=1
 command! Mt :TMiniBufExplorer
 
 " spaceで次のbufferへ。back-spaceで前のbufferへ
-nmap <Leader><Space> :MBEbn<CR>
-nmap <Leader><BS> :MBEbp<CR>
+nmap <C-BS> :MBEbn<CR>
+nmap <BS> :MBEbp<CR>
 
 hi MBENormal ctermfg=0 ctermbg=255
 hi MBEChanged ctermfg=0 ctermbg=255
@@ -306,6 +314,11 @@ let g:quickrun_config['_'] = {'split' : ''}
 let g:quickrun_config['ruby.rspec'] = {'command': 'spec'}
 let g:quickrun_config['ruby.test'] = {'command': 'ruby', 'cmdopt': '-I test', 'runmode' : 'async:vimproc'}
 let g:quickrun_config['ruby.runner'] = {'command': 'ruby', 'cmdopt': './script/runner', 'runmode' : 'async:vimproc'}
+let g:quickrun_config['java'] = {
+\   'exec': ['javac -encoding utf-8 %o %s', '%c %s:t:r %a', ':call delete("%S:t:r.class")'],
+\   'output_encode': '&termencoding',
+\ }
+
 augroup RubyTest
   autocmd!
   autocmd BufWinEnter,BufNewFile *_test.rb set filetype=ruby.test
@@ -316,4 +329,13 @@ augroup END
 " DirDiff
 "------------------------------------
 let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
+
+
+
+
+"------------------------------------
+" Utilities
+"------------------------------------
+nmap <Leader>% :let @+=(expand("%:p") . ":" . line("."))<CR>
+
 
