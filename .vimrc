@@ -238,7 +238,7 @@ vmap <silent> <Leader>ss :VimShellSendString<CR>
 "------------------------------------
 " The prefix key.
 nnoremap    [unite]   <Nop>
-nmap    f [unite]
+nmap    <C-f> [unite]
 
 nnoremap [unite]u  :<C-u>Unite<Space>
 nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
@@ -289,7 +289,6 @@ command! Mt :TMiniBufExplorer
 
 " spaceで次のbufferへ。back-spaceで前のbufferへ
 nmap <C-BS> :MBEbn<CR>
-nmap <BS> :MBEbp<CR>
 
 hi MBENormal ctermfg=0 ctermbg=255
 hi MBEChanged ctermfg=0 ctermbg=255
