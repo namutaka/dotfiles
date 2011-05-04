@@ -1,7 +1,8 @@
 "gvimrc
 
 if has('gui_macvim')
-	source ~/.vim/colors/my_macvim_color.vim
+	colorscheme desert
+	"source ~/.vim/colors/my_macvim_color.vim
 
 	set guifont=Monaco:h12
 	set guifontwide=Monaco:h12

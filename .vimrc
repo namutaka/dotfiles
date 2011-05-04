@@ -238,7 +238,7 @@ vmap <silent> <Leader>ss :VimShellSendString<CR>
 "------------------------------------
 " The prefix key.
 nnoremap    [unite]   <Nop>
-nmap    <C-f> [unite]
+nmap    <C-a> [unite]
 
 nnoremap [unite]u  :<C-u>Unite<Space>
 nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
