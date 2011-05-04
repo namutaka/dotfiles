@@ -11,6 +11,7 @@
 /.vim/tmp/
 /.vim/tags/
 !/.vimrc
+/.vim/**/tags
 
 !/.zshrc
 !/.profile
