@@ -288,6 +288,7 @@ let g:miniBufExplUseSingleClick=1
 command! Mt :TMiniBufExplorer
 
 " spaceで次のbufferへ。back-spaceで前のbufferへ
+nmap <BS> :MBEbp<CR>
 nmap <C-BS> :MBEbn<CR>
 
 hi MBENormal ctermfg=0 ctermbg=255
