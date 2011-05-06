@@ -154,7 +154,7 @@ nnoremap <Leader>w :BufferClose<CR>
 "------------------------------------
 " YankRing.vim
 "------------------------------------
-let g:yankring_history_dir = '~/.vim/tmp/'
+let g:yankring_history_dir = '~/.vim/tmp'
 let g:yankring_history_file = '.yankring_history'
 
 " Yankの履歴参照
