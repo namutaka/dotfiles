@@ -46,5 +46,8 @@ export GROOVY_HOME=/opt/local/share/java/groovy
 export _JAVA_OPTIONS='-Dfile.encoding=UTF-8'
 
 
+# Android
+export ANDROID_SDK=~/dev/android/android-sdk-mac_x86
+export PATH="$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools"
 
 

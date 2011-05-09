@@ -154,7 +154,7 @@ nnoremap <Leader>w :BufferClose<CR>
 "------------------------------------
 " YankRing.vim
 "------------------------------------
-let g:yankring_history_dir = '~/.vim/tmp/'
+let g:yankring_history_dir = '~/.vim/tmp'
 let g:yankring_history_file = '.yankring_history'
 
 " Yankの履歴参照
@@ -238,7 +238,7 @@ vmap <silent> <Leader>ss :VimShellSendString<CR>
 "------------------------------------
 " The prefix key.
 nnoremap    [unite]   <Nop>
-nmap    <C-f> [unite]
+nmap    <C-a> [unite]
 
 nnoremap [unite]u  :<C-u>Unite<Space>
 nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
@@ -288,6 +288,7 @@ let g:miniBufExplUseSingleClick=1
 command! Mt :TMiniBufExplorer
 
 " spaceで次のbufferへ。back-spaceで前のbufferへ
+nmap <BS> :MBEbp<CR>
 nmap <C-BS> :MBEbn<CR>
 
 hi MBENormal ctermfg=0 ctermbg=255
