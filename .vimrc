@@ -318,6 +318,7 @@ let g:quickrun_config['java'] = {
 \   'exec': ['javac -encoding utf-8 %o %s', '%c %s:t:r %a', ':call delete("%S:t:r.class")'],
 \   'output_encode': '&termencoding',
 \ }
+let g:quickrun_config['python.android'] = {'command' : 'monkeyrunner' }
 
 augroup RubyTest
   autocmd!
