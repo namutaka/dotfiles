@@ -1,22 +1,9 @@
 ".vimrc
-set runtimepath+=$HOME/.vim
-set winaltkeys=no
-set clipboard=unnamed
 
-"------------------------------------
-" pathogen
-"------------------------------------
-" pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
-filetype off
 " pathogen.vimによってbundle配下のpluginをpathに加える
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 call pathogen#helptags()
-set helpfile=$VIMRUNTIME/doc/help.txt
-" ファイルタイプ判定をon
-filetype plugin on
 
-" 標準プラグインの制御
-let plugin_dicwin_disable=1
 
 "------------------------------------
 " 表示設定
@@ -28,19 +15,19 @@ set hidden
 set nobackup
 set noswapfile
 "set noimdisable " ime設定
-set path+=~/
-let g:netrw_liststyle=3
-set mouse=a  " screenからのマウス操作
+set mouse=a
 set ttymouse=xterm2
 set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
 set splitbelow
 set splitright
-let g:vimball_home = expand("~/.vim/bundle/vimball")
-let &grepprg="grep -n -r --exclude-dir='.git' --exclude-dir=docs --exclude='*\\tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $*"
 set virtualedit=block
-let g:Align_xstrlen = 3
-let g:buffer_close_after_buf = -1
-set foldmethod=syntax
+set winaltkeys=no
+set clipboard=unnamed
+
+" パス設定
+set runtimepath+=$HOME/.vim
+set path+=~/
+let g:vimball_home = expand("~/.vim/bundle/vimball")
 set tags+=../../../tags
 set tags+=../../tags
 set tags+=../tags
@@ -52,6 +39,7 @@ set cursorline
 set list " 特殊文字
 set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
 set showmatch         " 括弧の対応をハイライト
+set foldmethod=syntax
 
 " インデント
 set tabstop=2
@@ -69,12 +57,12 @@ set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%y\ %{cfi
 " Man
 runtime! ftplugin/man.vim
 
-" 保存時に行末の空白を除去する
-autocmd BufWritePre * :%s/\s\+$//ge
+" 標準プラグインの制御
+let plugin_dicwin_disable=1
+let g:netrw_liststyle=3
+let g:Align_xstrlen = 3
+let g:buffer_close_after_buf = -1
 
-" .vimrcを開く
-command! Vimrc edit ~/.vimrc
-nmap <F2> :wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
 
 "------------------------------------
 " Key map
@@ -120,6 +108,7 @@ set ignorecase " 大文字小文字無視
 set smartcase  " 検索文字列に大文字が含まれている場合は区別して検索する
 set incsearch  " インクリメンタルサーチ
 set hlsearch   " 検索文字をハイライト
+let &grepprg="grep -n -r --exclude-dir='.git' --exclude-dir=docs --exclude='*\\tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $*"
 
 "Escの2回押しでハイライト消去
 nmap <ESC><ESC> :nohlsearch<CR><ESC>
@@ -332,11 +321,15 @@ augroup END
 let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
 
 
-
-
 "------------------------------------
 " Utilities
 "------------------------------------
 nmap <Leader>% :let @+=(expand("%:p") . ":" . line("."))<CR>
 
+" 保存時に行末の空白を除去する
+autocmd BufWritePre * :%s/\s\+$//ge
+
+" .vimrcを開く
+command! Vimrc edit ~/.vimrc
+nmap <F2> :wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
 
