@@ -1,13 +1,6 @@
 ".vimrc
 
-" pathogen.vimによってbundle配下のpluginをpathに加える
-call pathogen#infect()
-call pathogen#helptags()
-
-
-"------------------------------------
-" 表示設定
-"------------------------------------
+" 全体設定 {{{
 
 syntax on
 let mapleader = ","              " キーマップリーダー
@@ -54,19 +47,23 @@ set cmdheight=1
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%y\ %{cfi#format('<%s()>','')}%=%l,%c%V%8P
 
-" Man
-runtime! ftplugin/man.vim
-
 " 標準プラグインの制御
 let plugin_dicwin_disable=1
 let g:netrw_liststyle=3
 let g:Align_xstrlen = 3
 let g:buffer_close_after_buf = -1
 
+" Man
+runtime! ftplugin/man.vim
 
-"------------------------------------
-" Key map
-"------------------------------------
+" Quickfix
+autocmd FileType make setlocal noexpandtab
+au QuickfixCmdPost make,grep,grepadd,vimgrep copen
+
+" }}}
+
+
+" Key mapping {{{
 
 " CTRL-hjklでウィンドウ移動
 nnoremap <C-j> <C-w>j
@@ -100,9 +97,11 @@ map <silent> <C-S-Tab> :bp<CR>
 nmap <Leader><Space> a<Space><ESC>
 nmap <Leader><CR> o<ESC>
 
-"-------------------------------------------------------------------------------
-" 検索設定 Search
-"-------------------------------------------------------------------------------
+" }}}
+
+
+" 検索設定 Search {{{
+
 set wrapscan   " 最後まで検索したら先頭へ戻る
 set ignorecase " 大文字小文字無視
 set smartcase  " 検索文字列に大文字が含まれている場合は区別して検索する
@@ -133,52 +132,72 @@ nnoremap <C-g><C-b> :<C-u>GrepBuffer<Space><C-r><C-w><Enter>
 
 nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
 
-"------------------------------------
-" Kwbd.vim
-"------------------------------------
+" }}}
 
-" バッファを閉じる
-nnoremap <Leader>w :BufferClose<CR>
 
-"------------------------------------
-" YankRing.vim
-"------------------------------------
-let g:yankring_history_dir = '~/.vim/tmp'
-let g:yankring_history_file = '.yankring_history'
+" Plugins {{{
+set nocompatible               " be iMproved
+filetype off                   " required!
 
-" Yankの履歴参照
-nmap <Leader>y :YRShow<CR>
+set runtimepath+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-"------------------------------------
-" BufExplorer
-"------------------------------------
+Bundle 'gmarik/vundle'
+
+Bundle 'grep.vim'
+Bundle 'project.tar.gz'
+Bundle 'AutoComplPop'
+Bundle 'Align'
+Bundle 'tyru/current-func-info.vim'
+Bundle 'tyru/urilib.vim'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/vimproc'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'kana/vim-operator-user'
+Bundle 'thinca/vim-ref'
+Bundle 'msanders/cocoa.vim'
+
+" YankRing.vim {{{
+"let g:yankring_history_dir = '~/.vim/tmp'
+"let g:yankring_history_file = '.yankring_history'
+"
+"" Yankの履歴参照
+"nmap <Leader>y :YRShow<CR>
+" }}}
+
+
+" BufExplorer {{{
+Bundle 'bufexplorer'
 "<Leader>l<Space>でBufferList
 nnoremap <Leader>l<Space> :BufExplorer<CR>
+" }}}
 
-"------------------------------------
-" open-blowser.vim
-"------------------------------------
+
+" open-blowser.vim {{{
+Bundle 'tyru/open-browser.vim'
 
 " カーソル下のURLをブラウザで開く
 nmap fu <Plug>(openbrowser-open)
 vmap fu <Plug>(openbrowser-open)
 " カーソル下のキーワードをググる
 nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
+" }}}
 
-"------------------------------------
-" operator-replace.vim
-"------------------------------------
+
+" operator-replace.vim {{{
+Bundle 'kana/vim-operator-replace'
 " RwなどでYankしてるもので置き換える
 nmap <C-p> <Plug>(operator-replace)
+" }}}
 
-"------------------------------------
-" vimshell
-"------------------------------------
+
+" vimshell {{{
+Bundle 'Shougo/vimshell'
 "let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 "let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_enable_smart_case = 1
 
-if has('win32') || has('win64')
+if has('win32') || has('win64') " {{{
   " Display user name on Windows.
   let g:vimshell_prompt = $USERNAME."% "
 else
@@ -190,14 +209,14 @@ else
   let g:vimshell_execute_file_list['zip'] = 'zipinfo'
   call vimshell#set_execute_file('tgz,gz', 'gzcat')
   call vimshell#set_execute_file('tbz,bz2', 'bzcat')
-endif
+endif "}}}
 
-function! g:my_preexec(cmdline, context)
+function! g:my_preexec(cmdline, context) "{{{
   if a:cmdline =~# '^\s*diff\>'
     call vimshell#set_syntax('diff')
   endif
   return a:cmdline
-endfunction
+endfunction "}}}
 
 autocmd FileType vimshell
 \ call vimshell#altercmd#define('g', 'git')
@@ -220,11 +239,12 @@ nnoremap <silent> <Leader>ss <S-v>:VimShellSendString<CR>
 " 選択中に<Leader>ss: 非同期で開いたインタプリタに選択行を評価させる
 vmap <silent> <Leader>ss :VimShellSendString<CR>
 
+" }}}
 
 
-"------------------------------------
-" unite.vim
-"------------------------------------
+" unite.vim {{{
+Bundle 'Shougo/unite.vim'
+
 " The prefix key.
 nnoremap    [unite]   <Nop>
 nmap    <C-a> [unite]
@@ -238,31 +258,22 @@ nnoremap <silent> [unite]m  :<C-u>Unite file_mru<CR>
 " nnoremap <silent> [unite]b  :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 
 autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()"{{{
+function! s:unite_my_settings() "{{{
   " Overwrite settings.
   imap <buffer> jj      <Plug>(unite_insert_leave)
   nnoremap <silent><buffer> <C-k> :<C-u>call unite#mappings#do_action('preview')<CR>
   imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
   " Start insert.
   let g:unite_enable_start_insert = 1
-endfunction"}}}
+endfunction "}}}
 
 let g:unite_source_file_mru_limit = 200
+" }}}
 
-"------------------------------------
-" Quickfix
-"------------------------------------
-autocmd FileType make setlocal noexpandtab
-au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 
-"------------------------------------
-" grep.vim settings
-"------------------------------------
-let Grep_Find_Use_Xargs = 0
+" MiniBufExplorer {{{
+Bundle 'fholgado/minibufexpl.vim'
 
-"------------------------------------
-" MiniBufExplorer
-"------------------------------------
 "set minibfexp
 let g:miniBufExplMapWindowNavVim=1 "hjklで移動
 let g:miniBufExplSplitBelow=0  " Put new window above
@@ -285,18 +296,19 @@ hi MBEChanged ctermfg=0 ctermbg=255
 hi MBEVisibleNormal  ctermfg=255 ctermbg=0 cterm=bold
 hi MBEVisibleChanged ctermfg=255 ctermbg=0 cterm=bold
 autocmd BufNew -MiniBufExplorer- setl nocursorline
+" }}}
 
-"------------------------------------
-" Ysurround
-"------------------------------------
+
+" Ysurround {{{
+Bundle 'tpope/vim-surround'
 " s, ssで選択範囲を指定文字でくくる
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
+" }}}
 
 
-"------------------------------------
-" QuickRun
-"------------------------------------
+" QuickRun {{{
+Bundle 'thinca/vim-quickrun'
 
 let g:quickrun_config = {}
 let g:quickrun_config['_'] = {'split' : ''}
@@ -314,22 +326,36 @@ augroup RubyTest
   autocmd BufWinEnter,BufNewFile *_test.rb set filetype=ruby.test
 augroup END
 
-
-"------------------------------------
-" DirDiff
-"------------------------------------
-let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
+" }}}
 
 
-"------------------------------------
-" Utilities
-"------------------------------------
+filetype plugin indent on     " required!
+" }}}
+
+
+" Utilities {{{
+
+" .vimrcを開く
+command! Vimrc edit ~/.vimrc
+
+" F2 キーでセッションを保存する
+nmap <F2> :wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
+
+" ファイル名とカーソルの行数をコピー
 nmap <Leader>% :let @+=(expand("%:p") . ":" . line("."))<CR>
 
 " 保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\s\+$//ge
 
-" .vimrcを開く
-command! Vimrc edit ~/.vimrc
-nmap <F2> :wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
+" バッファを閉じる
+nnoremap <Leader>w :BufferClose<CR>
 
+" grep.vim settings
+let Grep_Find_Use_Xargs = 0
+
+" DirDiff
+let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
+
+" }}}
+
+" vim:ft=vim foldmethod=marker sw=2
