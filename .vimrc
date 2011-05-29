@@ -33,6 +33,7 @@ set list " 特殊文字
 set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
 set showmatch         " 括弧の対応をハイライト
 set foldmethod=syntax
+set foldlevel=1000
 
 " インデント
 set tabstop=2
