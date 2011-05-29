@@ -65,12 +65,6 @@ au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 
 " Key mapping {{{
 
-" CTRL-hjklでウィンドウ移動
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-
 " カーソルを表示行で移動する。論理行移動は<C-n>,<C-p>
 nnoremap h <Left>
 nnoremap j gj
@@ -79,6 +73,12 @@ nnoremap l <Right>
 nnoremap <Down> gj
 nnoremap <Up>   gk
 
+" CTRL-hjklでウィンドウ移動
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+
 " ウインドウサイズ変更
 nnoremap + <C-w>+
 nnoremap - <C-w>-
@@ -86,12 +86,12 @@ nnoremap <F7> :wincmd ><CR>
 nnoremap <F8> :wincmd <lt><CR>
 
 " ウインドウ／タブ切り換え
-map <silent> gw :macaction selectNextWindow:<CR>
-map <silent> gW :macaction selectPreviousWindow:<CR>
-map <silent> gt :tabnext<CR>
-map <silent> gT :tabprev<CR>
 map <silent> <C-Tab> :bn<CR>
 map <silent> <C-S-Tab> :bp<CR>
+map <silent> gt :tabnext<CR>
+map <silent> gT :tabprev<CR>
+map <silent> gw :macaction selectNextWindow:<CR>
+map <silent> gW :macaction selectPreviousWindow:<CR>
 
 " 頻出文字入力
 nmap <Leader><Space> a<Space><ESC>
@@ -157,6 +157,7 @@ Bundle 'kana/vim-operator-user'
 Bundle 'thinca/vim-ref'
 Bundle 'msanders/cocoa.vim'
 
+
 " YankRing.vim {{{
 "let g:yankring_history_dir = '~/.vim/tmp'
 "let g:yankring_history_file = '.yankring_history'
@@ -167,7 +168,7 @@ Bundle 'msanders/cocoa.vim'
 
 
 " BufExplorer {{{
-Bundle 'bufexplorer'
+Bundle 'bufexplorer.zip'
 "<Leader>l<Space>でBufferList
 nnoremap <Leader>l<Space> :BufExplorer<CR>
 " }}}
