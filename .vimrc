@@ -147,7 +147,7 @@ Bundle 'gmarik/vundle'
 
 Bundle 'grep.vim'
 Bundle 'project.tar.gz'
-Bundle 'AutoComplPop'
+"Bundle 'AutoComplPop'
 Bundle 'Align'
 Bundle 'tyru/current-func-info.vim'
 Bundle 'tyru/urilib.vim'
@@ -245,7 +245,7 @@ vmap <silent> <Leader>ss :VimShellSendString<CR>
 
 
 " unite.vim {{{
-Bundle 'Shougo/unite.vim'
+"Bundle 'Shougo/unite.vim'
 
 " The prefix key.
 nnoremap    [unite]   <Nop>
