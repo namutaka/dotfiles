@@ -5,8 +5,9 @@ if has('gui_macvim')
   colorscheme desert
   "source ~/.vim/colors/my_macvim_color.vim
 
-  set guifont=Monaco:h12
-  set guifontwide=Monaco:h12
+  set guifont=IPAゴシック:h15
+  set guifontwide=IPAゴシック:h15
+  set linespace=2
 
   set cmdheight=1
   set showtabline=2 " タブを常に表示
