@@ -4,7 +4,7 @@
 
 PROMPT='%n@%m:[%24<..<%~]%# '
 
-ISTFILE=~/.zsh_history
+HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt hist_ignore_dups     # ignore duplication command history list
