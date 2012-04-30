@@ -12,7 +12,7 @@ function! s:open_or_create_today_memo()
   let today_file = g:dayliy_memo_directory . "/" . today . ".txt"
 
   exec ":e " . today_file
-  if !filereadable(today_file)
+  if !filereadable(expand(today_file))
     exec ":r " . s:set_recent_filename()
   endif
 endfunction
