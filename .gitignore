@@ -1,19 +1,9 @@
-/*
+# .gitignore
 
-!/.git-excludes
-!/.gitconfig
-!/.gitignore
-
-!/.gvimrc
-!/.vim/
 /.vim/.*
-/.vim/bundle/
+/.vim/bundle/*
 /.vim/tmp/
 /.vim/tags/
-!/.vimrc
 /.vim/**/tags
 
-!/.zshrc
-!/.profile
-!/.screenrc
 
