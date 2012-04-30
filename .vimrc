@@ -91,8 +91,6 @@ map <silent> <C-Tab> :bn<CR>
 map <silent> <C-S-Tab> :bp<CR>
 map <silent> gt :tabnext<CR>
 map <silent> gT :tabprev<CR>
-map <silent> gw :macaction selectNextWindow:<CR>
-map <silent> gW :macaction selectPreviousWindow:<CR>
 
 " 頻出文字入力
 nmap <Leader><Space> a<Space><ESC>
@@ -108,7 +106,7 @@ set ignorecase " 大文字小文字無視
 set smartcase  " 検索文字列に大文字が含まれている場合は区別して検索する
 set incsearch  " インクリメンタルサーチ
 set hlsearch   " 検索文字をハイライト
-let &grepprg="grep -n -r --exclude-dir='.git' --exclude-dir=docs --exclude='*\\tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $*"
+let &grepprg="grep -n -r --exclude='.git/' --exclude='docs/' --exclude='*\\tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $*"
 
 "Escの2回押しでハイライト消去
 nmap <ESC><ESC> :nohlsearch<CR><ESC>
@@ -132,6 +130,36 @@ command! -nargs=1 Gb :GrepBuffer <args>
 nnoremap <C-g><C-b> :<C-u>GrepBuffer<Space><C-r><C-w><Enter>
 
 nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
+
+" }}}
+
+
+" Utilities {{{
+
+" .vimrcを開く
+command! Vimrc edit ~/.vimrc
+
+" F2 キーでセッションを保存する
+nmap <F2> :wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
+
+" ファイル名とカーソルの行数をコピー
+nmap <Leader>% :let @+=(expand("%:p") . ":" . line("."))<CR>
+
+" 保存時に行末の空白を除去する
+augroup CollectWritePre
+  autocmd!
+  autocmd BufWritePre * :%s/\s\+$//ge
+augroup END
+command! ResetWritePre autocmd! CollectWritePre
+
+" バッファを閉じる
+nnoremap <Leader>w :BufferClose<CR>
+
+" grep.vim settings
+let Grep_Find_Use_Xargs = 0
+
+" DirDiff
+let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
 
 " }}}
 
@@ -245,11 +273,11 @@ vmap <silent> <Leader>ss :VimShellSendString<CR>
 
 
 " unite.vim {{{
-"Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/unite.vim'
 
 " The prefix key.
 nnoremap    [unite]   <Nop>
-nmap    <C-a> [unite]
+nmap    <C-u> [unite]
 
 nnoremap [unite]u  :<C-u>Unite<Space>
 nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
@@ -314,7 +342,7 @@ Bundle 'thinca/vim-quickrun'
 
 let g:quickrun_config = {}
 let g:quickrun_config['_'] = {'split' : ''}
-let g:quickrun_config['ruby.rspec'] = {'command': 'spec'}
+let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-d -fs',}
 let g:quickrun_config['ruby.test'] = {'command': 'ruby', 'cmdopt': '-I test', 'runmode' : 'async:vimproc'}
 let g:quickrun_config['ruby.runner'] = {'command': 'ruby', 'cmdopt': './script/runner', 'runmode' : 'async:vimproc'}
 let g:quickrun_config['java'] = {
@@ -326,6 +354,7 @@ let g:quickrun_config['python.android'] = {'command' : 'monkeyrunner' }
 augroup RubyTest
   autocmd!
   autocmd BufWinEnter,BufNewFile *_test.rb set filetype=ruby.test
+  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
 augroup END
 
 " }}}
@@ -334,30 +363,5 @@ augroup END
 filetype plugin indent on     " required!
 " }}}
 
-
-" Utilities {{{
-
-" .vimrcを開く
-command! Vimrc edit ~/.vimrc
-
-" F2 キーでセッションを保存する
-nmap <F2> :wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
-
-" ファイル名とカーソルの行数をコピー
-nmap <Leader>% :let @+=(expand("%:p") . ":" . line("."))<CR>
-
-" 保存時に行末の空白を除去する
-autocmd BufWritePre * :%s/\s\+$//ge
-
-" バッファを閉じる
-nnoremap <Leader>w :BufferClose<CR>
-
-" grep.vim settings
-let Grep_Find_Use_Xargs = 0
-
-" DirDiff
-let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
-
-" }}}
 
 " vim:ft=vim foldmethod=marker sw=2

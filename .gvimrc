@@ -15,6 +15,9 @@ if has('gui_macvim')
   set guioptions-=T
   set guioptions-=a
 
+  map <silent> gw :macaction selectNextWindow:<CR>
+  map <silent> gW :macaction selectPreviousWindow:<CR>
+
   call g:restore_window_size()
 endif
 
