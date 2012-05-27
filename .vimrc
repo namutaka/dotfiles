@@ -153,7 +153,7 @@ augroup END
 command! ResetWritePre autocmd! CollectWritePre
 
 " バッファを閉じる
-nnoremap <Leader>w :BufferClose<CR>
+nnoremap <Leader>q :BufferClose<CR>
 
 " grep.vim settings
 let Grep_Find_Use_Xargs = 0
@@ -178,7 +178,6 @@ Bundle 'project.tar.gz'
 "Bundle 'AutoComplPop'
 Bundle 'Align'
 Bundle 'tyru/current-func-info.vim'
-Bundle 'tyru/urilib.vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/vimproc'
 Bundle 'scrooloose/nerdcommenter'
@@ -187,20 +186,17 @@ Bundle 'thinca/vim-ref'
 Bundle 'msanders/cocoa.vim'
 
 
-" YankRing.vim {{{
-"let g:yankring_history_dir = '~/.vim/tmp'
-"let g:yankring_history_file = '.yankring_history'
-"
-"" Yankの履歴参照
-"nmap <Leader>y :YRShow<CR>
-" }}}
+" vim-smartword : 単語移動がスマートな感じで
+Bundle 'smartword'
 
+" camelcasemotion : CamelCaseやsnake_case単位でのワード移動
+Bundle 'camelcasemotion'
 
-" BufExplorer {{{
-Bundle 'bufexplorer.zip'
-"<Leader>l<Space>でBufferList
-nnoremap <Leader>l<Space> :BufExplorer<CR>
-" }}}
+" eregex.vim : vimの正規表現をrubyやperlの正規表現な入力でできる :%S/perlregex/
+Bundle 'eregex.vim'
+
+" coffiee
+Bundle  'kchmck/vim-coffee-script'
 
 
 " open-blowser.vim {{{
@@ -277,13 +273,13 @@ Bundle 'Shougo/unite.vim'
 
 " The prefix key.
 nnoremap    [unite]   <Nop>
-nmap    <C-u> [unite]
+nmap    <C-q>  [unite]
 
-nnoremap [unite]u  :<C-u>Unite<Space>
-nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]f  :<C-u>Unite -buffer-name=files file<CR>
-nnoremap <silent> [unite]b  :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]m  :<C-u>Unite file_mru<CR>
+nnoremap [unite]u  :<C-u>Unite -no-split<Space>
+nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -no-split -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
+nnoremap <silent> [unite]b  :<C-u>Unite -no-split buffer<CR>
+nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
 
 " nnoremap <silent> [unite]b  :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 
