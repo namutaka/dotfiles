@@ -1,0 +1,19 @@
+#!/usr/bin/rake -f
+# vim: set ft=ruby:
+
+task :default do
+  sh "/usr/bin/rake -f #{__FILE__} -T"
+end
+
+desc "Hide hidden files in Finer"
+task :hidden do
+  sh "defaults write com.apple.finder AppleShowAllFiles FALSE"
+  sh "killall Finder"
+end
+
+desc "Show hidden files in Finer"
+task :show do
+  sh "defaults write com.apple.finder AppleShowAllFiles TRUE"
+  sh "killall Finder"
+end
+
