@@ -9,11 +9,17 @@ FILES=$(cat <<EOS
   gvimrc
   gitconfig
   screenrc
+  vrapperrc
 EOS)
 
 DOTFILES=${0%/*}
 
 for file in $FILES; do
-  ln -s $DOTFILES/$file .$file
+  target=.$file
+  if [ -e $target ]; then
+    echo "skipping $target"
+  else
+    ln -s $DOTFILES/$file $target
+  fi
 done
 
