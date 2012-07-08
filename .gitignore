@@ -1,9 +1,9 @@
 # .gitignore
 
-/.vim/.*
-/.vim/bundle/*
-/.vim/tmp/
-/.vim/tags/
-/.vim/**/tags
+/vim/.*
+/vim/bundle/*
+/vim/tmp/
+/vim/tags/
+/vim/**/tags
 
 

@@ -1,9 +1,5 @@
-[user]
-  email = namutaka+g@gmail.com
-  name = namu
-
 [core]
-  excludesfile = /Users/namu/.git-excludes
+  excludesfile = ~/dotfiles/git-excludes
   quotepath = false
 
 [alias]
