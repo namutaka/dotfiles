@@ -8,6 +8,7 @@ setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
 autoload -U compinit
 compinit
+setopt autopushd
 
 DOTFILES_PATH=~/DotFiles
 for shfile in $DOTFILES_PATH/zsh/*.*sh; do
