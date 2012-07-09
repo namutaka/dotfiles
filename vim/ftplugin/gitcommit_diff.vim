@@ -44,7 +44,7 @@ function! s:show_diff()
   let q = '"'
   call map(list, 'q . substitute(v:val, "[!%#]", "\\\\\\0", "g") . q')
 
-  execute '0read !LANG=C git diff --cached ' join(list, ' ')
+  execute '0read !LANG=C git diff --cached -- ' join(list, ' ')
   % substitute/\r$//e
   global/^diff /-1put =[]
 
