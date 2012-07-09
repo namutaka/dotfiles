@@ -25,3 +25,5 @@
 [color]
   ui = auto
 
+[merge]
+	ff = false
