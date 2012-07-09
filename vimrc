@@ -47,6 +47,7 @@ set autoindent
 set cmdheight=1
 set laststatus=2
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%y\ %{cfi#format('<%s()>','')}%=%l,%c%V%8P
+highlight CursorLine term=reverse cterm=none ctermbg=232
 
 " 標準プラグインの制御
 let plugin_dicwin_disable=1
@@ -65,6 +66,10 @@ au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 
 
 " Key mapping {{{
+
+" for us-keyboard
+noremap ; :
+noremap : ;
 
 " カーソルを表示行で移動する。論理行移動は<C-n>,<C-p>
 nnoremap h <Left>
@@ -87,10 +92,10 @@ nnoremap <F7> :wincmd ><CR>
 nnoremap <F8> :wincmd <lt><CR>
 
 " ウインドウ／タブ切り換え
-map <silent> <C-Tab> :bn<CR>
-map <silent> <C-S-Tab> :bp<CR>
-map <silent> gt :tabnext<CR>
-map <silent> gT :tabprev<CR>
+map <silent> <C-Tab> ;bn<CR>
+map <silent> <C-S-Tab> ;bp<CR>
+map <silent> gt ;tabnext<CR>
+map <silent> gT ;tabprev<CR>
 
 " 頻出文字入力
 nmap <Leader><Space> a<Space><ESC>
@@ -109,7 +114,7 @@ set hlsearch   " 検索文字をハイライト
 let &grepprg="grep -n -r --exclude='.git/' --exclude='docs/' --exclude='*\\tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $*"
 
 "Escの2回押しでハイライト消去
-nmap <ESC><ESC> :nohlsearch<CR><ESC>
+nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
 "選択した文字列を検索
 vnoremap <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
@@ -125,7 +130,7 @@ nnoremap <Leader><C-i>  :<C-u>help<Space>
 nnoremap <Leader><C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
 
 " :Gb <args> でGrepBufferする
-command! -nargs=1 Gb :GrepBuffer <args>
+command! -nargs=1 Gb ;GrepBuffer <args>
 " カーソル下の単語をGrepBufferする
 nnoremap <C-g><C-b> :<C-u>GrepBuffer<Space><C-r><C-w><Enter>
 
@@ -140,15 +145,15 @@ nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
 command! Vimrc edit ~/.vimrc
 
 " F2 キーでセッションを保存する
-nmap <F2> :wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
+nmap <F2> ;wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
 
 " ファイル名とカーソルの行数をコピー
-nmap <Leader>% :let @+=(expand("%:p") . ":" . line("."))<CR>
+nmap <Leader>% ;let @+=(expand("%:p") . ":" . line("."))<CR>
 
 " 保存時に行末の空白を除去する
 augroup CollectWritePre
   autocmd!
-  autocmd BufWritePre * :%s/\s\+$//ge
+  autocmd BufWritePre * ;%s/\s\+$//ge
 augroup END
 command! ResetWritePre autocmd! CollectWritePre
 
@@ -184,6 +189,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'kana/vim-operator-user'
 Bundle 'thinca/vim-ref'
 Bundle 'msanders/cocoa.vim'
+Bundle 'msanders/snipmate.vim'
 
 
 " vim-smartword : 単語移動がスマートな感じで
@@ -251,8 +257,8 @@ autocmd FileType vimshell
 \| call vimshell#altercmd#define('ll', 'ls -l')
 \| call vimshell#hook#set('preexec', ['g:my_preexec'])
 
-command! Vs :VimShell
-command! -nargs=? -complete=dir Vsi :VimShellInteractive <args>
+command! Vs ;VimShell
+command! -nargs=? -complete=dir Vsi ;VimShellInteractive <args>
 
 " <Leader>is: シェルを起動
 nnoremap <silent> <Leader>is :VimShell<CR>
@@ -263,7 +269,7 @@ nnoremap <silent> <Leader>irb :VimShellInteractive irb<CR>
 " <Leader>ss: 非同期で開いたインタプリタに現在の行を評価させる
 nnoremap <silent> <Leader>ss <S-v>:VimShellSendString<CR>
 " 選択中に<Leader>ss: 非同期で開いたインタプリタに選択行を評価させる
-vmap <silent> <Leader>ss :VimShellSendString<CR>
+vnoremap <silent> <Leader>ss :VimShellSendString<CR>
 
 " }}}
 
@@ -311,11 +317,11 @@ let g:miniBufExplMaxSize = 10
 let g:miniBufExplUseSingleClick=1
 
 ":MtでMiniBufExplorerの表示トグル
-command! Mt :TMiniBufExplorer
+command! Mt ;TMiniBufExplorer
 
 " spaceで次のbufferへ。back-spaceで前のbufferへ
-nmap <BS> :MBEbp<CR>
-nmap <C-BS> :MBEbn<CR>
+nmap <BS> ;MBEbp<CR>
+nmap <C-BS> ;MBEbn<CR>
 
 hi MBENormal ctermfg=0 ctermbg=255
 hi MBEChanged ctermfg=0 ctermbg=255
