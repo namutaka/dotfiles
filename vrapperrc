@@ -1,9 +1,10 @@
 set ignorecase
 set smartcase
+set clipboard=unnamed
 
-"スクロール
-noremap <Space>j <C-f>
-noremap <Space>k <C-b>
+" ;でExコマンド入力( ;と:を入れ替)
+noremap ; :
+noremap : ;
 
 "カーソル位置の単語をyankする
 nnoremap vv vawy
@@ -16,10 +17,6 @@ onoremap gc ;<C-u>normal gc<Enter>
 "  Insert mode中で単語単位/行単位の削除をアンドゥ可能にする
 inoremap <C-u>  <C-g>u<C-u>
 inoremap <C-w>  <C-g>u<C-w>
-
-" ;でExコマンド入力( ;と:を入れ替)
-noremap ; :
-noremap : ;
 
 "srで参照をプロジェクトから検索
 eclipseaction SearchRef  org.eclipse.jdt.ui.edit.text.java.search.references.in.project
@@ -37,9 +34,21 @@ nnoremap gb :GoLastEditPosition<C-m>
 nnoremap [ %
 nnoremap ] %
 
-
 "次のメンバ(フィールド,メソッド)
 eclipseaction GoNextMember org.eclipse.jdt.ui.edit.text.java.goto.next.member
 nnoremap mm :GoNextMember<C-m>
 eclipseaction GoPrevMember org.eclipse.jdt.ui.edit.text.java.goto.previous.member
 nnoremap mp :GoPrevMember<C-m>
+
+"大文字/小文字変換
+eclipseaction ToUpperCase org.eclipse.ui.edit.text.upperCase
+vnoremap U :ToUpperCase<C-m>
+eclipseaction ToLowerCase org.eclipse.ui.edit.text.lowerCase
+vnoremap u :ToLowerCase<C-m>
+
+
+"QuickAssist
+eclipseaction QuickAssist org.eclipse.jdt.ui.edit.text.java.correction.assist.proposals
+nnoremap ma :QuickAssist<C-m>
+
+
