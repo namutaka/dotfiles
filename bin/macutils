@@ -5,15 +5,40 @@ task :default do
   sh "/usr/bin/rake -f #{__FILE__} -T"
 end
 
-desc "Hide hidden files in Finer"
-task :hidden do
-  sh "defaults write com.apple.finder AppleShowAllFiles FALSE"
+namespace :hidden do
+  desc "Hide hidden files in Finer"
+  task :hide do
+    setFinderSetting "AppleShowAllFiles", false
+  end
+
+  desc "Show hidden files in Finer"
+  task :show do
+    setFinderSetting "AppleShowAllFiles", true
+  end
+end
+
+namespace :dsstore do
+  desc "DS Store don't write in networek drives"
+  task :dontwrite do
+    setDefaults "com.apple.desktopservices", "DSDontWriteNetworkStores", true
+    puts "Please relogin"
+  end
+
+  desc "DS Store write in networek drives"
+  task :write do
+    setDefaults "com.apple.desktopservices", "DSDontWriteNetworkStores", false
+    puts "Please relogin"
+  end
+end
+
+
+def setFinderSetting(key, isOn)
+  setDefaults "com.apple.finder", key, isOn
   sh "killall Finder"
 end
 
-desc "Show hidden files in Finer"
-task :show do
-  sh "defaults write com.apple.finder AppleShowAllFiles TRUE"
-  sh "killall Finder"
+def setDefaults(domain, key, isOn)
+  sh "defaults write #{domain} #{key} #{isOn ? 'TRUE' : 'FALSE'}"
 end
+
 
