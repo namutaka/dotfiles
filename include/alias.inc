@@ -19,5 +19,6 @@ if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
 fi
 
 alias gst='git status'
-alias gl='git log --graph'
+alias gl='git log --graph --decorate'
+alias gg='git gui&'
 

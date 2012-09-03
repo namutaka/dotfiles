@@ -4,7 +4,7 @@
 
 [alias]
   co = checkout
-  br = branch
+  br = branch -v
   ci = commit
   st = status
   last = log -1 HEAD
@@ -13,6 +13,7 @@
   cs = diff --cached --stat
   vd = difftool -t macvimdiff
   df = !git --no-pager diff
+	re = remote -v
 
 [difftool]
   prompt = false
@@ -26,4 +27,10 @@
   ui = auto
 
 [merge]
-	ff = false
+	tool = mvimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[mergetool "mvimdiff"]
+  cmd = /usr/local/bin/mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+
