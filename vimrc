@@ -114,7 +114,7 @@ set hlsearch   " 検索文字をハイライト
 let &grepprg="grep -n -r --exclude='.git/' --exclude='docs/' --exclude='*\\tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $*"
 
 "Escの2回押しでハイライト消去
-nmap <ESC><ESC> ;nohlsearch<CR><ESC>
+nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
 
 "選択した文字列を検索
 vnoremap <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
@@ -187,10 +187,11 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/vimproc'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'kana/vim-operator-user'
-Bundle 'thinca/vim-ref'
 Bundle 'msanders/cocoa.vim'
 Bundle 'msanders/snipmate.vim'
 
+" Git
+Bundle 'tpope/vim-fugitive'
 
 " vim-smartword : 単語移動がスマートな感じで
 Bundle 'smartword'
@@ -212,7 +213,8 @@ Bundle 'tyru/open-browser.vim'
 nmap fu <Plug>(openbrowser-open)
 vmap fu <Plug>(openbrowser-open)
 " カーソル下のキーワードをググる
-nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
+nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><CR>
+vnoremap fs "xy:<C-u>OpenBrowserSearch<Space><C-R>x<CR>
 " }}}
 
 
@@ -222,6 +224,12 @@ Bundle 'kana/vim-operator-replace'
 nmap <C-p> <Plug>(operator-replace)
 " }}}
 
+
+" vim-ref.vim {{{
+Bundle 'thinca/vim-ref'
+let g:ref_source_webdict_sites = {}
+let g:ref_source_webdict_sites['lio'] = {'url' : 'http://ejje.weblio.jp/content/%s'}
+" }}}
 
 " vimshell {{{
 Bundle 'Shougo/vimshell'
