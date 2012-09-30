@@ -192,6 +192,7 @@ Bundle 'msanders/snipmate.vim'
 
 " Git
 Bundle 'tpope/vim-fugitive'
+Bundle 'digitaltoad/vim-jade'
 
 " vim-smartword : 単語移動がスマートな感じで
 Bundle 'smartword'
@@ -325,7 +326,7 @@ let g:miniBufExplMaxSize = 10
 let g:miniBufExplUseSingleClick=1
 
 ":MtでMiniBufExplorerの表示トグル
-command! Mt ;TMiniBufExplorer
+command! Mt :TMiniBufExplorer
 
 " spaceで次のbufferへ。back-spaceで前のbufferへ
 nmap <BS> ;MBEbp<CR>
@@ -360,6 +361,7 @@ let g:quickrun_config['java'] = {
 \   'output_encode': '&termencoding',
 \ }
 let g:quickrun_config['python.android'] = {'command' : 'monkeyrunner' }
+let g:quickrun_config['coffee.compile'] = {'command' : 'coffee', 'cmdopt' : '-bpc'}
 
 augroup RubyTest
   autocmd!
