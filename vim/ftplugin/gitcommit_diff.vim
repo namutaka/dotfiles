@@ -27,7 +27,8 @@ function! s:get_file_list()
 endfunction
 
 
-function! s:show_diff()
+function! GIT_COMMIT_SHOW_DIFF()
+  autocmd BufWinEnter COMMIT_EDITMSG
   let list = s:get_file_list()
   goto 1
   if empty(list)
@@ -41,6 +42,8 @@ function! s:show_diff()
   setlocal bufhidden=hide
   setlocal readonly
 
+  let _modified = &modified
+
   let q = '"'
   call map(list, 'q . substitute(v:val, "[!%#]", "\\\\\\0", "g") . q')
 
@@ -48,8 +51,9 @@ function! s:show_diff()
   % substitute/\r$//e
   global/^diff /-1put =[]
 
+  let &modified = _modified
   1
 endfunction
 
-call s:show_diff()
+autocmd BufWinEnter COMMIT_EDITMSG silent call GIT_COMMIT_SHOW_DIFF()
 
