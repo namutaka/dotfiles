@@ -16,6 +16,8 @@ set splitright
 set virtualedit=block
 set winaltkeys=no
 set clipboard=unnamed
+set encoding=utf-8
+
 
 " パス設定
 set runtimepath+=$HOME/.vim
@@ -111,7 +113,7 @@ set ignorecase " 大文字小文字無視
 set smartcase  " 検索文字列に大文字が含まれている場合は区別して検索する
 set incsearch  " インクリメンタルサーチ
 set hlsearch   " 検索文字をハイライト
-let &grepprg="grep -n -r --exclude='.git/' --exclude='docs/' --exclude='*\\tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.swp' $*"
+let &grepprg="grep -n -r --exclude='tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.svn*' --exclude='*.swp' $*"
 
 "Escの2回押しでハイライト消去
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
@@ -182,6 +184,7 @@ Bundle 'grep.vim'
 Bundle 'project.tar.gz'
 "Bundle 'AutoComplPop'
 Bundle 'Align'
+Bundle 'banyan/recognize_charcode.vim'
 Bundle 'tyru/current-func-info.vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/vimproc'
