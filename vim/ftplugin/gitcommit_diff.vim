@@ -28,7 +28,6 @@ endfunction
 
 
 function! GIT_COMMIT_SHOW_DIFF()
-  autocmd BufWinEnter COMMIT_EDITMSG
   let list = s:get_file_list()
   goto 1
   if empty(list)
@@ -40,6 +39,7 @@ function! GIT_COMMIT_SHOW_DIFF()
   setlocal noswapfile
   setlocal buftype=quickfix
   setlocal bufhidden=hide
+  setlocal nobuflisted
   setlocal readonly
 
   let _modified = &modified
@@ -52,8 +52,9 @@ function! GIT_COMMIT_SHOW_DIFF()
   global/^diff /-1put =[]
 
   let &modified = _modified
-  1
+  wincmd p
+  set ft=gitcommit
 endfunction
 
-autocmd BufWinEnter COMMIT_EDITMSG silent call GIT_COMMIT_SHOW_DIFF()
+silent call GIT_COMMIT_SHOW_DIFF()
 
