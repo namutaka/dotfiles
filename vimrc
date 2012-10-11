@@ -44,6 +44,7 @@ set softtabstop=0
 set expandtab
 set smartindent
 set autoindent
+set textwidth=0
 
 " ステータスバー
 set cmdheight=1
@@ -62,7 +63,7 @@ runtime! ftplugin/man.vim
 
 " Quickfix
 autocmd FileType make setlocal noexpandtab
-au QuickfixCmdPost make,grep,grepadd,vimgrep copen
+au QuickfixCmdPost make,grep,grepadd,vimgrep cwindow
 
 " }}}
 
