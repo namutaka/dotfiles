@@ -21,6 +21,8 @@ fi
 # git series
 alias gst='git status'
 alias gl='git log --graph --decorate'
+alias gf='git flow'
+alias gb='git br'
 alias gsl='gst;echo;gl -3'
 alias gg='git gui &'
 alias gk='gitk --all &'
