@@ -10,6 +10,7 @@ FILES=$(cat <<EOS
   gitconfig
   screenrc
   vrapperrc
+  tmux.conf
 EOS)
 
 DOTFILES=${0%/*}
