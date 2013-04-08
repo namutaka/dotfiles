@@ -82,4 +82,5 @@ function! s:show_diff()
 endfunction
 
 call s:show_diff()
+setlocal fenc=utf-8
 

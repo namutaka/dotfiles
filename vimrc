@@ -169,6 +169,10 @@ let Grep_Find_Use_Xargs = 0
 " DirDiff
 let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
 
+"タイムスタンプを挿入してinsertモードへ移行
+nnoremap <Leader>n <ESC>i<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
+nnoremap <Leader>N <ESC>o<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
+
 " }}}
 
 
@@ -209,6 +213,9 @@ Bundle 'eregex.vim'
 
 " coffiee
 Bundle  'kchmck/vim-coffee-script'
+
+" SVN
+Bundle 'kmnk/vim-unite-svn'
 
 
 " open-blowser.vim {{{
