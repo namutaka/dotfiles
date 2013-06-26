@@ -34,3 +34,6 @@
 [mergetool "mvimdiff"]
   cmd = /usr/local/bin/mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
 
+[push]
+	default = current
+

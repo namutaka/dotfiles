@@ -45,6 +45,7 @@ set expandtab
 set smartindent
 set autoindent
 set textwidth=0
+autocmd FileType text setlocal textwidth=0
 
 " ステータスバー
 set cmdheight=1
@@ -103,6 +104,9 @@ map <silent> gT ;tabprev<CR>
 " 頻出文字入力
 nmap <Leader><Space> a<Space><ESC>
 nmap <Leader><CR> o<ESC>
+
+
+nnoremap <silent> <C-n> :enew<CR>
 
 " }}}
 

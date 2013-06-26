@@ -1,5 +1,6 @@
 #.zshrc
 
+SHELL=/bin/zsh
 PROMPT='[%24<..<%~]%# '
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
