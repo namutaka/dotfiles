@@ -207,6 +207,11 @@ Bundle 'kana/vim-operator-user'
 Bundle 'msanders/cocoa.vim'
 Bundle 'msanders/snipmate.vim'
 
+" Markdown
+Bundle 'mattn/mkdpreview-vim'
+Bundle 'mattn/webapi-vim'
+
+
 " Git
 Bundle 'tpope/vim-fugitive'
 Bundle 'digitaltoad/vim-jade'
@@ -226,6 +231,9 @@ Bundle  'kchmck/vim-coffee-script'
 " SVN
 Bundle 'kmnk/vim-unite-svn'
 
+" powerline
+Bundle 'taichouchou2/alpaca_powertabline'
+Bundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 
 " open-blowser.vim {{{
 Bundle 'tyru/open-browser.vim'

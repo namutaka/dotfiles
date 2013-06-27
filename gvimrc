@@ -5,8 +5,8 @@ if has('gui_macvim')
   colorscheme desert
   "source ~/.vim/colors/my_macvim_color.vim
 
-  set guifont=IPAゴシック:h15,Osaka-Mono:h15
-  set guifontwide=IPAゴシック:h15,Osaka-Mono:h15
+  set guifont=IPAGothic\ for\ Powerline:h15,Osaka-Mono:h15
+  set guifontwide=IPAGothic\ for\ Powerline:h15,Osaka-Mono:h15
   set linespace=2
 
   set cmdheight=1
