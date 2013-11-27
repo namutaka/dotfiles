@@ -46,6 +46,7 @@ set smartindent
 set autoindent
 set textwidth=0
 autocmd FileType text setlocal textwidth=0
+autocmd FileType gitcommit set fenc=utf-8|setlocal textwidth=0|DiffGitCached|resize 10
 
 " ステータスバー
 set cmdheight=1
@@ -176,6 +177,10 @@ let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
 "タイムスタンプを挿入してinsertモードへ移行
 nnoremap <Leader>n <ESC>i<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
 nnoremap <Leader>N <ESC>o<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
+
+" spaceで次のbufferへ。back-spaceで前のbufferへ
+nmap <BS> ;bn<CR>
+nmap <C-BS> ;bp<CR>
 
 " }}}
 
@@ -327,32 +332,33 @@ let g:unite_source_file_mru_limit = 200
 " }}}
 
 
-" MiniBufExplorer {{{
-Bundle 'fholgado/minibufexpl.vim'
 
-"set minibfexp
-let g:miniBufExplMapWindowNavVim=1 "hjklで移動
-let g:miniBufExplSplitBelow=0  " Put new window above
-let g:miniBufExplMapWindowNavArrows=1
-let g:miniBufExplMapCTabSwitchBufs=1
-let g:miniBufExplModSelTarget=1
-let g:miniBufExplSplitToEdge=1
-let g:miniBufExplMaxSize = 10
-let g:miniBufExplUseSingleClick=1
-
-":MtでMiniBufExplorerの表示トグル
-command! Mt :TMiniBufExplorer
-
-" spaceで次のbufferへ。back-spaceで前のbufferへ
-nmap <BS> ;MBEbp<CR>
-nmap <C-BS> ;MBEbn<CR>
-
-hi MBENormal ctermfg=0 ctermbg=255
-hi MBEChanged ctermfg=0 ctermbg=255
-hi MBEVisibleNormal  ctermfg=255 ctermbg=0 cterm=bold
-hi MBEVisibleChanged ctermfg=255 ctermbg=0 cterm=bold
-autocmd BufNew -MiniBufExplorer- setl nocursorline
-" }}}
+"" MiniBufExplorer {{{
+"Bundle 'fholgado/minibufexpl.vim'
+"
+""set minibfexp
+"let g:miniBufExplMapWindowNavVim=1 "hjklで移動
+"let g:miniBufExplSplitBelow=0  " Put new window above
+"let g:miniBufExplMapWindowNavArrows=1
+"let g:miniBufExplMapCTabSwitchBufs=1
+"let g:miniBufExplModSelTarget=1
+"let g:miniBufExplSplitToEdge=1
+"let g:miniBufExplMaxSize = 10
+"let g:miniBufExplUseSingleClick=1
+"
+"":MtでMiniBufExplorerの表示トグル
+"command! Mt :TMiniBufExplorer
+"
+"" spaceで次のbufferへ。back-spaceで前のbufferへ
+"nmap <BS> ;MBEbp<CR>
+"nmap <C-BS> ;MBEbn<CR>
+"
+"hi MBENormal ctermfg=0 ctermbg=255
+"hi MBEChanged ctermfg=0 ctermbg=255
+"hi MBEVisibleNormal  ctermfg=255 ctermbg=0 cterm=bold
+"hi MBEVisibleChanged ctermfg=255 ctermbg=0 cterm=bold
+"autocmd BufNew -MiniBufExplorer- setl nocursorline
+"" }}}
 
 
 " Ysurround {{{

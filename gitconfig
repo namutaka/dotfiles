@@ -1,17 +1,18 @@
 [core]
   excludesfile = ~/dotfiles/git-excludes
   quotepath = false
+  editor = mvim -f
 
 [alias]
   co = checkout
   br = branch -v
   ci = commit
-  st = status
+  st = status -bs
   last = log -1 HEAD
   ds = diff --stat
   ca = diff --cached
   cs = diff --cached --stat
-  vd = difftool -t macvimdiff
+  vimdiff = difftool -t macvimdiff
   df = !git --no-pager diff
 	re = remote -v
 
@@ -22,6 +23,9 @@
   cmd = "git_diff_macvim \"$LOCAL\" \"$REMOTE\""
 
 [pager]
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
 
 [color]
   ui = auto
@@ -32,8 +36,12 @@
 [mergetool]
 	prompt = false
 [mergetool "mvimdiff"]
-  cmd = /usr/local/bin/mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+  cmd = mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
 
 [push]
 	default = current
 
+[gui]
+	commitmsgwidth = 85
+[diff]
+	algorithm = patience

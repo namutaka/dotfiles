@@ -19,7 +19,7 @@ if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
 fi
 
 # git series
-alias gst='git status'
+alias gst='git st'
 alias gl='git log --graph --decorate'
 alias gf='git flow'
 alias gff='git flow feature'
@@ -29,4 +29,5 @@ alias gb='git br'
 alias gsl='gst;echo;gl -3'
 alias gg='git gui &'
 alias gk='gitk --all &'
+alias ggg='open . -a SourceTree.app'
 

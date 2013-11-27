@@ -14,6 +14,9 @@
 "         - Modified from svn_diff.vim(http://gist.github.com/307495)
 " }}}
 
+" DiffGitCachedがあるので使わないことに
+finish
+
 if exists('b:loaded_ftplugin_git_diff')
   finish
 endif
