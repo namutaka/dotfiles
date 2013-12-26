@@ -17,9 +17,10 @@
 " The global variable g:scroll_factor changes the scroll speed.
 "
 "
-" Written by Brad Phelan 2006
+" Original Written by Brad Phelan 2006
 " http://xtargets.com
 "
+" Modified by namutaka 2011
 "
 "
 if has('gui_macvim')
@@ -61,8 +62,9 @@ function! SmoothScroll(dir, windiv, factor)
       endif
    endwhile
 endfunction
-nmap <C-D> :call SmoothScroll("d",2, 2)<CR>
-nmap <C-U> :call SmoothScroll("u",2, 2)<CR>
-nmap <C-F> :call SmoothScroll("d",1, 1)<CR>
-nmap <C-B> :call SmoothScroll("u",1, 1)<CR>
+
+nnoremap <C-D> :call SmoothScroll("d",2, 2)<CR>
+nnoremap <C-U> :call SmoothScroll("u",2, 2)<CR>
+nnoremap <C-F> :call SmoothScroll("d",1, 1)<CR>
+nnoremap <C-B> :call SmoothScroll("u",1, 1)<CR>
 
