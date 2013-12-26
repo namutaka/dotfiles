@@ -17,6 +17,18 @@ namespace :hidden do
   end
 end
 
+namespace :quicklook do
+  desc "Disable select text in QuickLook"
+  task :disable do
+    setFinderSetting "QLEnableTextSelection", false
+  end
+
+  desc "Enable select text in QuickLook"
+  task :enable do
+    setFinderSetting "QLEnableTextSelection", true
+  end
+end
+
 namespace :dsstore do
   desc "DS Store don't write in networek drives"
   task :dontwrite do
