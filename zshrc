@@ -11,7 +11,7 @@ autoload -U compinit
 compinit
 setopt autopushd
 
-DOTFILES_PATH=~/DotFiles
+DOTFILES_PATH=~/dotfiles
 for shfile in $DOTFILES_PATH/zsh/*.*sh; do
   [ -r $shfile ] && . $shfile
 done
