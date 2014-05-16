@@ -2,7 +2,7 @@
 # vim: set ft=ruby:
 
 task :default do
-  sh "/usr/bin/rake -f #{__FILE__} -T"
+  sh "/usr/bin/rake -f #{__FILE__} -T", verbose: false
 end
 
 namespace :hidden do
