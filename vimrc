@@ -26,6 +26,9 @@ let g:vimball_home = expand("~/.vim/bundle/vimball")
 set tags+=../../../tags
 set tags+=../../tags
 set tags+=../tags
+let $PATH = $PATH . ':~/local/bin'
+set undodir=$HOME/.vim/tmp
+
 
 " 表示
 set number
@@ -97,17 +100,21 @@ nnoremap <F7> :wincmd ><CR>
 nnoremap <F8> :wincmd <lt><CR>
 
 " ウインドウ／タブ切り換え
-map <silent> <C-Tab> ;bn<CR>
-map <silent> <C-S-Tab> ;bp<CR>
-map <silent> gt ;tabnext<CR>
-map <silent> gT ;tabprev<CR>
+nnoremap <silent> <C-Tab> :bn<CR>
+nnoremap <silent> <C-S-Tab> :bp<CR>
+nnoremap <silent> gt :tabnext<CR>
+nnoremap <silent> gT :tabprev<CR>
 
 " 頻出文字入力
 nmap <Leader><Space> a<Space><ESC>
 nmap <Leader><CR> o<ESC>
 
-
+" 新規バッファ
 nnoremap <silent> <C-n> :enew<CR>
+
+" 比較
+command! Diff :windo diffthis
+command! Doff :windo diffoff
 
 " }}}
 
@@ -159,11 +166,13 @@ nmap <F2> ;wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
 nmap <Leader>% ;let @+=(expand("%:p") . ":" . line("."))<CR>
 
 " 保存時に行末の空白を除去する
-augroup CollectWritePre
+augroup RemoveLineEndSpace
   autocmd!
   autocmd BufWritePre * ;%s/\s\+$//ge
 augroup END
-command! ResetWritePre autocmd! CollectWritePre
+command! AllowLineEndSpace autocmd! RemoveLineEndSpace
+autocmd FileType seizo AllowLineEndSpace
+autocmd FileType mako AllowLineEndSpace
 
 " バッファを閉じる
 nnoremap <Leader>q :BufferClose<CR>
@@ -206,6 +215,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'kana/vim-operator-user'
 Bundle 'msanders/cocoa.vim'
 Bundle 'msanders/snipmate.vim'
+Bundle 'vcscommand.vim'
 
 " Markdown
 Bundle 'mattn/mkdpreview-vim'
@@ -266,20 +276,6 @@ Bundle 'Shougo/vimshell'
 "let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_enable_smart_case = 1
 
-if has('win32') || has('win64') " {{{
-  " Display user name on Windows.
-  let g:vimshell_prompt = $USERNAME."% "
-else
-  " Display user name on Linux.
-  let g:vimshell_prompt = $USER."% "
-
-  call vimshell#set_execute_file('bmp,jpg,png,gif', 'gexe eog')
-  call vimshell#set_execute_file('mp3,m4a,ogg', 'gexe amarok')
-  let g:vimshell_execute_file_list['zip'] = 'zipinfo'
-  call vimshell#set_execute_file('tgz,gz', 'gzcat')
-  call vimshell#set_execute_file('tbz,bz2', 'bzcat')
-endif "}}}
-
 function! g:my_preexec(cmdline, context) "{{{
   if a:cmdline =~# '^\s*diff\>'
     call vimshell#set_syntax('diff')
@@ -324,49 +320,17 @@ nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
 nnoremap <silent> [unite]b  :<C-u>Unite -no-split buffer<CR>
 nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
 
-" nnoremap <silent> [unite]b  :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings() "{{{
   " Overwrite settings.
-  imap <buffer> jj      <Plug>(unite_insert_leave)
-  nnoremap <silent><buffer> <C-k> :<C-u>call unite#mappings#do_action('preview')<CR>
-  imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+  imap <buffer> <C-j>      <Plug>(unite_insert_leave)
+  imap <buffer> <C-BS>   <Plug>(unite_delete_backward_path)
   " Start insert.
-  let g:unite_enable_start_insert = 1
 endfunction "}}}
 
+let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_limit = 200
 " }}}
-
-
-
-"" MiniBufExplorer {{{
-"Bundle 'fholgado/minibufexpl.vim'
-"
-""set minibfexp
-"let g:miniBufExplMapWindowNavVim=1 "hjklで移動
-"let g:miniBufExplSplitBelow=0  " Put new window above
-"let g:miniBufExplMapWindowNavArrows=1
-"let g:miniBufExplMapCTabSwitchBufs=1
-"let g:miniBufExplModSelTarget=1
-"let g:miniBufExplSplitToEdge=1
-"let g:miniBufExplMaxSize = 10
-"let g:miniBufExplUseSingleClick=1
-"
-"":MtでMiniBufExplorerの表示トグル
-"command! Mt :TMiniBufExplorer
-"
-"" spaceで次のbufferへ。back-spaceで前のbufferへ
-"nmap <BS> ;MBEbp<CR>
-"nmap <C-BS> ;MBEbn<CR>
-"
-"hi MBENormal ctermfg=0 ctermbg=255
-"hi MBEChanged ctermfg=0 ctermbg=255
-"hi MBEVisibleNormal  ctermfg=255 ctermbg=0 cterm=bold
-"hi MBEVisibleChanged ctermfg=255 ctermbg=0 cterm=bold
-"autocmd BufNew -MiniBufExplorer- setl nocursorline
-"" }}}
 
 
 " Ysurround {{{
@@ -403,6 +367,5 @@ augroup END
 
 filetype plugin indent on     " required!
 " }}}
-
 
 " vim:ft=vim foldmethod=marker sw=2
