@@ -213,9 +213,14 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/vimproc'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'kana/vim-operator-user'
-Bundle 'msanders/cocoa.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'vcscommand.vim'
+Bundle 'scrooloose/nerdtree'
+
+" languages
+Bundle 'msanders/cocoa.vim'
+Bundle 'derekwyatt/vim-scala'
+Bundle  'kchmck/vim-coffee-script'
 
 " Markdown
 Bundle 'mattn/mkdpreview-vim'
@@ -234,9 +239,6 @@ Bundle 'camelcasemotion'
 
 " eregex.vim : vimの正規表現をrubyやperlの正規表現な入力でできる :%S/perlregex/
 Bundle 'eregex.vim'
-
-" coffiee
-Bundle  'kchmck/vim-coffee-script'
 
 " SVN
 Bundle 'kmnk/vim-unite-svn'
