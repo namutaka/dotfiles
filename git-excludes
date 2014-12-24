@@ -8,3 +8,6 @@
 .vimproj
 .svn/
 
+~$*
+Thumbs.db
+
