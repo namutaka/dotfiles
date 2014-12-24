@@ -5,6 +5,15 @@ task :default do
   sh "/usr/bin/rake -f #{__FILE__} -T", verbose: false
 end
 
+def setFinderSetting(key, isOn)
+  setDefaults "com.apple.finder", key, isOn
+  sh "killall Finder"
+end
+
+def setDefaults(domain, key, isOn)
+  sh "defaults write #{domain} #{key} #{isOn ? 'TRUE' : 'FALSE'}"
+end
+
 namespace :hidden do
   desc "Hide hidden files in Finer"
   task :hide do
@@ -44,13 +53,42 @@ namespace :dsstore do
 end
 
 
-def setFinderSetting(key, isOn)
-  setDefaults "com.apple.finder", key, isOn
-  sh "killall Finder"
-end
+namespace :proxy do
+  NETWORKSERVICE = "Ethernet"
 
-def setDefaults(domain, key, isOn)
-  sh "defaults write #{domain} #{key} #{isOn ? 'TRUE' : 'FALSE'}"
-end
+  def networksetup(task, *args)
+    sh "sudo networksetup -#{task} #{NETWORKSERVICE} #{args.join(' ')}"
+    secure = task.to_s.sub('webproxy', 'securewebproxy')
+    if task.to_s != secure
+      sh "sudo networksetup -#{secure} #{NETWORKSERVICE} #{args.join(' ')}"
+    end
+  end
 
+  desc "Show proxy settings"
+  task :state do
+    networksetup(:getwebproxy)
+    networksetup(:getproxybypassdomains)
+  end
+
+  desc "Proxy on"
+  task :on do
+    host = ENV['host']
+    throw "host is required" if host.nil? or host.empty?
+
+    networksetup(:setwebproxy, *host.split(':'))
+
+    bypass = ENV['bypass']
+    if bypass.nil? or bypass.empty?
+      networksetup(:setproxybypassdomains, "*.local", "169.254/16")
+    else
+      networksetup(:setproxybypassdomains, "*.local", "169.254/16", bypass.split(','))
+    end
+  end
+
+  desc "Proxy off"
+  task :off do
+    networksetup(:setwebproxystate, "off")
+  end
+
+end
 
