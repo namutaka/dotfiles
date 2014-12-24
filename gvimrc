@@ -18,7 +18,7 @@ if has('gui_macvim')
   map <silent> gw :macaction selectNextWindow:<CR>
   map <silent> gW :macaction selectPreviousWindow:<CR>
 
-  call g:restore_window_size()
+  call Restore_window_size()
 endif
 
 if has('win32') || has('gui_gnome')

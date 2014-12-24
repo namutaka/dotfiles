@@ -16,7 +16,7 @@ augroup SaveWindow
   endfunction
 augroup END
 
-function g:restore_window_size()
+function Restore_window_size()
 	if filereadable(g:save_window_file)
 		execute 'source' g:save_window_file
 	endif

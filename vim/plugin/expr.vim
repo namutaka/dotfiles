@@ -107,7 +107,7 @@ endfunction " }}}
 " get selected text,
 " split to number list, and
 " calculate number list.
-function! g:expr(...)
+function! Expr(...)
     let l:selected = s:selected_text()
     let l:splitted = s:split(l:selected)
 
@@ -130,7 +130,7 @@ endfunction " }}}
 
 " commnad Expr {{{
 " main commnad.
-command! -range -nargs=? Expr :echo g:expr(<f-args>)
+command! -range -nargs=? Expr :echo Expr(<f-args>)
 " }}}
 
 let &cpo = s:save_cpo " {{{

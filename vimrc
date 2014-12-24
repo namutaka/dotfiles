@@ -28,7 +28,7 @@ set tags+=../../tags
 set tags+=../tags
 let $PATH = $PATH . ':~/local/bin'
 set undodir=$HOME/.vim/tmp
-
+set backupskip=/tmp/*,/private/tmp/*
 
 " 表示
 set number
@@ -173,6 +173,8 @@ augroup END
 command! AllowLineEndSpace autocmd! RemoveLineEndSpace
 autocmd FileType seizo AllowLineEndSpace
 autocmd FileType mako AllowLineEndSpace
+autocmd FileType markdown AllowLineEndSpace
+
 
 " バッファを閉じる
 nnoremap <Leader>q :BufferClose<CR>
@@ -181,7 +183,7 @@ nnoremap <Leader>q :BufferClose<CR>
 let Grep_Find_Use_Xargs = 0
 
 " DirDiff
-let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp"
+let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp,.DS_Store,thumb.db,.git"
 
 "タイムスタンプを挿入してinsertモードへ移行
 nnoremap <Leader>n <ESC>i<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
@@ -215,7 +217,9 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'kana/vim-operator-user'
 Bundle 'msanders/snipmate.vim'
 Bundle 'vcscommand.vim'
+
 Bundle 'scrooloose/nerdtree'
+nnoremap <Leader><Leader> :NERDTreeToggle<CR>
 
 " languages
 Bundle 'msanders/cocoa.vim'
@@ -246,6 +250,10 @@ Bundle 'kmnk/vim-unite-svn'
 " powerline
 Bundle 'taichouchou2/alpaca_powertabline'
 Bundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+
+
+let g:multi_cursor_next_key='<C-m>'
+Bundle 'terryma/vim-multiple-cursors'
 
 " open-blowser.vim {{{
 Bundle 'tyru/open-browser.vim'
@@ -278,19 +286,11 @@ Bundle 'Shougo/vimshell'
 "let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_enable_smart_case = 1
 
-function! g:my_preexec(cmdline, context) "{{{
-  if a:cmdline =~# '^\s*diff\>'
-    call vimshell#set_syntax('diff')
-  endif
-  return a:cmdline
-endfunction "}}}
-
 autocmd FileType vimshell
 \ call vimshell#altercmd#define('g', 'git')
 \| call vimshell#altercmd#define('i', 'iexe')
 \| call vimshell#altercmd#define('l', 'll')
 \| call vimshell#altercmd#define('ll', 'ls -l')
-\| call vimshell#hook#set('preexec', ['g:my_preexec'])
 
 command! Vs ;VimShell
 command! -nargs=? -complete=dir Vsi ;VimShellInteractive <args>
