@@ -263,6 +263,17 @@ let g:multi_cursor_next_key='<M-m>'
 let g:multi_cursor_prev_key='<M-p>'
 Plugin 'terryma/vim-multiple-cursors'
 
+" easy-align {{{
+
+Plugin 'junegunn/vim-easy-align'
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap <ENTER> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+"nmap ga <Plug>(EasyAlign)
+
+" }}}
+
 " open-blowser.vim {{{
 Plugin 'tyru/open-browser.vim'
 
