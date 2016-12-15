@@ -234,8 +234,8 @@ Plugin 'derekwyatt/vim-scala'
 Plugin  'kchmck/vim-coffee-script'
 
 " Markdown
-Bundle 'mattn/mkdpreview-vim'
-Bundle 'mattn/webapi-vim'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'kannokanno/previm'
 
 
 " Git
