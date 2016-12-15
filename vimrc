@@ -17,6 +17,8 @@ set virtualedit=block
 set winaltkeys=no
 set clipboard=unnamed
 set encoding=utf-8
+"" 標準入力はUTF-8と見なす
+autocmd StdinReadPre * set fileencodings=utf-8
 
 
 " パス設定
@@ -50,6 +52,7 @@ set autoindent
 set textwidth=0
 autocmd FileType text setlocal textwidth=0
 autocmd FileType gitcommit set fenc=utf-8|setlocal textwidth=0|DiffGitCached|resize 10
+
 
 " ステータスバー
 set cmdheight=1
@@ -115,6 +118,10 @@ nnoremap <silent> <C-n> :enew<CR>
 " 比較
 command! Diff :windo diffthis
 command! Doff :windo diffoff
+
+" inc,dec
+vnoremap <c-a> <c-a>gv
+vnoremap <c-x> <c-x>gv
 
 " }}}
 
