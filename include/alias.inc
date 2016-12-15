@@ -27,7 +27,7 @@ alias gfh='git flow hotfix'
 alias gfr='git flow release'
 alias gb='git br'
 alias gsl='gst;echo;gl -3'
-alias gg='git gui &'
+alias gg='open . -a SourceTree.app'
 alias gk='gitk --all &'
 alias ggg='open . -a SourceTree.app'
 
