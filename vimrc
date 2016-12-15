@@ -340,6 +340,13 @@ nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -no-split -buffer-name=fil
 nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
 nnoremap <silent> [unite]b  :<C-u>Unite -no-split buffer<CR>
 nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
+" grep検索
+nnoremap <silent> [unite]g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+" カーソル位置の単語をgrep検索
+nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+" grep検索結果の再呼出
+nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
+
 
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings() "{{{
@@ -349,8 +356,14 @@ function! s:unite_my_settings() "{{{
   " Start insert.
 endfunction "}}}
 
-let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_limit = 200
+
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
 " }}}
 
 
