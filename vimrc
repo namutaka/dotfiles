@@ -208,30 +208,30 @@ set nocompatible               " be iMproved
 filetype off                   " required!
 
 set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'grep.vim'
-Bundle 'project.tar.gz'
+Plugin 'grep.vim'
+Plugin 'project.tar.gz'
 "Bundle 'AutoComplPop'
-Bundle 'Align'
-Bundle 'banyan/recognize_charcode.vim'
-Bundle 'tyru/current-func-info.vim'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/vimproc'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'kana/vim-operator-user'
-Bundle 'msanders/snipmate.vim'
-Bundle 'vcscommand.vim'
 
-Bundle 'scrooloose/nerdtree'
+Plugin 'banyan/recognize_charcode.vim'
+Plugin 'tyru/current-func-info.vim'
+Plugin 'Shougo/neocomplcache'
+Plugin 'Shougo/vimproc'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'kana/vim-operator-user'
+Plugin 'msanders/snipmate.vim'
+Plugin 'vcscommand.vim'
+
+Plugin 'scrooloose/nerdtree'
 nnoremap <Leader><Leader> :NERDTreeToggle<CR>
 
 " languages
-Bundle 'msanders/cocoa.vim'
-Bundle 'derekwyatt/vim-scala'
-Bundle  'kchmck/vim-coffee-script'
+Plugin 'msanders/cocoa.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin  'kchmck/vim-coffee-script'
 
 " Markdown
 Bundle 'mattn/mkdpreview-vim'
@@ -239,31 +239,31 @@ Bundle 'mattn/webapi-vim'
 
 
 " Git
-Bundle 'tpope/vim-fugitive'
-Bundle 'digitaltoad/vim-jade'
+Plugin 'tpope/vim-fugitive'
+Plugin 'digitaltoad/vim-jade'
 
 " vim-smartword : 単語移動がスマートな感じで
-Bundle 'smartword'
+Plugin 'smartword'
 
 " camelcasemotion : CamelCaseやsnake_case単位でのワード移動
-Bundle 'camelcasemotion'
+Plugin 'camelcasemotion'
 
 " eregex.vim : vimの正規表現をrubyやperlの正規表現な入力でできる :%S/perlregex/
-Bundle 'eregex.vim'
+Plugin 'eregex.vim'
 
 " SVN
-Bundle 'kmnk/vim-unite-svn'
+Plugin 'kmnk/vim-unite-svn'
 
 " powerline
-Bundle 'taichouchou2/alpaca_powertabline'
-Bundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+"Plugin 'taichouchou2/alpaca_powertabline'
+Plugin 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 
 
 let g:multi_cursor_next_key='<C-m>'
-Bundle 'terryma/vim-multiple-cursors'
+Plugin 'terryma/vim-multiple-cursors'
 
 " open-blowser.vim {{{
-Bundle 'tyru/open-browser.vim'
+Plugin 'tyru/open-browser.vim'
 
 " カーソル下のURLをブラウザで開く
 nmap fu <Plug>(openbrowser-open)
@@ -275,20 +275,20 @@ vnoremap fs "xy:<C-u>OpenBrowserSearch<Space><C-R>x<CR>
 
 
 " operator-replace.vim {{{
-Bundle 'kana/vim-operator-replace'
+Plugin 'kana/vim-operator-replace'
 " RwなどでYankしてるもので置き換える
 nmap <C-p> <Plug>(operator-replace)
 " }}}
 
 
 " vim-ref.vim {{{
-Bundle 'thinca/vim-ref'
+Plugin 'thinca/vim-ref'
 let g:ref_source_webdict_sites = {}
 let g:ref_source_webdict_sites['lio'] = {'url' : 'http://ejje.weblio.jp/content/%s'}
 " }}}
 
 " vimshell {{{
-Bundle 'Shougo/vimshell'
+Plugin 'Shougo/vimshell'
 "let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 "let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
 let g:vimshell_enable_smart_case = 1
@@ -317,7 +317,7 @@ vnoremap <silent> <Leader>ss :VimShellSendString<CR>
 
 
 " unite.vim {{{
-Bundle 'Shougo/unite.vim'
+Plugin 'Shougo/unite.vim'
 
 " The prefix key.
 nnoremap    [unite]   <Nop>
@@ -343,7 +343,7 @@ let g:unite_source_file_mru_limit = 200
 
 
 " Ysurround {{{
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 " s, ssで選択範囲を指定文字でくくる
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
@@ -351,7 +351,7 @@ nmap ss <Plug>Yssurround
 
 
 " QuickRun {{{
-Bundle 'thinca/vim-quickrun'
+Plugin 'thinca/vim-quickrun'
 
 let g:quickrun_config = {}
 let g:quickrun_config['_'] = {'split' : ''}
@@ -374,6 +374,7 @@ augroup END
 " }}}
 
 
+call vundle#end()
 filetype plugin indent on     " required!
 " }}}
 
