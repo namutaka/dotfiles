@@ -379,8 +379,12 @@ nmap ss <Plug>Yssurround
 Plugin 'thinca/vim-quickrun'
 
 let g:quickrun_config = {}
-let g:quickrun_config['_'] = {'split' : ''}
-let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-d -fs',}
+let g:quickrun_config['_'] = {
+\  'split' : '',
+\  'runner' : 'vimproc',
+\  'runner/vimproc/updatetime' : 60
+\}
+let g:quickrun_config['ruby.rspec'] = {'command': 'bundle', 'cmdopt': ' exec rspec -f d',}
 let g:quickrun_config['ruby.test'] = {'command': 'ruby', 'cmdopt': '-I test', 'runmode' : 'async:vimproc'}
 let g:quickrun_config['ruby.runner'] = {'command': 'ruby', 'cmdopt': './script/runner', 'runmode' : 'async:vimproc'}
 let g:quickrun_config['java'] = {
