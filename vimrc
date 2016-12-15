@@ -259,7 +259,8 @@ Plugin 'kmnk/vim-unite-svn'
 Plugin 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 
 
-let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_next_key='<M-m>'
+let g:multi_cursor_prev_key='<M-p>'
 Plugin 'terryma/vim-multiple-cursors'
 
 " open-blowser.vim {{{
