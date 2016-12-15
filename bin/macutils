@@ -52,6 +52,17 @@ namespace :dsstore do
   end
 end
 
+namespace :pressHold do
+  desc "Enable input source press and hold"
+  task :enable do
+    setDefaults "-g",  "ApplePressAndHoldEnabled", true
+  end
+
+  desc "Disable input source press and hold"
+  task :disable do
+    setDefaults "-g",  "ApplePressAndHoldEnabled", false
+  end
+end
 
 namespace :proxy do
   NETWORKSERVICE = "Ethernet"
