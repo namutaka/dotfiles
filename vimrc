@@ -278,7 +278,7 @@ vnoremap fs "xy:<C-u>OpenBrowserSearch<Space><C-R>x<CR>
 " operator-replace.vim {{{
 Plugin 'kana/vim-operator-replace'
 " RwなどでYankしてるもので置き換える
-nmap <C-p> <Plug>(operator-replace)
+map <C-p> <Plug>(operator-replace)
 " }}}
 
 
