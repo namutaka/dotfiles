@@ -1,5 +1,5 @@
 #!/usr/bin/rake -f
-# vim: set ft=ruby:
+# vim:ft=ruby
 
 task :default do
   sh "/usr/bin/rake -f #{__FILE__} -T", verbose: false
@@ -65,16 +65,17 @@ namespace :pressHold do
 end
 
 namespace :proxy do
-  NETWORKSERVICE = "Ethernet"
+  NETWORKSERVICE = "Thunderbolt Ethernet"
 
   def networksetup(task, *args)
-    sh "sudo networksetup -#{task} #{NETWORKSERVICE} #{args.join(' ')}"
+    sh "sudo networksetup -#{task} '#{NETWORKSERVICE}' #{args.join(' ')}"
     secure = task.to_s.sub('webproxy', 'securewebproxy')
     if task.to_s != secure
-      sh "sudo networksetup -#{secure} #{NETWORKSERVICE} #{args.join(' ')}"
+      sh "sudo networksetup -#{secure} '#{NETWORKSERVICE}' #{args.join(' ')}"
     end
   end
 
+  #setautoproxyurl
   desc "Show proxy settings"
   task :state do
     networksetup(:getwebproxy)
@@ -84,7 +85,7 @@ namespace :proxy do
   desc "Proxy on"
   task :on do
     host = ENV['host']
-    throw "host is required" if host.nil? or host.empty?
+    throw "host is required : host=HOST[:PORT] [bypass=DOMAIN,...]" if host.nil? or host.empty?
 
     networksetup(:setwebproxy, *host.split(':'))
 
