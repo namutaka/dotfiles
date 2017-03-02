@@ -19,7 +19,8 @@ function precmd_vcs_info () {
     [[ -n "$vcs_info_msg_2_" ]] && psvar[1]="$vcs_info_msg_2_"
 }
 
-precmd_functions+=precmd_vcs_info
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd precmd_vcs_info
 
 # prompt
 local psdirs='[%F{yellow}%3(v|%32<..<%3v%<<|%60<..<%~%<<)%f]'
