@@ -16,6 +16,8 @@
   df = !git --no-pager diff
   re = remote -v
   mt = mergetool
+  glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  changelog = log --graph --topo-order --stat
 
 [difftool]
   prompt = false
