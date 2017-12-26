@@ -69,8 +69,10 @@ namespace :proxy do
 
   def networksetup(task, *args)
     sh "sudo networksetup -#{task} '#{NETWORKSERVICE}' #{args.join(' ')}"
+
     secure = task.to_s.sub('webproxy', 'securewebproxy')
     if task.to_s != secure
+      puts
       sh "sudo networksetup -#{secure} '#{NETWORKSERVICE}' #{args.join(' ')}"
     end
   end
@@ -78,7 +80,11 @@ namespace :proxy do
   #setautoproxyurl
   desc "Show proxy settings"
   task :state do
+    puts "## #{NETWORKSERVICE} proxy setting"
     networksetup(:getwebproxy)
+    puts
+
+    puts "## #{NETWORKSERVICE} bypass domain setting"
     networksetup(:getproxybypassdomains)
   end
 
