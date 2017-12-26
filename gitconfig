@@ -38,6 +38,7 @@
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
+	keepBackup = false
 [mergetool "mvimdiff"]
   cmd = mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
 
