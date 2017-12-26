@@ -34,3 +34,17 @@ endf
 
 command! -range SqlList silent <line1>,<line2>call SqlList()
 
+" git log to CHANGELOG
+function! GitLogToChangelog() range
+  let rng = a:firstline . "," . a:lastline
+  exec rng . 's/^[| ]\+//'
+  exec rng . 's/Author[^<]*<\([^@]\+\)@.*/@\1/'
+  exec rng . 's/\s*See merge request [^!]\+\(![0-9]\+\).*/\1/'
+  exec rng . 's/^[|\\ ]*Merge:.*$/----- MERGED ------/'
+  exec rng . 's/^.*\* \+commit.*$/ /'
+  exec rng . 'g/^$\|Date:\|\d\+ files\? changed, \d\+ insertions\?\| | \d\+ [+-]\+$/d'
+endf
+
+command! -range Changlog silent <line1>,<line2>call GitLogToChangelog()
+
+
