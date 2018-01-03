@@ -53,7 +53,6 @@ set textwidth=0
 autocmd FileType text setlocal textwidth=0
 autocmd FileType gitcommit set fenc=utf-8|setlocal textwidth=0|DiffGitCached|resize 10
 
-
 " ステータスバー
 set cmdheight=1
 set laststatus=2
@@ -340,6 +339,7 @@ nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -no-split -buffer-name=fil
 nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
 nnoremap <silent> [unite]b  :<C-u>Unite -no-split buffer<CR>
 nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
+
 " grep検索
 nnoremap <silent> [unite]g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 " カーソル位置の単語をgrep検索
@@ -351,12 +351,16 @@ nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings() "{{{
   " Overwrite settings.
-  imap <buffer> <C-j>      <Plug>(unite_insert_leave)
+  imap <buffer> <C-j>    <Plug>(unite_insert_leave)
   imap <buffer> <C-BS>   <Plug>(unite_delete_backward_path)
   " Start insert.
 endfunction "}}}
 
+
+let g:unite_enable_start_insert = 0
 let g:unite_source_file_mru_limit = 200
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
 
 " unite grep に ag(The Silver Searcher) を使う
 if executable('ag')
@@ -387,6 +391,7 @@ let g:quickrun_config['_'] = {
 let g:quickrun_config['ruby.rspec'] = {'command': 'bundle', 'cmdopt': ' exec rspec -f d',}
 let g:quickrun_config['ruby.test'] = {'command': 'ruby', 'cmdopt': '-I test', 'runmode' : 'async:vimproc'}
 let g:quickrun_config['ruby.runner'] = {'command': 'ruby', 'cmdopt': './script/runner', 'runmode' : 'async:vimproc'}
+let g:quickrun_config['ruby.bundle'] = { 'command': 'ruby', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
 let g:quickrun_config['java'] = {
 \   'exec': ['javac -encoding utf-8 %o %s', '%c %s:t:r %a', ':call delete("%S:t:r.class")'],
 \   'output_encode': '&termencoding',
