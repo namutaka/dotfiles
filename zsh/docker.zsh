@@ -8,5 +8,6 @@ function setup_docker() {
 
 alias doc-up='eval $(setup_docker)'
 alias doc-run='docker run --rm -it'
+alias doc-exec='docker exec -it'
 alias doc-comp='docker-compose'
 
