@@ -28,6 +28,7 @@ set winaltkeys=no
 set clipboard=unnamed
 scriptencoding utf-8
 set encoding=utf-8
+set wildmode=longest:full,list:full
 "" 標準入力はUTF-8と見なす
 augroup MyAutoCmd
   autocmd StdinReadPre * set fileencodings=utf-8
