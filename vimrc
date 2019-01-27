@@ -1,6 +1,11 @@
-".vimrc
+" .vimrc
 
-let mapleader = ","              " キーマップリーダー
+let mapleader = ','              " キーマップリーダー
+
+" 自前設定用group
+augroup MyAutoCmd
+  autocmd!
+augroup END
 
 execute 'source' fnameescape(expand('~/.vim/setup/dein.vim'))
 
@@ -21,15 +26,17 @@ set splitright
 set virtualedit=block
 set winaltkeys=no
 set clipboard=unnamed
+scriptencoding utf-8
 set encoding=utf-8
 "" 標準入力はUTF-8と見なす
-autocmd StdinReadPre * set fileencodings=utf-8
-
+augroup MyAutoCmd
+  autocmd StdinReadPre * set fileencodings=utf-8
+augroup END
 
 " パス設定
 set runtimepath+=$HOME/.vim
 set path+=~/
-let g:vimball_home = expand("~/.vim/bundle/vimball")
+let g:vimball_home = expand('~/.vim/bundle/vimball')
 set tags+=../../../tags
 set tags+=../../tags
 set tags+=../tags
@@ -55,8 +62,10 @@ set expandtab
 set smartindent
 set autoindent
 set textwidth=0
-autocmd FileType text setlocal textwidth=0
-autocmd FileType gitcommit set fenc=utf-8|setlocal textwidth=0|DiffGitCached|resize 10
+augroup MyAutoCmd
+  autocmd FileType text setlocal textwidth=0
+  autocmd FileType gitcommit set fenc=utf-8|setlocal textwidth=0|DiffGitCached|resize 10
+augroup END
 
 " ステータスバー
 set cmdheight=1
@@ -73,8 +82,10 @@ let g:buffer_close_after_buf = -1
 runtime! ftplugin/man.vim
 
 " Quickfix
-autocmd FileType make setlocal noexpandtab
-au QuickfixCmdPost make,grep,grepadd,vimgrep cwindow
+augroup MyAutoCmd
+  autocmd FileType make setlocal noexpandtab
+  autocmd QuickfixCmdPost make,grep,grepadd,vimgrep cwindow
+augroup END
 
 " }}}
 
@@ -180,9 +191,10 @@ augroup RemoveLineEndSpace
   autocmd BufWritePre * ;%s/\s\+$//ge
 augroup END
 command! AllowLineEndSpace autocmd! RemoveLineEndSpace
-autocmd FileType seizo AllowLineEndSpace
-autocmd FileType mako AllowLineEndSpace
-autocmd FileType markdown AllowLineEndSpace
+
+augroup MyAutoCmd
+  autocmd FileType markdown AllowLineEndSpace
+augroup END
 
 
 " バッファを閉じる
@@ -192,7 +204,7 @@ nnoremap <Leader>q :BufferClose<CR>
 let Grep_Find_Use_Xargs = 0
 
 " DirDiff
-let g:DirDiffExcludes = "CVS,.*.swp,.svn,*.log,*.tmp,.DS_Store,thumb.db,.git"
+let g:DirDiffExcludes = 'CVS,.*.swp,.svn,*.log,*.tmp,.DS_Store,thumb.db,.git'
 
 "タイムスタンプを挿入してinsertモードへ移行
 nnoremap <Leader>n <ESC>i<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>

@@ -191,3 +191,11 @@ augroup RubyTest
 augroup END
 '''
 
+[[plugins]]
+# 非同期コードチェック
+# :vim: pip3 install vim-vint
+repo = 'w0rp/ale'
+hook_add = '''
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+'''
+
