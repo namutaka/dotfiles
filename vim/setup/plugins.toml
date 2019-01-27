@@ -1,0 +1,193 @@
+# vim toml
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+# powerline
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+# ファイルリストビュー
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+nnoremap <Leader><Leader> :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+# Git操作
+# :Gstatus, :GBlame
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+# ファイルタイプ判定
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+# カーソル下に応じてファイルタイプ変更
+repo = 'osyo-manga/vim-precious'
+depens = 'context_filetype.vim'
+
+[[plugins]]
+# 入力候補表示
+# install: 'pip3 install --user pynvim'
+repo = 'Shougo/deoplete.nvim'
+depends = 'context_filetype.vim'
+on_event = 'InsertEnter'
+hook_source = '''
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 1
+inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
+'''
+
+[[plugins]]
+# deoplete.nvimから依存. neovimで無いとき必要
+repo = 'roxma/nvim-yarp'
+if   = '! has("nvim")'
+on_source = ['deoplete.nvim']
+
+[[plugins]]
+# deoplete.nvimから依存. neovimで無いとき必要
+repo = 'roxma/vim-hug-neovim-rpc'
+if   = '! has("nvim")'
+on_source = ['deoplete.nvim']
+
+[[plugins]]
+# 非同期処理用
+repo = 'Shougo/vimproc.vim'
+build  = 'make'
+
+[[plugins]]
+# operator-replaceの前提
+repo = 'kana/vim-operator-user'
+
+[[plugins]]
+# RwなどでYankしてるもので置き換える
+repo = 'kana/vim-operator-replace'
+depends = ['vim-operator-user']
+hook_add = '''
+nmap <C-p> <Plug>(operator-replace)
+'''
+
+[[plugins]]
+# Ysurround
+# s, ssで選択範囲を指定文字でくくる
+repo = 'tpope/vim-surround'
+hook_add = '''
+nmap s <Plug>Ysurround
+nmap ss <Plug>Yssurround
+'''
+
+[[plugins]]
+# vim-smartword : 単語移動がスマートな感じで
+repo = 'vim-scripts/smartword'
+hook_add = '''
+map w  <Plug>(smartword-w)
+map b  <Plug>(smartword-b)
+map e  <Plug>(smartword-e)
+map ge  <Plug>(smartword-ge)
+'''
+
+[[plugins]]
+# multi cursor 操作
+# https://github.com/terryma/vim-multiple-cursors
+repo = 'terryma/vim-multiple-cursors'
+hook_add = '''
+" 始動キーを <C-n> は使っているので変える
+let g:multi_cursor_start_word_key      = '<C-m>'
+'''
+
+[[plugins]]
+# easy-align
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap <ENTER> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+" nmap ga <Plug>(EasyAlign)
+'''
+
+[[plugins]]
+# open-blowser.vim
+repo = 'tyru/open-browser.vim'
+hook_add = '''
+" カーソル下のURLをブラウザで開く
+nmap fu <Plug>(openbrowser-open)
+vmap fu <Plug>(openbrowser-open)
+" カーソル下のキーワードをググる
+nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><CR>
+vnoremap fs "xy:<C-u>OpenBrowserSearch<Space><C-R>x<CR>
+'''
+
+
+[[plugins]]
+# unite.vim
+repo = 'Shougo/unite.vim'
+hook_add = '''
+" The prefix key.
+nnoremap    [unite]   <Nop>
+nmap    <C-q>  [unite]
+
+nnoremap [unite]u  :<C-u>Unite -no-split<Space>
+nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -no-split -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
+nnoremap <silent> [unite]b  :<C-u>Unite -no-split buffer<CR>
+nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
+
+" grep検索
+nnoremap <silent> [unite]g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+" カーソル位置の単語をgrep検索
+nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+" grep検索結果の再呼出
+nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
+
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings() "{{{
+  " Overwrite settings.
+  imap <buffer> <C-j>    <Plug>(unite_insert_leave)
+  imap <buffer> <C-BS>   <Plug>(unite_delete_backward_path)
+  " Start insert.
+endfunction "}}}
+
+let g:unite_enable_start_insert = 0
+let g:unite_source_file_mru_limit = 200
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+'''
+
+[[plugins]]
+# QuickRun
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+let g:quickrun_config = {}
+let g:quickrun_config['_'] = {
+\  'split' : '',
+\  'runner' : 'vimproc',
+\  'runner/vimproc/updatetime' : 60
+\}
+let g:quickrun_config['ruby.rspec'] = {'command': 'bundle', 'cmdopt': ' exec rspec -f d',}
+let g:quickrun_config['ruby.test'] = {'command': 'ruby', 'cmdopt': '-I test', 'runmode' : 'async:vimproc'}
+let g:quickrun_config['ruby.runner'] = {'command': 'ruby', 'cmdopt': './script/runner', 'runmode' : 'async:vimproc'}
+let g:quickrun_config['ruby.bundle'] = { 'command': 'ruby', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
+let g:quickrun_config['java'] = {
+\   'exec': ['javac -encoding utf-8 %o %s', '%c %s:t:r %a', ':call delete("%S:t:r.class")'],
+\   'output_encode': '&termencoding',
+\ }
+let g:quickrun_config['python.android'] = {'command' : 'monkeyrunner' }
+let g:quickrun_config['coffee.compile'] = {'command' : 'coffee', 'cmdopt' : '-bpc'}
+
+augroup RubyTest
+  autocmd!
+  autocmd BufWinEnter,BufNewFile *_test.rb set filetype=ruby.test
+  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
+augroup END
+'''
+

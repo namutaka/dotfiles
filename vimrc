@@ -1,15 +1,20 @@
 ".vimrc
 
-" 全体設定 {{{
-
-syntax on
 let mapleader = ","              " キーマップリーダー
+
+execute 'source' fnameescape(expand('~/.vim/setup/dein.vim'))
+
+" 全体設定 {{{
+syntax on
+
 set hidden
 set nobackup
 set noswapfile
 "set noimdisable " ime設定
 set mouse=a
-set ttymouse=xterm2
+if !has('nvim')
+    set ttymouse=xterm2
+endif
 set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
 set splitbelow
 set splitright
@@ -56,7 +61,6 @@ autocmd FileType gitcommit set fenc=utf-8|setlocal textwidth=0|DiffGitCached|res
 " ステータスバー
 set cmdheight=1
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%y\ %{cfi#format('<%s()>','')}%=%l,%c%V%8P
 highlight CursorLine term=reverse cterm=none ctermbg=232
 
 " 標準プラグインの制御
@@ -137,6 +141,9 @@ let &grepprg="grep -n -r --exclude='tags' --exclude='*.db' --exclude='*.log'  --
 "Escの2回押しでハイライト消去
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
 
+" very magicを使う
+nnoremap /  /\v
+
 "選択した文字列を検索
 vnoremap <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 "選択した文字列を置換
@@ -150,10 +157,6 @@ nnoremap <Leader><C-i>  :<C-u>help<Space>
 " カーソル下のキーワードをヘルプでひく
 nnoremap <Leader><C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
 
-" :Gb <args> でGrepBufferする
-command! -nargs=1 Gb ;GrepBuffer <args>
-" カーソル下の単語をGrepBufferする
-nnoremap <C-g><C-b> :<C-u>GrepBuffer<Space><C-r><C-w><Enter>
 
 nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
 
@@ -199,217 +202,6 @@ nnoremap <Leader>N <ESC>o<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
 nmap <BS> ;bn<CR>
 nmap <C-BS> ;bp<CR>
 
-" }}}
-
-
-" Plugins {{{
-set nocompatible               " be iMproved
-filetype off                   " required!
-
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#begin()
-
-Plugin 'gmarik/vundle'
-
-Plugin 'grep.vim'
-Plugin 'project.tar.gz'
-"Bundle 'AutoComplPop'
-
-Plugin 'banyan/recognize_charcode.vim'
-Plugin 'tyru/current-func-info.vim'
-Plugin 'Shougo/neocomplcache'
-Plugin 'Shougo/vimproc'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'kana/vim-operator-user'
-Plugin 'msanders/snipmate.vim'
-Plugin 'vcscommand.vim'
-
-Plugin 'scrooloose/nerdtree'
-nnoremap <Leader><Leader> :NERDTreeToggle<CR>
-
-" languages
-Plugin 'msanders/cocoa.vim'
-Plugin 'derekwyatt/vim-scala'
-Plugin  'kchmck/vim-coffee-script'
-
-" Markdown
-Plugin 'plasticboy/vim-markdown'
-Plugin 'kannokanno/previm'
-
-
-" Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'digitaltoad/vim-jade'
-
-" vim-smartword : 単語移動がスマートな感じで
-Plugin 'smartword'
-
-" camelcasemotion : CamelCaseやsnake_case単位でのワード移動
-Plugin 'camelcasemotion'
-
-" eregex.vim : vimの正規表現をrubyやperlの正規表現な入力でできる :%S/perlregex/
-Plugin 'eregex.vim'
-
-" SVN
-Plugin 'kmnk/vim-unite-svn'
-
-" powerline
-"Plugin 'taichouchou2/alpaca_powertabline'
-Plugin 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-
-
-let g:multi_cursor_next_key='<M-m>'
-let g:multi_cursor_prev_key='<M-p>'
-Plugin 'terryma/vim-multiple-cursors'
-
-" easy-align {{{
-
-Plugin 'junegunn/vim-easy-align'
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap <ENTER> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-"nmap ga <Plug>(EasyAlign)
-
-" }}}
-
-" open-blowser.vim {{{
-Plugin 'tyru/open-browser.vim'
-
-" カーソル下のURLをブラウザで開く
-nmap fu <Plug>(openbrowser-open)
-vmap fu <Plug>(openbrowser-open)
-" カーソル下のキーワードをググる
-nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><CR>
-vnoremap fs "xy:<C-u>OpenBrowserSearch<Space><C-R>x<CR>
-" }}}
-
-
-" operator-replace.vim {{{
-Plugin 'kana/vim-operator-replace'
-" RwなどでYankしてるもので置き換える
-map <C-p> <Plug>(operator-replace)
-" }}}
-
-
-" vim-ref.vim {{{
-Plugin 'thinca/vim-ref'
-let g:ref_source_webdict_sites = {}
-let g:ref_source_webdict_sites['lio'] = {'url' : 'http://ejje.weblio.jp/content/%s'}
-" }}}
-
-" vimshell {{{
-Plugin 'Shougo/vimshell'
-"let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-"let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
-let g:vimshell_enable_smart_case = 1
-
-autocmd FileType vimshell
-\ call vimshell#altercmd#define('g', 'git')
-\| call vimshell#altercmd#define('i', 'iexe')
-\| call vimshell#altercmd#define('l', 'll')
-\| call vimshell#altercmd#define('ll', 'ls -l')
-
-command! Vs ;VimShell
-command! -nargs=? -complete=dir Vsi ;VimShellInteractive <args>
-
-" <Leader>is: シェルを起動
-nnoremap <silent> <Leader>is :VimShell<CR>
-" <Leader>ipy: pythonを非同期で起動
-nnoremap <silent> <Leader>ipy :VimShellInteractive python<CR>
-" <Leader>irb: irbを非同期で起動
-nnoremap <silent> <Leader>irb :VimShellInteractive irb<CR>
-" <Leader>ss: 非同期で開いたインタプリタに現在の行を評価させる
-nnoremap <silent> <Leader>ss <S-v>:VimShellSendString<CR>
-" 選択中に<Leader>ss: 非同期で開いたインタプリタに選択行を評価させる
-vnoremap <silent> <Leader>ss :VimShellSendString<CR>
-
-" }}}
-
-
-" unite.vim {{{
-Plugin 'Shougo/unite.vim'
-
-" The prefix key.
-nnoremap    [unite]   <Nop>
-nmap    <C-q>  [unite]
-
-nnoremap [unite]u  :<C-u>Unite -no-split<Space>
-nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -no-split -buffer-name=files buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
-nnoremap <silent> [unite]b  :<C-u>Unite -no-split buffer<CR>
-nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
-
-" grep検索
-nnoremap <silent> [unite]g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-" カーソル位置の単語をgrep検索
-nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-" grep検索結果の再呼出
-nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
-
-
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings() "{{{
-  " Overwrite settings.
-  imap <buffer> <C-j>    <Plug>(unite_insert_leave)
-  imap <buffer> <C-BS>   <Plug>(unite_delete_backward_path)
-  " Start insert.
-endfunction "}}}
-
-
-let g:unite_enable_start_insert = 0
-let g:unite_source_file_mru_limit = 200
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
-
-" unite grep に ag(The Silver Searcher) を使う
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-" }}}
-
-
-" Ysurround {{{
-Plugin 'tpope/vim-surround'
-" s, ssで選択範囲を指定文字でくくる
-nmap s <Plug>Ysurround
-nmap ss <Plug>Yssurround
-" }}}
-
-
-" QuickRun {{{
-Plugin 'thinca/vim-quickrun'
-
-let g:quickrun_config = {}
-let g:quickrun_config['_'] = {
-\  'split' : '',
-\  'runner' : 'vimproc',
-\  'runner/vimproc/updatetime' : 60
-\}
-let g:quickrun_config['ruby.rspec'] = {'command': 'bundle', 'cmdopt': ' exec rspec -f d',}
-let g:quickrun_config['ruby.test'] = {'command': 'ruby', 'cmdopt': '-I test', 'runmode' : 'async:vimproc'}
-let g:quickrun_config['ruby.runner'] = {'command': 'ruby', 'cmdopt': './script/runner', 'runmode' : 'async:vimproc'}
-let g:quickrun_config['ruby.bundle'] = { 'command': 'ruby', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
-let g:quickrun_config['java'] = {
-\   'exec': ['javac -encoding utf-8 %o %s', '%c %s:t:r %a', ':call delete("%S:t:r.class")'],
-\   'output_encode': '&termencoding',
-\ }
-let g:quickrun_config['python.android'] = {'command' : 'monkeyrunner' }
-let g:quickrun_config['coffee.compile'] = {'command' : 'coffee', 'cmdopt' : '-bpc'}
-
-augroup RubyTest
-  autocmd!
-  autocmd BufWinEnter,BufNewFile *_test.rb set filetype=ruby.test
-  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-augroup END
-
-" }}}
-
-
-call vundle#end()
-filetype plugin indent on     " required!
 " }}}
 
 " vim:ft=vim foldmethod=marker sw=2
