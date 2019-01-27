@@ -216,4 +216,20 @@ nmap <C-BS> ;bp<CR>
 
 " }}}
 
+" foldmethod=syntaxのときに入力が重いことへの対処 {{{
+
+" https://qiita.com/izumin5210/items/7e0ad2f86d0686d8b376
+augroup MyAutoCmd
+  autocmd InsertEnter * if !exists('w:last_fdm')
+              \| let w:last_fdm=&foldmethod
+              \| setlocal foldmethod=manual
+              \| endif
+  autocmd InsertLeave,WinLeave * if exists('w:last_fdm')
+              \| let &l:foldmethod=w:last_fdm
+              \| unlet w:last_fdm
+              \| endif
+augroup END
+" }}}
+
+
 " vim:ft=vim foldmethod=marker sw=2
