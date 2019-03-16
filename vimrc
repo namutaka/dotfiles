@@ -233,5 +233,11 @@ nmap <C-BS> ;bp<CR>
 "" }}}
 
 
+"" digdag {{{
+
+autocmd BufNewFile,BufRead *.dig set filetype=yaml
+autocmd Syntax yaml setl indentkeys-=<:> indentkeys-=0#
+
+"" }}}
 
 " vim:ft=vim foldmethod=marker sw=2
