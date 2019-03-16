@@ -4,7 +4,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-# powerline
 repo = 'vim-airline/vim-airline'
 
 [[plugins]]
@@ -172,9 +171,6 @@ if executable('rg')
   let g:unite_source_grep_recursive_opt = ''
   "let g:unite_source_grep_encoding='utf-8'
 endif
-
-" }}}
-
 '''
 
 [[plugins]]
@@ -207,37 +203,35 @@ augroup END
 
 [[plugins]]
 # 非同期コードチェック
-# :vim: pip3 install vim-vint
+#
+# 言語別linter
+# :vim: pip install vim-vint
+# :bash: npm i -g bash-language-server (https://github.com/mads-hartmann/bash-language-server)
+# :python: pip install 'python-language-server[all]'
+#
 repo = 'w0rp/ale'
 hook_add = '''
+
+" airlineでlint結果表示(FIXME なぜかちゃんと動かない)
+let g:airline#extensions#ale#enabled = 1
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-'''
 
-[[plugins]]
-# vim-lsp
-repo = 'prabirshrestha/async.vim'
+" エラー行に表示するマーク
+let g:ale_sign_error = '⨉'
+let g:ale_sign_warning = '⚠'
 
-[[plugins]]
-# LSP
-repo = 'prabirshrestha/vim-lsp'
-depends = 'async.vim'
-hook_add = '''
-" npm i -g bash-language-server
-" https://github.com/mads-hartmann/bash-language-server
-if executable('bash-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'bash-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
-        \ 'whitelist': ['sh'],
-        \ })
-endif
+" auto-complete
+let g:ale_completion_enabled = 1
 
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
+" ファイルを開いたときにlint実行
+let g:ale_lint_on_enter = 1
+
+" 言語別 デフォルト外のlinter設定
+let g:ale_linters = {
+\ 'python': ['pyls']
+\}
+let g:ale_fixers = {
+\ 'python': ['isort']
+\}
 '''
 
