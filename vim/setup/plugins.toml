@@ -78,15 +78,16 @@ nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
 '''
 
-[[plugins]]
-# vim-smartword : 単語移動がスマートな感じで
-repo = 'vim-scripts/smartword'
-hook_add = '''
-map w  <Plug>(smartword-w)
-map b  <Plug>(smartword-b)
-map e  <Plug>(smartword-e)
-map ge  <Plug>(smartword-ge)
-'''
+#[[plugins]]
+# カーソルが飛びすぎるので使うのやめる
+## vim-smartword : 単語移動がスマートな感じで
+#repo = 'vim-scripts/smartword'
+#hook_add = '''
+#map w  <Plug>(smartword-w)
+#map b  <Plug>(smartword-b)
+#map e  <Plug>(smartword-e)
+#map ge  <Plug>(smartword-ge)
+#'''
 
 [[plugins]]
 # multi cursor 操作
