@@ -89,14 +89,15 @@ nmap ss <Plug>Yssurround
 #map ge  <Plug>(smartword-ge)
 #'''
 
-[[plugins]]
-# multi cursor 操作
-# https://github.com/terryma/vim-multiple-cursors
-repo = 'terryma/vim-multiple-cursors'
-hook_add = '''
-" 始動キーを <C-n> は使っているので変える
-let g:multi_cursor_start_word_key      = '<C-m>'
-'''
+# 暴発して使いにくいので無効
+#[[plugins]]
+## multi cursor 操作
+## https://github.com/terryma/vim-multiple-cursors
+#repo = 'terryma/vim-multiple-cursors'
+#hook_add = '''
+#" 始動キーを <C-n> は使っているので変える
+#let g:multi_cursor_start_word_key      = '<C-m>'
+#'''
 
 [[plugins]]
 # easy-align
