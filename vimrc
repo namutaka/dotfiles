@@ -179,6 +179,7 @@ nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
 
 " .vimrcを開く
 command! Vimrc edit ~/.vimrc
+command! VimPlugins edit ~/dotfiles/vim/setup/plugins.toml
 
 " F2 キーでセッションを保存する
 nmap <F2> ;wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
