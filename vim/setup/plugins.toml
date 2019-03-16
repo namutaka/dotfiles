@@ -213,3 +213,31 @@ hook_add = '''
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 '''
 
+[[plugins]]
+# vim-lsp
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+# LSP
+repo = 'prabirshrestha/vim-lsp'
+depends = 'async.vim'
+hook_add = '''
+" npm i -g bash-language-server
+" https://github.com/mads-hartmann/bash-language-server
+if executable('bash-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'bash-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+        \ 'whitelist': ['sh'],
+        \ })
+endif
+
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+'''
+
