@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-FILES=$(cat <<EOS
+FILES=(
   zsh
   zshrc
   vim
@@ -11,16 +11,18 @@ FILES=$(cat <<EOS
   screenrc
   vrapperrc
   tmux.conf
-EOS)
+  sshrc
+  sshrc.d
+)
 
 DOTFILES=${0%/*}
 
-for file in $FILES; do
+for file in ${FILES[@]}; do
   target=.$file
   if [ -e $target ]; then
     echo "skipping $target"
   else
-    ln -s $DOTFILES/$file $target
+    echo ln -s $DOTFILES/$file $target
   fi
 done
 

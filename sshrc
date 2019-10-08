@@ -1,0 +1,22 @@
+# sshrc
+
+# alias
+alias ll='ls -l'
+alias la='ls -la'
+alias rm='rm -i'
+alias suas='sudo -u appserver'
+alias tf='tail -f'
+alias grep='grep --line-buffered'
+
+# shell
+if [[ "$(hostname -s)" =~ "qa" ]]; then
+export PS1="[QA \u@\h \W]\$ "
+else
+export PS1="[PROD \u@\h \W]\$ "
+fi
+
+# vim
+export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
+which vim > /dev/null 2>&1 && alias vi=$(which vim)
+
+
