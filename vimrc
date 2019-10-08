@@ -123,6 +123,10 @@ nnoremap <silent> <C-S-Tab> :bp<CR>
 nnoremap <silent> gt :tabnext<CR>
 nnoremap <silent> gT :tabprev<CR>
 
+" spaceで次のbufferへ。back-spaceで前のbufferへ
+nmap <BS> ;bn<CR>
+nmap <S-BS> ;bp<CR>
+
 " 頻出文字入力
 nmap <Leader><Space> a<Space><ESC>
 nmap <Leader><CR> o<ESC>
@@ -212,9 +216,6 @@ let g:DirDiffExcludes = 'CVS,.*.swp,.svn,*.log,*.tmp,.DS_Store,thumb.db,.git'
 nnoremap <Leader>n <ESC>i<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
 nnoremap <Leader>N <ESC>o<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
 
-" spaceで次のbufferへ。back-spaceで前のbufferへ
-nmap <BS> ;bn<CR>
-nmap <C-BS> ;bp<CR>
 
 " }}}
 
