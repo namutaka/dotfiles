@@ -22,10 +22,11 @@ repo = 'tpope/vim-fugitive'
 # ファイルタイプ判定
 repo = 'Shougo/context_filetype.vim'
 
-[[plugins]]
-# カーソル下に応じてファイルタイプ変更
-repo = 'osyo-manga/vim-precious'
-depens = 'context_filetype.vim'
+# シンタックスが分かりにくいのでOFF
+# [[plugins]]
+# # カーソル下に応じてファイルタイプ変更
+# repo = 'osyo-manga/vim-precious'
+# depens = 'context_filetype.vim'
 
 [[plugins]]
 # 入力候補表示
@@ -221,7 +222,9 @@ let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
 
 " auto-complete
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
+
+let g:ale_sign_column_always = 1
 
 " ファイルを開いたときにlint実行
 let g:ale_lint_on_enter = 1
@@ -233,5 +236,10 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \ 'python': ['isort']
 \}
+'''
+
+[[plugins]] # indent可視化 https://github.com/Yggdroot/indentLine
+repo = 'Yggdroot/indentLine'
+hook_add = '''
 '''
 
