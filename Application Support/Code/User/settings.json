@@ -1,0 +1,51 @@
+{
+    "editor.renderWhitespace": "boundary",
+    "css.lint.hexColorLength": "warning",
+    "less.lint.hexColorLength": "warning",
+    "workbench.colorTheme": "Default Light+",
+    "vim.enableNeovim": false,
+    "vim.neovimPath": "/Users/tak/local/bin/nvim",
+    "vim.leader": ",",
+    "vim.incsearch": true,
+    "vim.hlsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [";"],
+            "after": [":"]
+        },
+        {
+            "before": [":"],
+            "after": [";"]
+        },
+        {
+            "before": ["<Esc>", "<Esc>"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["<leader>", "<leader>"],
+            "commands": ["workbench.action.toggleSidebarVisibility"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [";"],
+            "after": [":"]
+        },
+        {
+            "before": [":"],
+            "after": [";"]
+        }
+    ],
+    "workbench.editor.enablePreview": false,
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 2,
+    "workbench.tree.indent": 12,
+    "breadcrumbs.enabled": true,
+    "window.zoomLevel": 1,
+    "editor.fontSize": 10,
+    "git.confirmSync": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true
+}
