@@ -1,5 +1,9 @@
 #!/bin/bash
-set -e
+# Run in user root directory
+#
+set -ex
+
+cd ~/
 
 FILES=(
   zsh
@@ -13,6 +17,8 @@ FILES=(
   tmux.conf
   sshrc
   sshrc.d
+  irbrc
+  irb
 )
 
 DOTFILES=${0%/*}
@@ -22,7 +28,7 @@ for file in ${FILES[@]}; do
   if [ -e $target ]; then
     echo "skipping $target"
   else
-    echo ln -s $DOTFILES/$file $target
+    ln -s $DOTFILES/$file $target
   fi
 done
 
