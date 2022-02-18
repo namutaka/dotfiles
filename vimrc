@@ -32,6 +32,8 @@ set clipboard+=unnamedplus
 scriptencoding utf-8
 set encoding=utf-8
 set wildmode=longest:full,list:full
+set ambiwidth=double
+
 "" 標準入力はUTF-8と見なす
 augroup MyAutoCmd
   autocmd StdinReadPre * set fileencodings=utf-8
@@ -55,6 +57,7 @@ set cursorline
 set list " 特殊文字
 set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
 set showmatch         " 括弧の対応をハイライト
+set showcmd
 set foldmethod=syntax
 set foldlevel=1000
 
@@ -184,6 +187,8 @@ nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
 
 " Utilities {{{
 
+command! Sh set ft=sh
+
 " .vimrcを開く
 command! Vimrc edit ~/.vimrc
 command! VimPlugins edit ~/dotfiles/vim/setup/plugins.toml
@@ -203,6 +208,7 @@ command! AllowLineEndSpace autocmd! RemoveLineEndSpace
 
 augroup MyAutoCmd
   autocmd FileType markdown AllowLineEndSpace
+  autocmd BufNewFile,BufRead *.tsv,*.csv AllowLineEndSpace
 augroup END
 
 
