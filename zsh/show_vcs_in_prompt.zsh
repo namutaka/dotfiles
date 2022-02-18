@@ -24,6 +24,12 @@ add-zsh-hook precmd precmd_vcs_info
 
 # prompt
 local psdirs='[%F{yellow}%3(v|%32<..<%3v%<<|%60<..<%~%<<)%f]'
-local psvcs='%3(v|[%25<\<<%F{yellow}%2v%f@%F{green}%1v%f%<<]|)'
-RPROMPT="$psdirs$psvcs"
+local psvcs='%3(v|[%25<\<<%F{yellow}%2v%f%<<@%F{green}%1v%f]|)'
+
+#RPROMPT="$psdirs$psvcs"
+RPROMPT=
+
+PROMPT="
+%F{red}>>%f $psvcs$psdirs
+%F{red}>>%f %# "
 
