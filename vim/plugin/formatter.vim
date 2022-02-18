@@ -16,8 +16,9 @@ function! MdTable(...) range
     let delim = a:1
   end
   let rng = a:firstline . "," . a:lastline
-  exec rng . 's/^\|$\|' . delim . '/|/g'
-  exec rng . 's/"//g'
+  exec rng . 's/' . delim . '/|/ge'
+  exec rng . 's/^\|$/|/g'
+  exec rng . 's/"//ge'
   exec rng . 'EasyAlign *|'
 endf
 
@@ -27,7 +28,7 @@ command! -range -nargs=? MdTable silent <line1>,<line2>call MdTable(<f-args>)
 " SQLのin句に指定するような形式にする
 function! SqlList() range
   let rng = a:firstline . "," . a:lastline
-  exec rng . 's/"//g'
+  exec rng . 's/"//ge'
   exec rng . 's/^\|$/''/g'
   exec rng . 's/$/,/'
 endf
@@ -46,5 +47,16 @@ function! GitLogToChangelog() range
 endf
 
 command! -range Changlog silent <line1>,<line2>call GitLogToChangelog()
+
+
+" 転置
+function! Translate(sep) range
+  let rng = a:firstline . "," . a:lastline
+
+  exec rng . '!ruby -rcsv -e ''CSV.parse(ARGF, col_sep: "' . a:sep . '").transpose.each {|r| print r.to_csv(col_sep: "\t")}'''
+endf
+
+command! -range TransTsv silent <line1>,<line2>call Translate("\t")
+command! -range TransCsv silent <line1>,<line2>call Translate(",")
 
 
