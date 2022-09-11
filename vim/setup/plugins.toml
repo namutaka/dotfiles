@@ -28,29 +28,30 @@ repo = 'Shougo/context_filetype.vim'
 # repo = 'osyo-manga/vim-precious'
 # depens = 'context_filetype.vim'
 
-[[plugins]]
-# 入力候補表示
-# install: 'pip3 install --user pynvim'
-repo = 'Shougo/deoplete.nvim'
-depends = 'context_filetype.vim'
-on_event = 'InsertEnter'
-hook_source = '''
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 1
-inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
-'''
-
-[[plugins]]
-# deoplete.nvimから依存. neovimで無いとき必要
-repo = 'roxma/nvim-yarp'
-if   = '! has("nvim")'
-on_source = ['deoplete.nvim']
-
-[[plugins]]
-# deoplete.nvimから依存. neovimで無いとき必要
-repo = 'roxma/vim-hug-neovim-rpc'
-if   = '! has("nvim")'
-on_source = ['deoplete.nvim']
+# coc.nvimで十分っぽいので無効化
+# [[plugins]]
+# # 入力候補表示
+# # install: 'pip3 install --user pynvim'
+# repo = 'Shougo/deoplete.nvim'
+# depends = 'context_filetype.vim'
+# on_event = 'InsertEnter'
+# hook_source = '''
+# let g:deoplete#enable_at_startup = 1
+# let g:deoplete#disable_auto_complete = 1
+# inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
+# '''
+#
+# [[plugins]]
+# # deoplete.nvimから依存. neovimで無いとき必要
+# repo = 'roxma/nvim-yarp'
+# if   = '! has("nvim")'
+# on_source = ['deoplete.nvim']
+#
+# [[plugins]]
+# # deoplete.nvimから依存. neovimで無いとき必要
+# repo = 'roxma/vim-hug-neovim-rpc'
+# if   = '! has("nvim")'
+# on_source = ['deoplete.nvim']
 
 [[plugins]]
 # 非同期処理用
@@ -202,43 +203,149 @@ augroup RubyTest
 augroup END
 '''
 
+# [[plugins]]
+# # 非同期コードチェック
+# #
+# # 言語別linter
+# # :vim: pip install vim-vint
+# # :bash: npm i -g bash-language-server (https://github.com/mads-hartmann/bash-language-server)
+# # :python: pip install 'python-language-server[all]'
+# #
+# repo = 'w0rp/ale'
+# hook_add = '''
+#
+# " airlineでlint結果表示(FIXME なぜかちゃんと動かない)
+# let g:airline#extensions#ale#enabled = 1
+# let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+#
+# " エラー行に表示するマーク
+# let g:ale_sign_error = '⨉'
+# let g:ale_sign_warning = '⚠'
+#
+# " auto-complete
+# let g:ale_completion_enabled = 0
+#
+# let g:ale_sign_column_always = 1
+#
+# " ファイルを開いたときにlint実行
+# let g:ale_lint_on_enter = 1
+# " pipenv使用
+# let g:ale_python_auto_pipenv = 1
+#
+# " 言語別 デフォルト外のlinter設定
+# let g:ale_linters = {
+# \ 'python': ['pyls', 'pylint']
+# \}
+# let g:ale_fixers = {
+# \ 'python': ['isort']
+# \}
+# '''
+
 [[plugins]]
-# 非同期コードチェック
-#
-# 言語別linter
-# :vim: pip install vim-vint
-# :bash: npm i -g bash-language-server (https://github.com/mads-hartmann/bash-language-server)
-# :python: pip install 'python-language-server[all]'
-#
-repo = 'w0rp/ale'
+# Coc : VSCode的なオートコンプリート & LSP & lint
+# https://github.com/neoclide/coc.nvim
+repo = 'neoclide/coc.nvim'
+source = 'release'
+build = 'coc#util#install()'
 hook_add = '''
 
-" airlineでlint結果表示(FIXME なぜかちゃんと動かない)
-let g:airline#extensions#ale#enabled = 1
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+" coc.nvimでのバグ回避(https://github.com/neoclide/coc.nvim/issues/649)
+set nowritebackup
 
-" エラー行に表示するマーク
-let g:ale_sign_error = '⨉'
-let g:ale_sign_warning = '⚠'
+set signcolumn=yes
 
-" auto-complete
-let g:ale_completion_enabled = 0
+" swapファイルへの書き込みの無操作待ち時間(ms)
+" coc.nvim のおすすめ設定
+set updatetime=300
 
-let g:ale_sign_column_always = 1
+" Enterキーで補完を確定させる
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" ファイルを開いたときにlint実行
-let g:ale_lint_on_enter = 1
-" pipenv使用
-let g:ale_python_auto_pipenv = 1
 
-" 言語別 デフォルト外のlinter設定
-let g:ale_linters = {
-\ 'python': ['pyls', 'pylint']
-\}
-let g:ale_fixers = {
-\ 'python': ['isort']
-\}
+" タブで補完メニューのカーソル移動。また、補完メニューを開く
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
 '''
+
 
 [[plugins]] # indent可視化 https://github.com/Yggdroot/indentLine
 repo = 'Yggdroot/indentLine'

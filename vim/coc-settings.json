@@ -1,0 +1,23 @@
+{
+  // 補完開始時に候補を初期選択しないどうか
+  // 選択しても良さそうなのでfalse
+  "suggest.noselect": false,
+
+  "languageserver": {
+    // coc-json
+    // "json": {},
+
+    // coc-tsserver
+    // "typescript": {},
+
+    // coc-sh
+    "bash": {
+      // Setup:
+      //   npm install -g bash-language-server
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    }
+  }
+}

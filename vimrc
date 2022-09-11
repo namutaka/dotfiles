@@ -26,6 +26,8 @@ set splitright
 set virtualedit=block
 set winaltkeys=no
 set clipboard=unnamed
+
+" エンコーディング
 scriptencoding utf-8
 set encoding=utf-8
 set wildmode=longest:full,list:full
