@@ -26,6 +26,7 @@ set splitright
 set virtualedit=block
 set winaltkeys=no
 set clipboard=unnamed
+set clipboard+=unnamedplus
 
 " エンコーディング
 scriptencoding utf-8

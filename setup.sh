@@ -3,6 +3,8 @@
 #
 set -ex
 
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
 cd ~/
 
 FILES=(
@@ -19,16 +21,16 @@ FILES=(
   sshrc.d
   irbrc
   irb
+  config/nvim
+  config/goneovim
 )
 
-DOTFILES=${0%/*}
-
 for file in ${FILES[@]}; do
-  target=.$file
+  target=~/.$file
   if [ -e $target ]; then
     echo "skipping $target"
   else
-    ln -s $DOTFILES/$file $target
+    ln -s $SCRIPT_DIR/$file $target
   fi
 done
 
