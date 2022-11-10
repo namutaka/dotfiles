@@ -148,6 +148,9 @@ command! Doff :windo diffoff
 vnoremap <c-a> <c-a>gv
 vnoremap <c-x> <c-x>gv
 
+" quick-vim
+nnoremap <Leader>r :QuickRun<CR>
+
 " }}}
 
 

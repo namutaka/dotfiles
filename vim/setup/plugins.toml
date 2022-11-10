@@ -195,6 +195,7 @@ let g:quickrun_config['java'] = {
 \ }
 let g:quickrun_config['python.android'] = {'command' : 'monkeyrunner' }
 let g:quickrun_config['coffee.compile'] = {'command' : 'coffee', 'cmdopt' : '-bpc'}
+let g:quickrun_config['javascript'] = {'type' : 'javascript/nodejs'}
 
 augroup RubyTest
   autocmd!
@@ -350,5 +351,7 @@ omap ac <Plug>(coc-classobj-a)
 [[plugins]] # indent可視化 https://github.com/Yggdroot/indentLine
 repo = 'Yggdroot/indentLine'
 hook_add = '''
+" 装飾系文字を非表示にしないようにする(conceallevel)
+let g:indentLine_conceallevel = 0
 '''
 

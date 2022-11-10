@@ -4,7 +4,7 @@
 
 
 " xml整形
-command! XmlFormat :%s/></>\r</g | filetype indent on | setf xml | normal gg=G<CR>
+command! -range XmlFormat silent <line1>,<line2>!xmllint --format -
 
 autocmd! FileType javascript setl equalprg=uglifyjs\ -b
 
