@@ -5,6 +5,7 @@
 
 [alias]
   co = checkout
+  cof = !git branch | fzf | xargs -n 1 git checkout
   br = branch -v
   ci = commit
   st = status -bs
@@ -18,6 +19,12 @@
   mt = mergetool
   glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   changelog = log --graph --topo-order --stat
+  fp = log --first-parent
+
+  # あるコミットがマージされた箇所を調べる (https://stackoverflow.com/questions/8475448/find-merge-commit-which-include-a-specific-commit)
+  find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
+  show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
+
 
 [difftool]
   prompt = false
@@ -65,3 +72,11 @@
 [user]
 	useConfigOnly = true
 
+
+[grep]
+  lineNumber = true
+
+[rerere]
+	enabled = true
+[pull]
+	ff = only
