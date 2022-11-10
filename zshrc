@@ -14,6 +14,12 @@ autoload -U compinit
 compinit
 setopt autopushd
 
+# Enable editing command line on editor
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey -M vicmd v edit-command-line
+
 DOTFILES_PATH=~/dotfiles
 for shfile in $DOTFILES_PATH/zsh/*.*sh; do
   [ -r $shfile ] && . $shfile
