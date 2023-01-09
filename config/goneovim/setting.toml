@@ -83,6 +83,7 @@ Clipboard = true
 
 ## This setting is equivalent to Macmeta in MacVim.
 # Macmeta = false
+Macmeta = true
 
 ## The input method editor will be automatically disabled when the mode is changed to normal mode.
 ## It may be useful for users who use the input method editor (e.g. East Asian users).
@@ -177,6 +178,9 @@ Clipboard = true
 ##  let g:hoge = 'fuga'
 ## '''
 Ginitvim = '''
+cd $HOME
+
+luafile ~/.config/goneovim/fontscale.lua
 source ~/.config/nvim/ginit.vim
 '''
 
@@ -211,6 +215,7 @@ source ~/.config/nvim/ginit.vim
 # [Statusline]
 ## Whether or not to display the external status line
 # Visible = false
+Visible = true
 
 ## Options: "textLabel" / "icon" / "background" / "none"
 # ModeIndicatorType = "textLabel"
