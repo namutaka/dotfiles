@@ -128,6 +128,8 @@ nnoremap <silent> <C-Tab> :bn<CR>
 nnoremap <silent> <C-S-Tab> :bp<CR>
 nnoremap <silent> gt :tabnext<CR>
 nnoremap <silent> gT :tabprev<CR>
+" nnoremap <silent> <A-S-[> :tabnext<CR>
+" nnoremap <silent> <A-S-]> :tabprev<CR>
 
 " spaceで次のbufferへ。back-spaceで前のbufferへ
 nmap <BS> ;bn<CR>
@@ -147,9 +149,6 @@ command! Doff :windo diffoff
 " inc,dec
 vnoremap <c-a> <c-a>gv
 vnoremap <c-x> <c-x>gv
-
-" quick-vim
-nnoremap <Leader>r :QuickRun<CR>
 
 " }}}
 
@@ -230,6 +229,30 @@ nnoremap <Leader>N <ESC>o<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
 
 
 " }}}
+
+
+" Terminal {{{
+"
+" To map key to exit terminal-mode: >
+tnoremap <C-\><C-\> <C-\><C-n>
+tnoremap <C-T><C-T> <C-\><C-n>
+tnoremap <C-T>h <C-\><C-N><C-w>h
+tnoremap <C-T>j <C-\><C-N><C-w>j
+tnoremap <C-T>k <C-\><C-N><C-w>k
+tnoremap <C-T>l <C-\><C-N><C-w>l
+
+" To simulate |i_CTRL-R| in terminal-mode: >
+" tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
+" To use `ALT+{h,j,k,l}` to navigate windows from any mode: >
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+
+"
+" }}}
+
 
 " foldmethod=syntaxのときに入力が重いことへの対処 {{{
 " FIXME 何故かunletをするとvim-airlineでの表示崩れをするので一旦機能OFF

@@ -7,7 +7,7 @@ if has('gui_macvim')
 
   "set guifont=IPAGothic:h15,Osaka-Mono:h15
   "set guifontwide=IPAGothic\ for\ Powerline:h15,Osaka-Mono:h15
-  set guifont=Osaka-Mono:h15
+  set guifont=Monaco:h16
   " これを設定してしまうと <C--> <C-+>でのサイズ変更ができなくなる
   " set guifontwide=Osaka-Mono:h15
   set linespace=2

@@ -6,6 +6,9 @@ colorscheme desert
 "set guifontwide=IPAGothic\ for\ Powerline:h15,Osaka-Mono:h15
 "set guifont=Osaka-Mono:h15
 "set guifontwide=Osaka-Mono:h15
+
+set guifont=Monaco:h16
+
 set linespace=2
 
 set cmdheight=1
@@ -18,4 +21,6 @@ map <silent> gw :macaction selectNextWindow:<CR>
 map <silent> gW :macaction selectPreviousWindow:<CR>
 
 call Restore_window_size()
+
+source ~/.config/nvim/macmap.vim
 

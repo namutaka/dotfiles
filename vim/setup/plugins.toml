@@ -202,6 +202,10 @@ augroup RubyTest
   autocmd BufWinEnter,BufNewFile *_test.rb set filetype=ruby.test
   autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
 augroup END
+
+" quick-vim
+nnoremap <Leader>r :QuickRun<CR>
+
 '''
 
 # [[plugins]]
@@ -354,4 +358,9 @@ hook_add = '''
 " 装飾系文字を非表示にしないようにする(conceallevel)
 let g:indentLine_conceallevel = 0
 '''
+
+# diff表示が微妙なので利用せず
+# [[plugins]]
+# # 単語ごとのdiff
+# repo = 'rickhowe/diffchar.vim'
 
