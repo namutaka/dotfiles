@@ -47,7 +47,7 @@ set tags+=../../../tags
 set tags+=../../tags
 set tags+=../tags
 let $PATH = $PATH . ':~/local/bin'
-set undodir=$HOME/.vim/tmp
+set undodir=$HOME/.vim/temp
 set backupskip=/tmp/*,/private/tmp/*
 
 " 表示

@@ -11,8 +11,6 @@ FILES=(
   zsh
   zshrc
   vim
-  vimrc
-  gvimrc
   gitconfig
   screenrc
   vrapperrc
@@ -22,7 +20,6 @@ FILES=(
   irbrc
   irb
   config/nvim
-  config/goneovim
 )
 
 for file in ${FILES[@]}; do

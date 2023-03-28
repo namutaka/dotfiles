@@ -2,7 +2,7 @@
 
 /vim/.*
 /vim/bundle/*
-/vim/tmp/
+/vim/temp/
 /vim/tags/
 /vim/**/tags
 /vim/local/
