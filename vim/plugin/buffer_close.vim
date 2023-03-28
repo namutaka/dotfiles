@@ -32,7 +32,7 @@ function! <SID>BufferClose()
     enew
     setlocal syntax=none
     setlocal noswapfile
-    setlocal buftype=nofile
+    "setlocal buftype=nofile " nofileにするとバッファが消えないのでNG
     setlocal bufhidden=delete
   endif
 
