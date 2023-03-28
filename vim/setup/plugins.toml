@@ -364,3 +364,11 @@ let g:indentLine_conceallevel = 0
 # # 単語ごとのdiff
 # repo = 'rickhowe/diffchar.vim'
 
+
+
+[[plugins]]
+repo = 'jupyter-vim/jupyter-vim'
+hook_add = '''
+let g:jupyter_highlight_cells = 0
+'''
+
