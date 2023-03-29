@@ -254,6 +254,9 @@ source = 'release'
 build = 'coc#util#install()'
 hook_add = '''
 
+" config ファイルの場所(nvimとvimで共通にするため)
+let g:coc_config_home = expand('~/.config/nvim')
+
 " coc.nvimでのバグ回避(https://github.com/neoclide/coc.nvim/issues/649)
 set nowritebackup
 

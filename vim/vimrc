@@ -2,11 +2,6 @@
 
 let mapleader = ','              " キーマップリーダー
 
-" 自前設定用group
-augroup MyAutoCmd
-  autocmd!
-augroup END
-
 execute 'source' fnameescape(expand('~/.vim/setup/dein.vim'))
 
 " 全体設定 {{{
@@ -15,7 +10,11 @@ syntax on
 set hidden
 set nobackup
 set noswapfile
+
+" insert mode 抜けた時にimeをoffにする設定らしいが機能せず
 "set noimdisable " ime設定
+"set iminsert=2
+
 set mouse=a
 if !has('nvim')
     set ttymouse=xterm2
@@ -25,8 +24,7 @@ set splitbelow
 set splitright
 set virtualedit=block
 set winaltkeys=no
-set clipboard=unnamed
-set clipboard+=unnamedplus
+set clipboard=unnamed,unnamedplus
 
 " エンコーディング
 scriptencoding utf-8
@@ -34,30 +32,33 @@ set encoding=utf-8
 set wildmode=longest:full,list:full
 set ambiwidth=double
 
-"" 標準入力はUTF-8と見なす
-augroup MyAutoCmd
-  autocmd StdinReadPre * set fileencodings=utf-8
-augroup END
-
 " パス設定
 set runtimepath+=$HOME/.vim
-set path+=~/
 let g:vimball_home = expand('~/.vim/bundle/vimball')
-set tags+=../../../tags
-set tags+=../../tags
-set tags+=../tags
-let $PATH = $PATH . ':~/local/bin'
 set undodir=$HOME/.vim/temp
 set backupskip=/tmp/*,/private/tmp/*
+
+let $PATH = join([
+\   $PATH,
+\   expand('~/local/bin'),
+\   expand('~/.nodebrew/current/bin')
+\ ], ':')
 
 " 表示
 set number
 set nowrap
+set showmatch  " 括弧の対応をハイライト
+set showcmd    " 操作を最下部に表示
+
+" カーソル行ハイライト
 set cursorline
-set list " 特殊文字
+highlight CursorLine term=reverse cterm=none ctermbg=232
+
+"" 特殊文字表示
+set list
 set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
-set showmatch         " 括弧の対応をハイライト
-set showcmd
+
+"" fold設定
 set foldmethod=syntax
 set foldlevel=1000
 
@@ -68,31 +69,32 @@ set softtabstop=0
 set expandtab
 set smartindent
 set autoindent
-set textwidth=0
-augroup MyAutoCmd
-  autocmd FileType text setlocal textwidth=0
-  autocmd FileType gitcommit set fenc=utf-8|setlocal textwidth=0|DiffGitCached|resize 10
-augroup END
+set textwidth=0 " フォーマット時などでの１行の折り返し文字数
 
 " ステータスバー
 set cmdheight=1
 set laststatus=2
-highlight CursorLine term=reverse cterm=none ctermbg=232
+
 
 " 標準プラグインの制御
+
+"" dicwin.vim を使わない(Kaoriya向け)
 let plugin_dicwin_disable=1
+
+"" netrw(使ってない)
 let g:netrw_liststyle=3
-let g:Align_xstrlen = 3
+
+"" plugin/buffer_close.vim
 let g:buffer_close_after_buf = -1
 
-" Man
+" man page を :Man 〜〜で表示できるようにするプラグイン
 runtime! ftplugin/man.vim
 
-" Quickfix
-augroup MyAutoCmd
-  autocmd FileType make setlocal noexpandtab
-  autocmd QuickfixCmdPost make,grep,grepadd,vimgrep cwindow
-augroup END
+" grep.vim settings
+let Grep_Find_Use_Xargs = 0
+
+" DirDiff
+let g:DirDiffExcludes = 'CVS,.*.swp,.svn,*.log,*.tmp,.DS_Store,thumb.db,.git'
 
 " }}}
 
@@ -160,6 +162,8 @@ set ignorecase " 大文字小文字無視
 set smartcase  " 検索文字列に大文字が含まれている場合は区別して検索する
 set incsearch  " インクリメンタルサーチ
 set hlsearch   " 検索文字をハイライト
+
+"" :grep で実行するコマンド
 let &grepprg="grep -n -r --exclude='tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.svn*' --exclude='*.swp' $*"
 
 "Escの2回押しでハイライト消去
@@ -181,7 +185,7 @@ nnoremap <Leader><C-i>  :<C-u>help<Space>
 " カーソル下のキーワードをヘルプでひく
 nnoremap <Leader><C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
 
-
+" カーソル下の単語でgrep
 nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
 
 " }}}
@@ -192,11 +196,8 @@ nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
 command! Sh set ft=sh
 
 " .vimrcを開く
-command! Vimrc edit ~/.vimrc
+command! Vimrc edit ~/.vim/vimrc
 command! VimPlugins edit ~/dotfiles/vim/setup/plugins.toml
-
-" F2 キーでセッションを保存する
-nmap <F2> ;wa<Bar>exe "mksession! ~/.vim/tmp/" . v:this_session<CR>
 
 " ファイル名とカーソルの行数をコピー
 nmap <Leader>% ;let @+=(expand("%:p") . ":" . line("."))<CR>
@@ -206,22 +207,12 @@ augroup RemoveLineEndSpace
   autocmd!
   autocmd BufWritePre * ;%s/\s\+$//ge
 augroup END
+
+"" 空白を許容する場合に実行するコマンド
 command! AllowLineEndSpace autocmd! RemoveLineEndSpace
-
-augroup MyAutoCmd
-  autocmd FileType markdown AllowLineEndSpace
-  autocmd BufNewFile,BufRead *.tsv,*.csv AllowLineEndSpace
-augroup END
-
 
 " バッファを閉じる
 nnoremap <Leader>q :BufferClose<CR>
-
-" grep.vim settings
-let Grep_Find_Use_Xargs = 0
-
-" DirDiff
-let g:DirDiffExcludes = 'CVS,.*.swp,.svn,*.log,*.tmp,.DS_Store,thumb.db,.git'
 
 "タイムスタンプを挿入してinsertモードへ移行
 nnoremap <Leader>n <ESC>i<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
@@ -253,10 +244,14 @@ tnoremap <A-l> <C-\><C-N><C-w>l
 "
 " }}}
 
+" 自前設定用group
+augroup MyAutoCmd
+  autocmd!
+augroup END
 
-" foldmethod=syntaxのときに入力が重いことへの対処 {{{
 " FIXME 何故かunletをするとvim-airlineでの表示崩れをするので一旦機能OFF
-"" https://qiita.com/izumin5210/items/7e0ad2f86d0686d8b376
+" foldmethod=syntaxのときに入力が重いことへの対処 {{{
+" https://qiita.com/izumin5210/items/7e0ad2f86d0686d8b376
 "augroup MyAutoCmd
 "  autocmd InsertEnter * if !exists('w:last_fdm')
 "              \| let w:last_fdm=&foldmethod
@@ -269,12 +264,28 @@ tnoremap <A-l> <C-\><C-N><C-w>l
 "augroup END
 "" }}}
 
+" ファイルタイプ個別設定
+augroup MyAutoCmd
 
-"" digdag {{{
+  " yamlで':','#'を記入した時に自動インデント調整しないようにする
+  autocmd Syntax yaml setl indentkeys-=<:> indentkeys-=0#
 
-autocmd BufNewFile,BufRead *.dig set filetype=yaml
-autocmd Syntax yaml setl indentkeys-=<:> indentkeys-=0#
+  "" 標準入力はUTF-8と見なす
+  autocmd StdinReadPre * set fileencodings=utf-8
 
-"" }}}
+  "" textは自動改行なし
+  autocmd FileType text setlocal textwidth=0
+
+  "" git-commitメッセージ
+  autocmd FileType gitcommit set fenc=utf-8|setlocal textwidth=0|DiffGitCached|resize 10
+
+  " Quickfix
+  autocmd QuickfixCmdPost make,grep,grepadd,vimgrep cwindow
+
+  " 末尾スペースを許容する
+  autocmd FileType markdown AllowLineEndSpace
+  autocmd BufNewFile,BufRead *.tsv,*.csv AllowLineEndSpace
+
+augroup END
 
 " vim:ft=vim foldmethod=marker sw=2
