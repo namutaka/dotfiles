@@ -1,15 +1,30 @@
 " .vimrc
 
 let mapleader = ','              " キーマップリーダー
+let maplocalleader = '.'
 
 execute 'source' fnameescape(expand('~/.vim/setup/dein.vim'))
 
 " 全体設定 {{{
 syntax on
 
+colorscheme desert
+
+" true color利用
+if !has('gui_running')
+    \ && exists('&termguicolors')
+    \ && $COLORTERM ==# 'truecolor'
+  if !has('nvim')
+    let &t_8f = "\e[38;2;%lu;%lu;%lum"
+    let &t_8b = "\e[48;2;%lu;%lu;%lum"
+  endif
+  set termguicolors " ターミナルでTrueColorを使う
+endif
+
 set hidden
 set nobackup
 set noswapfile
+set updatetime=300 " カーソル無操作のイベント発火までの時間(ms)
 
 " insert mode 抜けた時にimeをoffにする設定らしいが機能せず
 "set noimdisable " ime設定
@@ -49,10 +64,13 @@ set number
 set nowrap
 set showmatch  " 括弧の対応をハイライト
 set showcmd    " 操作を最下部に表示
+set scrolloff=5 " スクロール開始するカーソルの前後幅
+set signcolumn=yes " 左端の指摘記号列を常に表示
 
 " カーソル行ハイライト
 set cursorline
 highlight CursorLine term=reverse cterm=none ctermbg=232
+highlight CursorLineNr term=reverse cterm=none ctermbg=232
 
 "" 特殊文字表示
 set list
@@ -70,6 +88,8 @@ set expandtab
 set smartindent
 set autoindent
 set textwidth=0 " フォーマット時などでの１行の折り返し文字数
+set smarttab " 行頭の余白内で Tab を打ち込むと'shiftwidth' の数だけインデントする
+set breakindent " wrapで折り返し時に全行インデントする
 
 " ステータスバー
 set cmdheight=1
@@ -163,6 +183,10 @@ set smartcase  " 検索文字列に大文字が含まれている場合は区別
 set incsearch  " インクリメンタルサーチ
 set hlsearch   " 検索文字をハイライト
 
+if has('nvim')
+  set inccommand=split " 置換をプレビュー
+endif
+
 "" :grep で実行するコマンド
 let &grepprg="grep -n -r --exclude='tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.svn*' --exclude='*.swp' $*"
 
@@ -203,13 +227,15 @@ command! VimPlugins edit ~/dotfiles/vim/setup/plugins.toml
 nmap <Leader>% ;let @+=(expand("%:p") . ":" . line("."))<CR>
 
 " 保存時に行末の空白を除去する
-augroup RemoveLineEndSpace
-  autocmd!
-  autocmd BufWritePre * ;%s/\s\+$//ge
-augroup END
+fun! StripTrailingWhitespace()
+    " Only strip if the b:noStripeWhitespace variable isn't set
+    if exists('b:noStripWhitespace')
+        return
+    endif
+    %s/\s\+$//e
+endfun
+autocmd BufWritePre * call StripTrailingWhitespace()
 
-"" 空白を許容する場合に実行するコマンド
-command! AllowLineEndSpace autocmd! RemoveLineEndSpace
 
 " バッファを閉じる
 nnoremap <Leader>q :BufferClose<CR>
@@ -282,9 +308,14 @@ augroup MyAutoCmd
   " Quickfix
   autocmd QuickfixCmdPost make,grep,grepadd,vimgrep cwindow
 
-  " 末尾スペースを許容する
-  autocmd FileType markdown AllowLineEndSpace
-  autocmd BufNewFile,BufRead *.tsv,*.csv AllowLineEndSpace
+  " tsv,csvは末尾スペースを許容する
+  autocmd FileType tsv,csv let b:noStripWhitespace=1
+
+  " nerdtree はsign列不要
+  autocmd FileType nerdtree set signcolumn=no
+
+  " markdown
+  autocmd FileType markdown set wrap|let b:noStripWhitespace=1
 
 augroup END
 

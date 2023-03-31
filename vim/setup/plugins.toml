@@ -5,6 +5,15 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
+hook_source = '''
+let g:airline_theme='dark'
+let g:airline#extensions#coc#enabled = 1
+"let g:airline_base16_improved_contrast = 1
+"let g:airline_base16_monotone = 1
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 # ファイルリストビュー
@@ -15,7 +24,6 @@ nnoremap <Leader><Leader> :NERDTreeToggle<CR>
 
 [[plugins]]
 # Git操作
-# :Gstatus, :GBlame
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
@@ -260,12 +268,6 @@ let g:coc_config_home = expand('~/.config/nvim')
 " coc.nvimでのバグ回避(https://github.com/neoclide/coc.nvim/issues/649)
 set nowritebackup
 
-set signcolumn=yes
-
-" swapファイルへの書き込みの無操作待ち時間(ms)
-" coc.nvim のおすすめ設定
-set updatetime=300
-
 " Enterキーで補完を確定させる
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
@@ -366,7 +368,6 @@ let g:indentLine_conceallevel = 0
 # [[plugins]]
 # # 単語ごとのdiff
 # repo = 'rickhowe/diffchar.vim'
-
 
 
 [[plugins]]

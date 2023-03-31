@@ -1,6 +1,6 @@
 "
-" filetype
+" filetype指定スクリプト
+" デフォルトで読み込まれる
 "
 
-au BufNewFile,BufRead *.md  setf markdown
 
