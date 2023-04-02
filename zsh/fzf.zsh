@@ -1,16 +1,15 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */usr/local/Cellar/fzf/0.27.0/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/usr/local/Cellar/fzf/0.27.0/bin"
-fi
+
+FZF_SHELL_PATH=/usr/local/opt/fzf/shell
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "/usr/local/Cellar/fzf/0.27.0/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "$FZF_SHELL_PATH/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "/usr/local/Cellar/fzf/0.27.0/shell/key-bindings.zsh"
+source "$FZF_SHELL_PATH/key-bindings.zsh"
 
 # Settings
 # ------------
