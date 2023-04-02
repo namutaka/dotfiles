@@ -30,37 +30,6 @@ repo = 'tpope/vim-fugitive'
 # ファイルタイプ判定
 repo = 'Shougo/context_filetype.vim'
 
-# シンタックスが分かりにくいのでOFF
-# [[plugins]]
-# # カーソル下に応じてファイルタイプ変更
-# repo = 'osyo-manga/vim-precious'
-# depens = 'context_filetype.vim'
-
-# coc.nvimで十分っぽいので無効化
-# [[plugins]]
-# # 入力候補表示
-# # install: 'pip3 install --user pynvim'
-# repo = 'Shougo/deoplete.nvim'
-# depends = 'context_filetype.vim'
-# on_event = 'InsertEnter'
-# hook_source = '''
-# let g:deoplete#enable_at_startup = 1
-# let g:deoplete#disable_auto_complete = 1
-# inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
-# '''
-#
-# [[plugins]]
-# # deoplete.nvimから依存. neovimで無いとき必要
-# repo = 'roxma/nvim-yarp'
-# if   = '! has("nvim")'
-# on_source = ['deoplete.nvim']
-#
-# [[plugins]]
-# # deoplete.nvimから依存. neovimで無いとき必要
-# repo = 'roxma/vim-hug-neovim-rpc'
-# if   = '! has("nvim")'
-# on_source = ['deoplete.nvim']
-
 [[plugins]]
 # 非同期処理用
 repo = 'Shougo/vimproc.vim'
@@ -87,27 +56,6 @@ nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
 '''
 
-#[[plugins]]
-# カーソルが飛びすぎるので使うのやめる
-## vim-smartword : 単語移動がスマートな感じで
-#repo = 'vim-scripts/smartword'
-#hook_add = '''
-#map w  <Plug>(smartword-w)
-#map b  <Plug>(smartword-b)
-#map e  <Plug>(smartword-e)
-#map ge  <Plug>(smartword-ge)
-#'''
-
-# 暴発して使いにくいので無効
-#[[plugins]]
-## multi cursor 操作
-## https://github.com/terryma/vim-multiple-cursors
-#repo = 'terryma/vim-multiple-cursors'
-#hook_add = '''
-#" 始動キーを <C-n> は使っているので変える
-#let g:multi_cursor_start_word_key      = '<C-m>'
-#'''
-
 [[plugins]]
 # easy-align
 repo = 'junegunn/vim-easy-align'
@@ -131,57 +79,6 @@ nnoremap fs :<C-u>OpenBrowserSearch<Space><C-r><C-w><CR>
 vnoremap fs "xy:<C-u>OpenBrowserSearch<Space><C-R>x<CR>
 '''
 
-
-[[plugins]]
-# unite.vim
-repo = 'Shougo/unite.vim'
-hook_add = '''
-" The prefix key.
-nnoremap    [unite]   <Nop>
-nmap    <C-q>  [unite]
-
-nnoremap [unite]u  :<C-u>Unite -no-split<Space>
-nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -no-split -buffer-name=files buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
-nnoremap <silent> [unite]b  :<C-u>Unite -no-split buffer<CR>
-nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
-
-" grep検索
-nnoremap <silent> [unite]g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-" カーソル位置の単語をgrep検索
-nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-" grep検索結果の再呼出
-nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
-
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings() "{{{
-  " Overwrite settings.
-  imap <buffer> <C-j>    <Plug>(unite_insert_leave)
-  imap <buffer> <C-BS>   <Plug>(unite_delete_backward_path)
-  " Start insert.
-endfunction "}}}
-
-let g:unite_enable_start_insert = 0
-let g:unite_source_file_mru_limit = 200
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
-
-" ag はUTF-8 以外のファイルをbinary扱いしてしまうので止める
-"" unite grep に ag(The Silver Searcher) を使う
-"if executable('ag')
-"  let g:unite_source_grep_command = 'ag'
-"  let g:unite_source_grep_default_opts = '--all-types --nogroup --nocolor --column'
-"  let g:unite_source_grep_recursive_opt = ''
-"endif
-
-" ripgrep を検索に使う
-if executable('rg')
-  let g:unite_source_grep_command = 'rg'
-  let g:unite_source_grep_default_opts = '--line-number --no-heading --color never'
-  let g:unite_source_grep_recursive_opt = ''
-  "let g:unite_source_grep_encoding='utf-8'
-endif
-'''
 
 [[plugins]]
 # QuickRun
@@ -215,44 +112,6 @@ augroup END
 nnoremap <Leader>r :QuickRun<CR>
 
 '''
-
-# [[plugins]]
-# # 非同期コードチェック
-# #
-# # 言語別linter
-# # :vim: pip install vim-vint
-# # :bash: npm i -g bash-language-server (https://github.com/mads-hartmann/bash-language-server)
-# # :python: pip install 'python-language-server[all]'
-# #
-# repo = 'w0rp/ale'
-# hook_add = '''
-#
-# " airlineでlint結果表示(FIXME なぜかちゃんと動かない)
-# let g:airline#extensions#ale#enabled = 1
-# let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-#
-# " エラー行に表示するマーク
-# let g:ale_sign_error = '⨉'
-# let g:ale_sign_warning = '⚠'
-#
-# " auto-complete
-# let g:ale_completion_enabled = 0
-#
-# let g:ale_sign_column_always = 1
-#
-# " ファイルを開いたときにlint実行
-# let g:ale_lint_on_enter = 1
-# " pipenv使用
-# let g:ale_python_auto_pipenv = 1
-#
-# " 言語別 デフォルト外のlinter設定
-# let g:ale_linters = {
-# \ 'python': ['pyls', 'pylint']
-# \}
-# let g:ale_fixers = {
-# \ 'python': ['isort']
-# \}
-# '''
 
 [[plugins]]
 # Coc : VSCode的なオートコンプリート & LSP & lint
@@ -356,7 +215,6 @@ omap ac <Plug>(coc-classobj-a)
 
 '''
 
-
 [[plugins]] # indent可視化 https://github.com/Yggdroot/indentLine
 repo = 'Yggdroot/indentLine'
 hook_add = '''
@@ -364,15 +222,229 @@ hook_add = '''
 let g:indentLine_conceallevel = 0
 '''
 
-# diff表示が微妙なので利用せず
-# [[plugins]]
-# # 単語ごとのdiff
-# repo = 'rickhowe/diffchar.vim'
-
-
 [[plugins]]
 repo = 'jupyter-vim/jupyter-vim'
 hook_add = '''
 let g:jupyter_highlight_cells = 0
 '''
+
+[[plugins]]
+# see: https://zenn.dev/mkobayashime/articles/nvim-treesitter-dein
+repo = 'nvim-treesitter/nvim-treesitter'
+if   = 'has("nvim")'
+hook_post_update = 'TSUpdate'
+lua_post_source = '''
+require("nvim-treesitter.configs").setup {
+  -- ここでハイライトしたい言語を指定しておくと、起動時にインストールされます
+  ensure_installed = {
+    "vim", "help", "query", "lua",
+    "dockerfile",
+    "typescript", "tsx", "javascript",
+    "gitignore",
+    "bash",
+    "markdown",
+    "json", "yaml", "toml",
+    "css", "scss",
+    "html",
+    "scala"
+  },
+  highlight = {
+    enable = true, -- ハイライトを有効化
+    additional_vim_regex_highlighting = false, -- catpuucin用
+    disable = {},
+  },
+　indent ={
+　　enable =true,--言語に応じた自動インデントを有効化
+  　disable ={"html"},-- htmlのインデントだけ無効化
+　},
+  autotag = {
+    enable = true,
+  },
+}
+'''
+
+#
+# Fern
+# うまくpluginが動かないのと操作感覚が微妙だった
+#
+#
+# [[plugins]]
+# repo = 'lambdalisue/fern.vim'
+# hook_add = '''
+# echom "Fern setting"
+# function! s:fern_settings() abort
+#   " Use 'select' instead of 'edit' for default 'open' action
+#   " nmap <buffer> <Plug>(fern-action-open) <Plug>(fern-action-open:select)
+#
+#   nmap <silent> <buffer> p     <Plug>(fern-action-preview:toggle)
+#   nmap <silent> <buffer> <C-p> <Plug>(fern-action-preview:auto:toggle)
+#   nmap <silent> <buffer> <C-d> <Plug>(fern-action-preview:scroll:down:half)
+#   nmap <silent> <buffer> <C-u> <Plug>(fern-action-preview:scroll:up:half)
+# endfunction
+#
+# augroup fern-custom
+#   autocmd! *
+#   autocmd FileType fern call s:fern_settings()
+# augroup END
+# '''
+#
+# [[plugins]]
+# repo = 'lambdalisue/nerdfont.vim'
+# [[plugins]]
+# repo = 'lambdalisue/glyph-palette.vim'
+# [[plugins]]
+# repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+# [[plugins]]
+# repo = 'lambdalisue/fern-git-status.vim'
+# [[plugins]]
+# repo = 'yuki-yano/fern-preview.vim'
+
+
+
+# diff表示が微妙なので利用せず
+# [[plugins]]
+# # 単語ごとのdiff
+# repo = 'rickhowe/diffchar.vim'
+
+# シンタックスが分かりにくいのでOFF
+# [[plugins]]
+# # カーソル下に応じてファイルタイプ変更
+# repo = 'osyo-manga/vim-precious'
+# depens = 'context_filetype.vim'
+
+# coc.nvimで十分っぽいので無効化
+# [[plugins]]
+# # 入力候補表示
+# # install: 'pip3 install --user pynvim'
+# repo = 'Shougo/deoplete.nvim'
+# depends = 'context_filetype.vim'
+# on_event = 'InsertEnter'
+# hook_source = '''
+# let g:deoplete#enable_at_startup = 1
+# let g:deoplete#disable_auto_complete = 1
+# inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
+# '''
+#
+# [[plugins]]
+# # deoplete.nvimから依存. neovimで無いとき必要
+# repo = 'roxma/nvim-yarp'
+# if   = '! has("nvim")'
+# on_source = ['deoplete.nvim']
+#
+# [[plugins]]
+# # deoplete.nvimから依存. neovimで無いとき必要
+# repo = 'roxma/vim-hug-neovim-rpc'
+# if   = '! has("nvim")'
+# on_source = ['deoplete.nvim']
+
+#[[plugins]]
+# カーソルが飛びすぎるので使うのやめる
+## vim-smartword : 単語移動がスマートな感じで
+#repo = 'vim-scripts/smartword'
+#hook_add = '''
+#map w  <Plug>(smartword-w)
+#map b  <Plug>(smartword-b)
+#map e  <Plug>(smartword-e)
+#map ge  <Plug>(smartword-ge)
+#'''
+
+# 暴発して使いにくいので無効
+#[[plugins]]
+## multi cursor 操作
+## https://github.com/terryma/vim-multiple-cursors
+#repo = 'terryma/vim-multiple-cursors'
+#hook_add = '''
+#" 始動キーを <C-n> は使っているので変える
+#let g:multi_cursor_start_word_key      = '<C-m>'
+#'''
+
+
+# [[plugins]]
+# # unite.vim
+# repo = 'Shougo/unite.vim'
+# hook_add = '''
+# " The prefix key.
+# nnoremap    [unite]   <Nop>
+# nmap    <C-q>  [unite]
+#
+# nnoremap [unite]u  :<C-u>Unite -no-split<Space>
+# nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -no-split -buffer-name=files buffer file_mru bookmark file<CR>
+# nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
+# nnoremap <silent> [unite]b  :<C-u>Unite -no-split buffer<CR>
+# nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
+#
+# " grep検索
+# nnoremap <silent> [unite]g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+# " カーソル位置の単語をgrep検索
+# nnoremap <silent> [unite]gr :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+# " grep検索結果の再呼出
+# nnoremap <silent> [unite]gg  :<C-u>UniteResume search-buffer<CR>
+#
+# autocmd FileType unite call s:unite_my_settings()
+# function! s:unite_my_settings() "{{{
+#   " Overwrite settings.
+#   imap <buffer> <C-j>    <Plug>(unite_insert_leave)
+#   imap <buffer> <C-BS>   <Plug>(unite_delete_backward_path)
+#   " Start insert.
+# endfunction "}}}
+#
+# let g:unite_enable_start_insert = 0
+# let g:unite_source_file_mru_limit = 200
+# let g:unite_enable_ignore_case = 1
+# let g:unite_enable_smart_case = 1
+#
+# " ag はUTF-8 以外のファイルをbinary扱いしてしまうので止める
+# "" unite grep に ag(The Silver Searcher) を使う
+# "if executable('ag')
+# "  let g:unite_source_grep_command = 'ag'
+# "  let g:unite_source_grep_default_opts = '--all-types --nogroup --nocolor --column'
+# "  let g:unite_source_grep_recursive_opt = ''
+# "endif
+#
+# " ripgrep を検索に使う
+# if executable('rg')
+#   let g:unite_source_grep_command = 'rg'
+#   let g:unite_source_grep_default_opts = '--line-number --no-heading --color never'
+#   let g:unite_source_grep_recursive_opt = ''
+#   "let g:unite_source_grep_encoding='utf-8'
+# endif
+# '''
+
+# [[plugins]]
+# # 非同期コードチェック
+# #
+# # 言語別linter
+# # :vim: pip install vim-vint
+# # :bash: npm i -g bash-language-server (https://github.com/mads-hartmann/bash-language-server)
+# # :python: pip install 'python-language-server[all]'
+# #
+# repo = 'w0rp/ale'
+# hook_add = '''
+#
+# " airlineでlint結果表示(FIXME なぜかちゃんと動かない)
+# let g:airline#extensions#ale#enabled = 1
+# let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+#
+# " エラー行に表示するマーク
+# let g:ale_sign_error = '⨉'
+# let g:ale_sign_warning = '⚠'
+#
+# " auto-complete
+# let g:ale_completion_enabled = 0
+#
+# let g:ale_sign_column_always = 1
+#
+# " ファイルを開いたときにlint実行
+# let g:ale_lint_on_enter = 1
+# " pipenv使用
+# let g:ale_python_auto_pipenv = 1
+#
+# " 言語別 デフォルト外のlinter設定
+# let g:ale_linters = {
+# \ 'python': ['pyls', 'pylint']
+# \}
+# let g:ale_fixers = {
+# \ 'python': ['isort']
+# \}
+# '''
 

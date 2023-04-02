@@ -1,4 +1,5 @@
 " .vimrc
+scriptencoding utf-8
 
 let mapleader = ','              " キーマップリーダー
 let maplocalleader = '.'
@@ -42,7 +43,6 @@ set winaltkeys=no
 set clipboard=unnamed,unnamedplus
 
 " エンコーディング
-scriptencoding utf-8
 set encoding=utf-8
 set wildmode=longest:full,list:full
 set ambiwidth=double

@@ -32,6 +32,7 @@ if dein#load_state(s:dein_dir)
   " Required:
   call dein#end()
   call dein#save_state()
+  autocmd VimEnter * call dein#call_hook('post_source')
 endif
 
 " Required:
