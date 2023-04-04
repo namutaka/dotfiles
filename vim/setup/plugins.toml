@@ -8,8 +8,6 @@ repo = 'vim-airline/vim-airline'
 hook_source = '''
 let g:airline_theme='dark'
 let g:airline#extensions#coc#enabled = 1
-"let g:airline_base16_improved_contrast = 1
-"let g:airline_base16_monotone = 1
 '''
 
 [[plugins]]
