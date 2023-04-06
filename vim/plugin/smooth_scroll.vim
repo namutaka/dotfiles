@@ -23,7 +23,7 @@
 " Modified by namutaka 2011
 "
 "
-if has('gui_macvim')
+if has('gui_running')
   finish
 endif
 

@@ -1,4 +1,4 @@
-" Buffer Close
+" Close current buffer
 "
 " Date: 2011/2/11
 " Author: namutaka
@@ -8,23 +8,23 @@
 " Options:
 " 閉じた後に表示するバッファ
 "   -1 := 前方のバッファ
-"    0 := スクラッチバッファ
+"    0 := 無名バッファ
 "    1 := 後方のバッファ
-if !exists("g:buffer_close_after_buf")
-  let g:buffer_close_after_buf = 0
+if !exists("g:close_buffer__next_dir")
+  let g:close_buffer__next_dir = -1
 endif
 
 " Public Interface:
-com! BufferClose call <SID>BufferClose()
+command! CloseBuffer call CloseBuffer()
 
 
 " Functions: {{{
-function! <SID>BufferClose()
+function! CloseBuffer()
   let buf_no = bufnr("%")
 
-  if g:buffer_close_after_buf < 0
+  if g:close_buffer__next_dir < 0
     confirm bprevious
-  elseif g:buffer_close_after_buf > 0
+  elseif g:close_buffer__next_dir > 0
     confirm bnext
   endif
 
