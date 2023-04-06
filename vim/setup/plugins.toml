@@ -435,6 +435,9 @@ function! s:ddu_ff_settings() abort
   nnoremap <buffer><silent> <Space>
     \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'open', 'params': {'command': 'vsplit'}})<CR>
 
+  nnoremap <buffer><silent> d
+    \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'delete'})<CR>
+
   nnoremap <buffer><silent> a
     \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
 
@@ -468,7 +471,7 @@ repo = 'Shougo/ddu-source-file'
 [[plugins]]
 repo = 'Shougo/ddu-source-file_old'
 [[plugins]]
-repo = 'Shougo/ddu-source-buffer'
+repo = 'shun/ddu-source-buffer'
 [[plugins]]
 repo = 'Shougo/ddu-filter-matcher_substring'
 [[plugins]]
