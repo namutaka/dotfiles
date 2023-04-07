@@ -383,6 +383,11 @@ repo = 'vim-denops/denops.vim'
 [[plugins]]
 repo = 'Shougo/ddu.vim'
 hook_add = '''
+function! IfNvim(nvimValue, vimValue)
+  return has('nvim') ?  a:nvimValue : a:vimValue
+endfunction
+
+
 " Note: ff ui
 " https://github.com/Shougo/ddu-ui-ff
 call ddu#custom#patch_global({
@@ -415,15 +420,16 @@ call ddu#custom#patch_global({
 \     'ff': {
 \       'startFilter': v:false,
 \       'prompt': '> ',
-\       'split': 'floating',
+\       'split': IfNvim('floating', 'no'),
 \     },
 \     'filer': {
-\       'split': 'floating',
+\       'split': IfNvim('floating', 'no'),
 \       'previewFloating': v:true,
 \       'sort': 'filename',
 \     }
 \   },
 \ })
+
 
 " prefix key
 nnoremap    [ddu]   <Nop>
@@ -461,7 +467,7 @@ function! s:ddu_filer_settings() abort
   nnoremap <buffer> I
     \ <Cmd>call ddu#ui#filer#do_action('updateOptions', {
     \   'sourceOptions': {
-    \     '_': {
+    \     'file': {
     \       'matchers': ToggleHidden(),
     \     },
     \   },
