@@ -255,7 +255,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "
 
 nnoremap [coclist] <Nop>
-nmap <CR> [coclist]
+nmap <C-Space> [coclist]
 
 " Show all diagnostics
 nnoremap <silent><nowait> [coclist]a  :<C-u>CocList diagnostics<cr>
