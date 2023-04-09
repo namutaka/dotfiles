@@ -11,3 +11,7 @@ alias doc-run='docker run --rm -it'
 alias doc-exec='docker exec -it'
 alias doc-comp='docker-compose'
 
+alias docc='docker-compose'
+alias docc-run='docker-compose run'
+alias docc-exec='docker-compose exec'
+
