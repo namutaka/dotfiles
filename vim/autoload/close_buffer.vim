@@ -1,30 +1,21 @@
 " Close current buffer
 "
-" Date: 2011/2/11
+" Date: 2023/04/10
 " Author: namutaka
-" Version: 1.0.0
+" Version: 2.0.0
 "
 
-" Options:
-" 閉じた後に表示するバッファ
+" バッファを閉じる
+" :next_buffer: 閉じた後に表示するバッファ
 "   -1 := 前方のバッファ
 "    0 := 無名バッファ
 "    1 := 後方のバッファ
-if !exists("g:close_buffer__next_dir")
-  let g:close_buffer__next_dir = -1
-endif
-
-" Public Interface:
-command! CloseBuffer call CloseBuffer()
-
-
-" Functions: {{{
-function! CloseBuffer()
+function! close_buffer#close(next_buffer) abort
   let buf_no = bufnr("%")
 
-  if g:close_buffer__next_dir < 0
+  if a:next_buffer < 0
     confirm bprevious
-  elseif g:close_buffer__next_dir > 0
+  elseif a:next_buffer > 0
     confirm bnext
   endif
 
@@ -40,5 +31,5 @@ function! CloseBuffer()
     exe "confirm bdel ".buf_no
   endif
 endfunction
-" }}}
+
 

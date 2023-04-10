@@ -104,9 +104,6 @@ let plugin_dicwin_disable=1
 "" netrw(使ってない)
 let g:netrw_liststyle=3
 
-"" plugin/close_buffer.vim
-let g:close_buffer__next_dir = -1
-
 " man page を :Man 〜〜で表示できるようにするプラグイン
 runtime! ftplugin/man.vim
 
@@ -236,14 +233,15 @@ fun! StripTrailingWhitespace()
 endfun
 autocmd BufWritePre * call StripTrailingWhitespace()
 
-
-" バッファを閉じる
-nnoremap <Leader>q :CloseBuffer<CR>
-
 "タイムスタンプを挿入してinsertモードへ移行
 nnoremap <Leader>n <ESC>i<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
 nnoremap <Leader>N <ESC>o<C-R>=strftime("%Y/%m/%d %H:%M")<CR><ESC>
 
+" バッファを閉じる
+nnoremap <Leader>q :call close_buffer#close(-1)<CR>
+
+" binary_mode有効
+command! BinaryMode call binary_mode#start()
 
 " }}}
 

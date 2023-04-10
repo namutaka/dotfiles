@@ -2,6 +2,12 @@
 " 毎日メモ作成
 " 2011/04/18  namutaka@gmail.com
 " =========================================
+if exists('g:loaded_daily_memo')
+  finish
+endif
+
+let g:loaded_daily_memo = 1
+
 
 let g:daily_memo_directory = "~/Memo"
 

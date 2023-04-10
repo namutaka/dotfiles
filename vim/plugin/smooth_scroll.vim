@@ -23,12 +23,19 @@
 " Modified by namutaka 2011
 "
 "
+if exists('g:loaded_smooth_scroll')
+  finish
+endif
+
+let g:loaded_smooth_scroll = 1
+
 if has('gui_running')
   finish
 endif
 
 let g:scroll_factor = 5000
 let g:scroll_skip_size = 1
+
 function! SmoothScroll(dir, windiv, factor)
    let wh=winheight(0)
    let i=0
