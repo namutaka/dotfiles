@@ -4,6 +4,56 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'glacambre/firenvim'
+hook_post_update = 'firenvim#install(0)'
+hook_add = '''
+if exists('g:started_by_firenvim')
+  augroup Firenvim
+    au BufEnter * set guifont=Monaco:h18
+  augroup END
+
+  let s:firevim_auto_write = { 'timer_id': v:null }
+  function! s:firevim_auto_write.inner_write(timer) abort
+    let self.timer_id = v:null
+    write
+  endfunction
+
+  function! s:firevim_auto_write.write() abort
+    if self.timer_id != v:null
+      echom self.timer_id
+      call timer_stop(self.timer_id)
+      let self.timer_id = v:null
+    end
+
+    let self.timer_id = timer_start(3000, s:firevim_auto_write.inner_write)
+  endfunction
+
+  autocmd TextChanged * ++nested call s:firevim_auto_write.write()
+  autocmd TextChangedI * ++nested call s:firevim_auto_write.write()
+endif
+'''
+lua_source ='''
+vim.g.firenvim_config = {
+    globalSettings = {
+      alt = "all",
+    },
+    localSettings = {
+        [".*"] = {
+          selector = "",
+          priority = 0,
+        },
+        [".*github.com.*"] = {
+            cmdline  = "neovim",
+            content  = "text",
+            priority = 1,
+            selector = "textarea",
+            takeover = "always"
+        }
+    }
+}
+'''
+
+[[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_source = '''
 let g:airline_theme='dark'
