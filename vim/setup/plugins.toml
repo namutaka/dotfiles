@@ -157,7 +157,8 @@ augroup RubyTest
 augroup END
 
 " quick-vim
-nnoremap <Leader>r :QuickRun<CR>
+nnoremap <Leader>r <Plug>(quickrun)
+vnoremap <Leader>r <Plug>(quickrun)
 
 '''
 
