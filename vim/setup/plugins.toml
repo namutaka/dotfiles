@@ -5,6 +5,7 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'glacambre/firenvim'
+if   = 'has("nvim")'
 hook_post_update = 'firenvim#install(0)'
 hook_add = '''
 if exists('g:started_by_firenvim')
