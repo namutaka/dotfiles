@@ -32,10 +32,10 @@
 [difftool "macvimdiff"]
   cmd = "git_diff_macvim \"$LOCAL\" \"$REMOTE\""
 
-[pager]
-  log = diff-highlight | less
-  show = diff-highlight | less
-  diff = diff-highlight | less
+#[pager]
+#  log = diff-highlight | less
+#  show = diff-highlight | less
+#  diff = diff-highlight | less
 
 [color]
   ui = auto
