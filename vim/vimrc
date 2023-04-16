@@ -32,9 +32,7 @@ set updatetime=300 " カーソル無操作のイベント発火までの時間(m
 "set iminsert=2
 
 set mouse=a
-if !has('nvim')
-    set ttymouse=xterm2
-endif
+" set ttymouse=xterm2 " これは設定するとおかしくなる
 set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
 set splitbelow
 set splitright
