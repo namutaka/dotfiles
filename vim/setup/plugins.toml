@@ -236,6 +236,9 @@ nmap    <Space>  [coc]
 xmap    <Space>  [coc]
 omap    <Space>  [coc]
 
+" help
+nmap [coc]? <CMD>map [coc]<CR>
+
 " Symbol renaming.
 nmap [coc]rn <Plug>(coc-rename)
 
@@ -315,6 +318,9 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 nnoremap [coclist] <Nop>
 nmap <C-Space> [coclist]
+
+" help
+nmap [coclist]? <CMD>map [coclist]<CR>
 
 " Show all diagnostics
 nnoremap <silent><nowait> [coclist]a  :<C-u>CocList diagnostics<cr>
@@ -442,6 +448,8 @@ call ddu#custom#patch_global({
 " prefix key
 nnoremap    [ddu]   <Nop>
 nmap    <C-q>  [ddu]
+
+nmap <silent> [ddu]? <Cmd>map [ddu]<CR>
 
 nmap <silent> [ddu]f <Cmd>call ddu#start({})<CR>
 
