@@ -76,6 +76,13 @@ nnoremap <Leader><Leader> :NERDTreeToggle<CR>
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
+repo = 'lewis6991/gitsigns.nvim'
+if   = 'has("nvim")'
+lua_add = '''
+require('gitsigns').setup()
+'''
+
+[[plugins]]
 # ファイルタイプ判定
 repo = 'Shougo/context_filetype.vim'
 
