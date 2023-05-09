@@ -1,4 +1,4 @@
 # .irbrc
 
-require "~/.irb/handy.rb"
+require "~/dotfiles/irb/handy.rb"
 
