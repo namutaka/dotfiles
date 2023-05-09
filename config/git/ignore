@@ -1,4 +1,4 @@
-#git all ignore patterns
+# git global ignore patterns
 
 .*.swp
 *~

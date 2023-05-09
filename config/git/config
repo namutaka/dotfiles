@@ -1,5 +1,4 @@
 [core]
-  excludesfile = ~/dotfiles/git-excludes
   quotepath = false
   editor = mvim -f
   #editor = vimr --wait --nvim
