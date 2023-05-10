@@ -1,38 +1,37 @@
 #!/bin/bash
-# Run in user root directory
+# Link dotfiles/directories
 #
 set -e
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-CONFIG_DIR=$SCRIPT_DIR/config
+
+linkToDot() {
+  local target=$1
+
+  if [[ -z $target ]]; then
+    echo "Error target is required" >&2
+    exit 1
+  fi
+
+  local dest_path=~/.$target
+  local src_path=$SCRIPT_DIR/$target
+
+  if [[ -e $dest_path ]]; then
+    echo "Already exists $dest_path : $src_path"
+  else
+    echo ln -s $src_path $dest_path
+    ln -s $src_path $dest_path
+  fi
+}
 
 cd ~/
 
-FILES=(
-  zshrc
-  vim
-  tmux.conf
-  sshrc
-  sshrc.d
-)
+linkToDot zshrc
+linkToDot vim
+linkToDot sshrc
+linkToDot sshrc.d
 
-for file in ${FILES[@]}; do
-  target=~/.$file
-  if [ -e $target ]; then
-    echo "skipping $target"
-  else
-    echo ln -s $SCRIPT_DIR/$file $target
-    ln -s $SCRIPT_DIR/$file $target
-  fi
-done
-
-for config_path in $(cd $CONFIG_DIR; ls); do
-  target=~/.config/$config_path
-  if [ -e $target ]; then
-    echo "skipping $target"
-  else
-    echo ln -s $CONFIG_DIR/$config_path $target
-    ln -s $CONFIG_DIR/$config_path $target
-  fi
+for config_path in $(cd $SCRIPT_DIR; ls -d config/*); do
+  linkToDot $config_path
 done
 

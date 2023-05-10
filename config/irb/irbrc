@@ -1,0 +1,6 @@
+# .irbrc
+
+puts "Load irbrc"
+
+require "~/dotfiles/config/irb/handy.rb"
+
