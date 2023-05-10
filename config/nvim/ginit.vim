@@ -1,5 +1,5 @@
-" ginit.vim
+" neovim ginit.vim
 
-source ~/.vim/gvimrc
+source ~/dotfiles/vim/gvimrc
 source ~/.config/nvim/macmap.vim
 

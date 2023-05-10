@@ -24,10 +24,13 @@ linkToDot() {
   fi
 }
 
+
 cd ~/
 
 linkToDot zshrc
-linkToDot vim
+[[ ! -e ~/.vim ]] && mkdir -p ~/.vim
+linkToDot vim/vimrc
+linkToDot vim/gvimrc
 linkToDot sshrc
 linkToDot sshrc.d
 

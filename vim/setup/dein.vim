@@ -25,7 +25,7 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   " TOML 読み込み
-  let g:config_dir  = expand('~/.vim/setup')
+  let g:config_dir = g:vim_home_path . '/setup'
   call dein#load_toml(g:config_dir . '/plugins.toml', {'lazy': 0})
   " call dein#load_toml(g:config_dir . '/plugins_lazy.toml', {'lazy': 1})
 

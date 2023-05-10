@@ -1,10 +1,14 @@
 " .vimrc
 scriptencoding utf-8
 
-let mapleader = ','              " キーマップリーダー
+" キーマップリーダー
+let mapleader = ','
 let maplocalleader = '.'
 
-execute 'source' fnameescape(expand('~/.vim/setup/dein.vim'))
+" vim設定場所指定
+let g:vim_home_path = expand('~/dotfiles/vim')
+execute 'set runtimepath^=' . expand('~/dotfiles/vim')
+execute 'source' fnameescape(g:vim_home_path . '/setup/dein.vim')
 
 " 全体設定 {{{
 syntax on
@@ -46,9 +50,8 @@ set wildmode=longest:full,list:full
 set ambiwidth=double
 
 " パス設定
-set runtimepath+=$HOME/.vim
-let g:vimball_home = expand('~/.vim/bundle/vimball')
-set undodir=$HOME/.vim/temp
+let g:vimball_home = g:vim_home_path . '/bundle/vimball'
+execute 'set undodir=' . g:vim_home_path . '/temp'
 set backupskip=/tmp/*,/private/tmp/*
 
 let $PATH = join([
@@ -215,7 +218,7 @@ nnoremap <C-g><C-r> :grep<Space><C-r><C-w>
 command! Sh set ft=sh
 
 " .vimrcを開く
-command! Vimrc edit ~/.vim/vimrc
+command! Vimrc edit $MYVIMRC
 command! VimPlugins edit ~/dotfiles/vim/setup/plugins.toml
 
 " ファイル名とカーソルの行数をコピー
