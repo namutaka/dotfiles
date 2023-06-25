@@ -112,6 +112,14 @@ vnoremap <Leader>r <Plug>(quickrun)
 [[plugins]]
 # Coc : VSCode的なオートコンプリート & LSP & lint
 # https://github.com/neoclide/coc.nvim
+#
+# CocInstall
+#  - coc-lists
+#  - coc-json
+#  - coc-sh
+#  - coc-tsserver
+#  - coc-pyright
+#
 repo = 'neoclide/coc.nvim'
 source = 'release'
 build = 'coc#util#install()'
@@ -255,7 +263,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Mappings for CoCList
 "
 
-nnoremap [coclist] <Nop>
+nnoremap [coclist] :<C-u>CocList
 nmap <C-Space> [coclist]
 
 " help
@@ -271,6 +279,9 @@ nnoremap <silent><nowait> [coclist]c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> [coclist]o  :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent><nowait> [coclist]s  :<C-u>CocList -I symbols<cr>
+" Grep buffer
+nnoremap <silent><nowait> [coclist]l  :<C-u>CocList lines<cr>
+
 " Do default action for next item
 nnoremap <silent><nowait> [coclist]j  :<C-u>CocNext<CR>
 " Do default action for previous item

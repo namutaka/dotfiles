@@ -17,7 +17,9 @@
       "args": ["start"],
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
-    }
+    },
+
+    // coc-pyright
+    // "python": {}
   }
 }
-
