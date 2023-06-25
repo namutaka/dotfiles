@@ -301,7 +301,7 @@ lua_post_source = '''
 require("nvim-treesitter.configs").setup {
   -- ここでハイライトしたい言語を指定しておくと、起動時にインストールされます
   ensure_installed = {
-    "vim", "help", "query", "lua",
+    "vim", "query", "lua", -- "help",
     "dockerfile",
     "typescript", "tsx", "javascript",
     "gitignore",
