@@ -30,6 +30,8 @@ alias gsl='gst;echo;gl -3'
 alias gg='open -a SourceTree.app $(git rev-parse --show-toplevel)'
 alias gk='gitk --all &'
 
+alias cdr='cd $(git rev-parse --show-toplevel)'
+
 # mac
 alias ql='qlmanage -p "$@" >& /dev/null'
 
