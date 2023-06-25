@@ -7,8 +7,29 @@ let maplocalleader = '.'
 
 " vim設定場所指定
 let g:vim_home_path = expand('~/dotfiles/vim')
-execute 'set runtimepath^=' . expand('~/dotfiles/vim')
+execute 'set runtimepath^=' . g:vim_home_path
 execute 'source' fnameescape(g:vim_home_path . '/setup/dein.vim')
+
+" 環境パス設定
+let g:node_bin_path = expand("~/.nodebrew/node/v19.4.0/bin")
+let g:python_path = '/usr/local/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin/python3'
+
+" パス設定
+let $PATH = join([
+\   $PATH,
+\   expand('~/local/bin'),
+\   g:node_bin_path
+\ ], ':')
+
+let g:coc_node_path = g:node_bin_path . '/node'
+if has('nvim')
+  let g:python3_host_prog = g:python_path
+endif
+
+let g:vimball_home = g:vim_home_path . '/bundle/vimball'
+execute 'set undodir=' . g:vim_home_path . '/temp'
+set backupskip=/tmp/*,/private/tmp/*
+
 
 " 全体設定 {{{
 syntax on
@@ -49,16 +70,6 @@ set encoding=utf-8
 set wildmode=longest:full,list:full
 set ambiwidth=double
 
-" パス設定
-let g:vimball_home = g:vim_home_path . '/bundle/vimball'
-execute 'set undodir=' . g:vim_home_path . '/temp'
-set backupskip=/tmp/*,/private/tmp/*
-
-let $PATH = join([
-\   $PATH,
-\   expand('~/local/bin'),
-\   expand('~/.nodebrew/current/bin')
-\ ], ':')
 
 " 表示
 set number
