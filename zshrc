@@ -69,7 +69,8 @@ ZSH_CUSTOM=~/dotfiles/zsh
 plugins=(
   # git  # aliasを定義しすぎるので使わない
   aws
-  zsh-autosuggestions
+  # 邪魔なので使わない
+  #zsh-autosuggestions
   zsh-completions
 )
 
