@@ -27,7 +27,7 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'lewis6991/gitsigns.nvim'
 if   = 'has("nvim")'
-lua_add = '''
+lua_source = '''
 require('gitsigns').setup()
 '''
 

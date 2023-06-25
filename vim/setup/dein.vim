@@ -35,6 +35,9 @@ if dein#load_state(s:dein_dir)
   autocmd VimEnter * call dein#call_hook('post_source')
 endif
 
+" 常にhook_source実行
+call dein#call_hook('source')
+
 " Required:
 filetype plugin indent on
 syntax enable
