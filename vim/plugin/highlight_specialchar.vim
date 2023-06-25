@@ -12,6 +12,10 @@ let g:loaded_highlight_specialchar = 1
 
 "行末のスペース連続をハイライトさせる
 function! s:eol_space_highlight()
+  if &filetype == 'ddu-filer'
+    return
+  endif
+
   syntax match EOLSpace /[ \t]\+$/ display containedin=ALL
   highlight EOLSpace cterm=underline ctermbg=Gray gui=underline guibg=gray30
 endf
