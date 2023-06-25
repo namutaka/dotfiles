@@ -23,6 +23,10 @@
   glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   changelog = log --graph --topo-order --stat
   fp = log --first-parent
+  new = !sh -c \"git checkout -b feature/$1\"
+  pub = push -u origin HEAD
+
+  gone = !git for-each-ref --format '%(upstream:track) %(refname:short)' | grep gone
 
   # あるコミットがマージされた箇所を調べる (https://stackoverflow.com/questions/8475448/find-merge-commit-which-include-a-specific-commit)
   find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
@@ -64,7 +68,7 @@
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 
 
 [merge]
