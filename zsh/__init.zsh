@@ -5,6 +5,9 @@
 # shellのキー操作をemacs操作にする
 bindkey -e
 
+# pager
+PAGER=
+
 # history settings
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
