@@ -1,0 +1,49 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = true
+
+[character]
+format = "[\\$](green bold) "
+
+[directory]
+truncation_length = 3
+
+[git_branch]
+symbol = ''
+format = '\([$symbol$branch(:$remote_branch)]($style)\)'
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+conflicted = ''
+ahead = ''
+behind = ''
+diverged = ''
+up_to_date = '✓'
+untracked = ''
+stashed = ''
+modified = '*'
+staged = ''
+renamed = ''
+deleted = ''
+
+[package]
+disabled = true
+
+[aws]
+format = 'on [$symbol$profile]($style) '
+style = 'bold blue'
+symbol = '🅰 '
+[aws.profile_aliases]
+# Enterprise_Naming_Scheme-voidstars = 'void**'
+
+[python]
+disabled = true
+
+[java]
+disabled = true
+
+[scala]
+disabled = true
+
+[terraform]
+format = 'via [$symbol$version $workspace]($style) '
+

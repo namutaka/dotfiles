@@ -7,6 +7,11 @@ FZF_SHELL_PATH=$HOMEBREW_PREFIX/opt/fzf/shell
 # ---------------
 [[ $- == *i* ]] && source "$FZF_SHELL_PATH/completion.zsh" 2> /dev/null
 
+
+_fzf_compgen_dir() {
+  find "$1" -type d -maxdepth 1
+}
+
 # Key bindings
 # ------------
 source "$FZF_SHELL_PATH/key-bindings.zsh"
