@@ -1,6 +1,9 @@
 "
 " dein.vim 初期設定
 "
+" update plugins
+" call dein#update()
+"
 
 "dein Scripts-----------------------------
 if &compatible
@@ -9,6 +12,7 @@ endif
 
 let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
 let s:dein_dir = s:cache_home . '/dein'
+
 
 " Required:
 if &runtimepath !~# '/dein.vim'

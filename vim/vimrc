@@ -5,6 +5,9 @@ scriptencoding utf-8
 let mapleader = ','
 let maplocalleader = '.'
 
+
+let g:denops_disable_version_check = 1
+
 " vim設定場所指定
 let g:vim_home_path = expand('~/dotfiles/vim')
 execute 'set runtimepath^=' . g:vim_home_path
@@ -64,6 +67,7 @@ set splitright
 set virtualedit=block
 set winaltkeys=no
 set clipboard=unnamed,unnamedplus
+set diffopt+=iwhite
 
 " エンコーディング
 set encoding=utf-8
