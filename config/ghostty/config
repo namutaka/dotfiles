@@ -1,0 +1,60 @@
+## theme
+
+#theme = Catppuccin Mocha
+theme = GitHub Dark
+
+## quick-terminal
+keybind = "global:cmd+backquote=toggle_quick_terminal"
+
+quick-terminal-position = center
+quick-terminal-screen = mouse
+quick-terminal-animation-duration = 0.2
+quick-terminal-autohide = true
+
+## shell
+shell-integration = zsh
+
+## visual
+
+# フォントサイズ（お好みで調整してください）
+font-size = 14
+# 行間を少し広げてモダンにする（10%〜20%くらいが人気）
+adjust-cell-height = 10%
+
+
+## window
+
+window-padding-x = 5
+window-padding-y = 5
+window-padding-balance = true
+
+# フルスクリーン時にMac標準の挙動にする
+macos-window-shadow = true
+# 入力中はマウスカーソルを隠す
+mouse-hide-while-typing = true
+
+
+## split
+
+# 【重要】Cmd+Enter で「下に」分割
+keybind = cmd+enter=new_split:down
+
+# Cmd+Shift+Enter で「右に」分割
+keybind = cmd+shift+enter=new_split:right
+
+# Cmd + 矢印キー で分割した画面を「移動」
+keybind = cmd+left=goto_split:left
+keybind = cmd+right=goto_split:right
+keybind = cmd+up=goto_split:top
+keybind = cmd+down=goto_split:bottom
+
+# Cmd + Shift + 矢印キー で分割サイズを「調整」
+keybind = cmd+shift+left=resize_split:left,20
+keybind = cmd+shift+right=resize_split:right,20
+keybind = cmd+shift+up=resize_split:up,20
+keybind = cmd+shift+down=resize_split:down,20
+
+# Cmd + W で現在の「ペイン（分割）」を閉じる
+# （デフォルトだとウィンドウごと閉じてしまうことがあるため、ペインを閉じる設定を優先）
+keybind = cmd+w=close_surface
+
