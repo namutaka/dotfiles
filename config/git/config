@@ -111,4 +111,11 @@
 
 [user]
 	useConfigOnly = true
+	email = you@example.com
+	name = Your Name
 
+[init]
+	defaultBranch = main
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager

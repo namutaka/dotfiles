@@ -1,7 +1,7 @@
 # Setup fzf
 # ---------
 
-FZF_SHELL_PATH=/usr/local/opt/fzf/shell
+FZF_SHELL_PATH=$HOMEBREW_PREFIX/opt/fzf/shell
 
 # Auto-completion
 # ---------------
