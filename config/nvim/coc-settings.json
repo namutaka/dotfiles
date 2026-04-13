@@ -20,6 +20,13 @@
     },
 
     // coc-pyright
-    // "python": {}
+    // "python": {},
+
+    // scala / metals
+    "metals": {
+      "command": "metals-vim",
+      "rootPatterns": ["build.sbt"],
+      "filetypes": ["scala", "sbt"]
+    }
   }
 }
