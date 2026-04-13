@@ -1,6 +1,10 @@
 # vim toml
 
 [[plugins]]
+repo = 'github/copilot.vim'
+
+
+[[plugins]]
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
@@ -119,6 +123,9 @@ vnoremap <Leader>r <Plug>(quickrun)
 #  - coc-sh
 #  - coc-tsserver
 #  - coc-pyright
+#  - coc-git
+#  - coc-git
+#  - coc-rust-analyzer
 #
 repo = 'neoclide/coc.nvim'
 source = 'release'
@@ -126,7 +133,7 @@ build = 'coc#util#install()'
 hook_add = '''
 
 " config ファイルの場所(nvimとvimで共通にするため)
-let g:coc_config_home = expand('~/.config/nvim')
+let g:coc_config_home = expand('~/dotfiles/config/nvim')
 
 " coc.nvimでのバグ回避(https://github.com/neoclide/coc.nvim/issues/649)
 set nowritebackup
@@ -382,12 +389,12 @@ call ddu#custom#patch_global({
 \   },
 \   'uiParams': {
 \     'ff': {
+\       'split': IfNvim('horizontal', 'no'),
 \       'startFilter': v:false,
 \       'prompt': '> ',
-\       'split': IfNvim('floating', 'no'),
 \     },
 \     'filer': {
-\       'split': IfNvim('floating', 'no'),
+\       'split': IfNvim('horizontal', 'no'),
 \       'previewFloating': v:true,
 \       'sort': 'filename',
 \     }
@@ -413,25 +420,25 @@ nmap <silent> [ddu]b <Cmd>call ddu#start({
 autocmd FileType ddu-filer call s:ddu_filer_settings()
 function! s:ddu_filer_settings() abort
   nnoremap <buffer><silent> <CR>
-        \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
   nnoremap <buffer><silent> <Space>
-        \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+        \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
   nnoremap <buffer> o
-        \ <Cmd>call ddu#ui#filer#do_action('expandItem', {'mode': 'toggle'})<CR>
+        \ <Cmd>call ddu#ui#do_action('expandItem', {'mode': 'toggle'})<CR>
   nnoremap <buffer><silent> p
-    \ <Cmd>call ddu#ui#filer#do_action('preview')<CR>
+    \ <Cmd>call ddu#ui#do_action('preview')<CR>
   nnoremap <buffer><silent> <S-CR>
-        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'cd'})<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'cd'})<CR>
 
   " quit
   nnoremap <buffer><silent> q
-        \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+        \ <Cmd>call ddu#ui#do_action('quit')<CR>
   nnoremap <buffer><silent> <ESC>
-        \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+        \ <Cmd>call ddu#ui#do_action('quit')<CR>
 
   " toggle hidden files
   nnoremap <buffer> I
-    \ <Cmd>call ddu#ui#filer#do_action('updateOptions', {
+    \ <Cmd>call ddu#ui#do_action('updateOptions', {
     \   'sourceOptions': {
     \     'file': {
     \       'matchers': ToggleHidden(),
@@ -453,24 +460,24 @@ endfunction
 autocmd FileType ddu-ff call s:ddu_ff_settings()
 function! s:ddu_ff_settings() abort
   nnoremap <buffer><silent> <CR>
-    \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'open'})<CR>
+    \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'open'})<CR>
 
   nnoremap <buffer><silent> <Space>
-    \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'open', 'params': {'command': 'vsplit'}})<CR>
+    \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'open', 'params': {'command': 'vsplit'}})<CR>
 
   nnoremap <buffer><silent> d
-    \ <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'delete'})<CR>
+    \ <Cmd>call ddu#ui#do_action('itemAction', {'name': 'delete'})<CR>
 
   nnoremap <buffer><silent> a
-    \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+    \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
 
   nnoremap <buffer><silent> p
-    \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
+    \ <Cmd>call ddu#ui#do_action('preview')<CR>
 
   nnoremap <buffer><silent> q
-    \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+    \ <Cmd>call ddu#ui#do_action('quit')<CR>
   nnoremap <buffer><silent> <Esc>
-    \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+    \ <Cmd>call ddu#ui#do_action('quit')<CR>
 endfunction
 
 " ddu filter内の操作
@@ -479,8 +486,8 @@ function! s:ddu_ff_filter_settings() abort
   inoremap <buffer><silent> <CR>  <Esc><Cmd>close<CR>
   nnoremap <buffer><silent> <CR>  <Cmd>close<CR>
 
-  inoremap <buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#ff#do_action('quit')<CR>
-  nnoremap <buffer><silent> <Esc> <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+  inoremap <buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#do_action('quit')<CR>
+  nnoremap <buffer><silent> <Esc> <Cmd>call ddu#ui#do_action('quit')<CR>
 endfunction
 '''
 [[plugins]]
