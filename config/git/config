@@ -4,13 +4,15 @@
 [core]
   quotepath = false
   editor = mvim -f
+  #pager = less
   #editor = vimr --wait --nvim
 
 [alias]
   co = checkout
-  cof = !git branch | fzf | xargs -n 1 git checkout
+  cof = !git branch | cut -c 3- | fzf --preview-window wrap --preview \"git log -n 1 --pretty=format:'%Cgreen%d %Creset%s' {}\" | xargs -n 1 git checkout
   br = branch -v
   ci = commit
+  sw = switch
   st = status -bs
   last = log -1 HEAD
   ds = diff --stat
@@ -41,7 +43,7 @@
   ui = auto
 
 [gui]
-	commitmsgwidth = 85
+  commitmsgwidth = 85
 
 [commit]
   template = ~/.stCommitMsg
@@ -67,8 +69,8 @@
     cmd = vimr --wait --nvim -d "$LOCAL" "$REMOTE"
 
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
 
 
 [merge]
@@ -89,19 +91,19 @@
   cmd = vimr --wait --nvim -d "$LOCAL" "$MERGED" "$REMOTE"
 
 [mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
 
 
 [push]
-	default = simple
+  default = simple
 
 [pull]
   ff = only
 
 [fetch]
-	recurseSubmodules = false
-	prune = true
+  recurseSubmodules = false
+  prune = true
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
@@ -110,12 +112,12 @@
   required = true
 
 [user]
-	useConfigOnly = true
+  useConfigOnly = true
 	email = you@example.com
 	name = Your Name
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [credential]
-	helper = 
-	helper = /usr/local/share/gcm-core/git-credential-manager
+  helper =
+  helper = /usr/local/share/gcm-core/git-credential-manager
