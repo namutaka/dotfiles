@@ -88,6 +88,11 @@ highlight CursorLineNr term=reverse cterm=none ctermbg=232
 set list
 set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
 
+"highlight clear VertSplit
+highlight VertSplit ctermfg=233 ctermbg=233 guifg=Gray10 guibg=Gray10
+set fillchars+=vert:\\x20,eob:\\x20
+
+
 "" fold設定
 set foldmethod=syntax
 set foldlevel=1000
