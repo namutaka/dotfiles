@@ -3,6 +3,10 @@
 #theme = Catppuccin Mocha
 theme = GitHub Dark
 
+font-feature = "-calt"
+font-feature = "-dlig"
+font-feature = "-liga"
+
 ## quick-terminal
 keybind = "global:cmd+backquote=toggle_quick_terminal"
 
