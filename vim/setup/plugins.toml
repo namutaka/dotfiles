@@ -126,7 +126,7 @@ vnoremap <Leader>r <Plug>(quickrun)
 #  - coc-rust-analyzer
 #
 repo = 'neoclide/coc.nvim'
-source = 'release'
+rev = 'release'
 build = 'coc#util#install()'
 hook_add = '''
 execute 'source' fnameescape(g:vim_home_path . '/setup/coc.vim')
