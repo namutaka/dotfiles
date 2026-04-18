@@ -15,17 +15,18 @@ call ddu#custom#patch_global({
 \     },
 \   },
 \   'sources': [
+\     {'name': 'buffer'},
 \     {'name': 'file', 'params': {}},
 \     {'name': 'file_old', 'params': {}},
 \   ],
 \   'sourceOptions': {
-\     'file': {
-\       'matchers': ['matcher_hidden'],
-\       'columns': ['filename'],
-\     },
 \     'buffer': {
 \       'matchers': ['matcher_substring'],
 \       'columns': [],
+\     },
+\     'file': {
+\       'matchers': ['matcher_relative'],
+\       'columns': ['filename'],
 \     },
 \   },
 \   'kindOptions': {
@@ -42,7 +43,7 @@ call ddu#custom#patch_global({
 \     'filer': {
 \       'split': IfNvim('floating', 'no'),
 \       'previewFloating': v:true,
-\       'sort': 'filename',
+\       'sort': 'time',
 \     }
 \   },
 \ })
