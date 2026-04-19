@@ -47,6 +47,7 @@ if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
+  inoremap <silent><expr> <c-space> coc#refresh()
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -74,46 +75,11 @@ endfunction
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-nmap    <Space>  [coc]
-xmap    <Space>  [coc]
-omap    <Space>  [coc]
-
-" help
-noremap    [coc]   <CMD>map [coc]<CR>
-"nmap [coc]? <CMD>map [coc]<CR>
-
-" Symbol renaming
-nmap [coc]rn <Plug>(coc-rename)
-
-" Formatting selected code
-xmap [coc]f  <Plug>(coc-format-selected)
-nmap [coc]f  <Plug>(coc-format-selected)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s)
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
 augroup end
-
-" Applying code actions to the selected code block
-" Example: `[coc]aap` for current paragraph
-xmap [coc]a  <Plug>(coc-codeaction-selected)
-nmap [coc]a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying code actions at the cursor position
-nmap [coc]ac  <Plug>(coc-codeaction-cursor)
-" Remap keys for apply code actions affect whole buffer
-nmap [coc]as  <Plug>(coc-codeaction-source)
-" Apply the most preferred quickfix action to fix diagnostic on the current line
-nmap [coc]qf  <Plug>(coc-fix-current)
-
-" Remap keys for applying refactor code actions
-nmap <silent> [coc]re <Plug>(coc-codeaction-refactor)
-xmap <silent> [coc]r  <Plug>(coc-codeaction-refactor-selected)
-nmap <silent> [coc]r  <Plug>(coc-codeaction-refactor-selected)
-
-" Run the Code Lens action on the current line
-nmap [coc]cl  <Plug>(coc-codelens-action)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server
@@ -141,44 +107,52 @@ endif
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
-" Add `:Format` command to format current buffer
-command! -nargs=0 Format :call CocActionAsync('format')
-
-" Add `:Fold` command to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer
-command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
-
 " Add (Neo)Vim's native statusline support
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Mappings for CoCList
 
-nnoremap [coclist] :<C-u>CocList<CR>
-nmap <C-Space> [coclist]
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-" help
-nmap [coclist]? <CMD>map [coclist]<CR>
+let g:which_key_map = {
+  \  'a' : {
+  \    'name' : '+action',
+  \    '*':  ['<Plug>(coc-codeaction-selected)', 'code action'],
+  \    'c' : ['<Plug>(coc-codeaction-cursor)', 'code action at cursor'],
+  \    's' : ['<Plug>(coc-codeaction-source)', 'code action for buffer'],
+  \    'l' : ['<Plug>(coc-codelens-action)', 'code lens'],
+  \  },
+  \  'f' : {
+  \    'name' : '+format',
+  \    's' : ['<Plug>(coc-format-selected)', 'format selected'],
+  \    'f' : [':call CocActionAsync("format")', 'format all'],
+  \    'i' : [':call CocActionAsync("runCommand", "editor.action.organizeImport")', 'organize import'],
+  \  },
+  \  'r' : {
+  \    'name' : '+refactor',
+  \    'f' : ['<Plug>(coc-fix-current)', 'code fix'],
+  \    '*': ['<Plug>(coc-codeaction-refactor-selected)', 'refactor selected'],
+  \    'e' : ['<Plug>(coc-codeaction-refactor)', 'refactor'],
+  \    'n' : ['<Plug>(coc-rename)', 'rename'],
+  \  },
+  \}
+let g:which_key_map.l = {
+  \ 'name' : '+list',
+  \  'a' : [':CocList diagnostics', 'Show all diagnostics'],
+  \  'e' : [':CocList extensions', 'Manage extensions'],
+  \  'c' : [':CocList commands', 'Show commands'],
+  \  'o' : [':CocList outline', 'Find symbol of current document'],
+  \  's' : [':CocList -I symbols', 'Search workspace symbols'],
+  \  'j' : [':CocNext', 'Do default action for next item'],
+  \  'k' : [':CocPrev', 'Do default action for previous item'],
+  \  'p' : [':CocListResume', 'Resume latest coc list'],
+  \ }
+call which_key#register('<Space>', "g:which_key_map")
 
-" Show all diagnostics
-nnoremap <silent><nowait> [coclist]a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent><nowait> [coclist]e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent><nowait> [coclist]c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent><nowait> [coclist]o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent><nowait> [coclist]s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item
-nnoremap <silent><nowait> [coclist]j  :<C-u>CocNext<CR>
-" Do default action for previous item
-nnoremap <silent><nowait> [coclist]k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent><nowait> [coclist]p  :<C-u>CocListResume<CR>
+nnoremap <silent> <Space> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <Space> :<c-u>WhichKeyVisual '<Space>'<CR>
 
 " }}}
 

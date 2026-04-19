@@ -2,6 +2,13 @@
   // 補完開始時に候補を初期選択しないどうか
   "suggest.noselect": true,
 
+  "codeLens.enable": true,
+
+  "suggest.floatConfig.border": true,
+  "signature.floatConfig.border": true,
+  "hover.floatConfig.border": true,
+  "diagnostic.floatConfig.border": true,
+
   "languageserver": {
     // coc-json
     // "json": {},

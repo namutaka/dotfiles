@@ -72,7 +72,8 @@ set diffopt+=iwhite
 " エンコーディング
 set encoding=utf-8
 set wildmode=longest:full,list:full
-set ambiwidth=double
+" cocのfloatingが崩れる
+"set ambiwidth=double
 
 
 " 表示
@@ -209,7 +210,7 @@ endif
 let &grepprg="grep -n -r --exclude='tags' --exclude='*.db' --exclude='*.log'  --exclude='*.tmp' --exclude='*.svn*' --exclude='*.swp' $*"
 
 "Escの2回押しでハイライト消去
-nnoremap <ESC><ESC> :nohlsearch<CR><ESC>
+nnoremap <ESC><ESC> :nohlsearch<CR>
 
 " very magicを使う
 nnoremap /  /\v

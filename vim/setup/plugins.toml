@@ -1,6 +1,9 @@
 ## vim toml
 
 [[plugins]]
+repo = 'liuchengxu/vim-which-key'
+
+[[plugins]]
 repo = 'github/copilot.vim'
 
 [[plugins]]
@@ -128,6 +131,7 @@ vnoremap <Leader>r <Plug>(quickrun)
 repo = 'neoclide/coc.nvim'
 rev = 'release'
 build = 'coc#util#install()'
+depends = ['vim-which-key']
 hook_add = '''
 execute 'source' fnameescape(g:vim_home_path . '/setup/coc.vim')
 '''
