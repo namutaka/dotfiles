@@ -91,7 +91,7 @@ highlight CursorLineNr term=reverse cterm=none ctermbg=232
 
 "" 特殊文字表示
 set list
-set listchars=tab:>\ ,eol:\ ,trail:_,extends:\
+set listchars=tab:>\\x20,eol:\\x20,trail:_,extends:\\x20,multispace:\\x20\\x20
 
 "highlight clear VertSplit
 highlight VertSplit ctermfg=233 ctermbg=233 guifg=Gray10 guibg=Gray10

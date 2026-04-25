@@ -144,15 +144,20 @@ let g:which_key_map.l = {
   \  'e' : [':CocList extensions', 'Manage extensions'],
   \  'c' : [':CocList commands', 'Show commands'],
   \  'o' : [':CocList outline', 'Find symbol of current document'],
-  \  's' : [':CocList -I symbols', 'Search workspace symbols'],
+  \  'y' : [':CocList -I symbols', 'Search workspace symbols'],
+  \  'g' : [':CocList grep', 'Grep'],
   \  'j' : [':CocNext', 'Do default action for next item'],
   \  'k' : [':CocPrev', 'Do default action for previous item'],
   \  'p' : [':CocListResume', 'Resume latest coc list'],
   \ }
 call which_key#register('<Space>', "g:which_key_map")
 
-nnoremap <silent> <Space> :<c-u>WhichKey '<Space>'<CR>
-vnoremap <silent> <Space> :<c-u>WhichKeyVisual '<Space>'<CR>
+nnoremap <silent> <Space>ls :CocSearch<space>
 
+nnoremap <silent><nowait> <Space> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent><nowait> <Space> :<c-u>WhichKeyVisual '<Space>'<CR>
+
+"nnoremap <silent><nowait> g :<c-u>WhichKey 'g'<CR>
+"vnoremap <silent><nowait> g :<c-u>WhichKeyVisual 'g'<CR>
 " }}}
 
