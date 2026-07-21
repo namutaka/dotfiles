@@ -3,8 +3,8 @@
 autoload -U edit-command-line
 zle -N edit-command-line
 
-# emacsモードで <C-x>e
-bindkey '^xe' edit-command-line
+# emacsモードで <C-o>
+bindkey '^o' edit-command-line
 
 # vimモードで v
 # 不要

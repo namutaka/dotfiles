@@ -35,3 +35,6 @@ alias cdr='cd $(git rev-parse --show-toplevel)'
 # mac
 alias ql='qlmanage -p "$@" >& /dev/null'
 
+# reset tty
+alias tty_reset='stty sane'
+
