@@ -23,6 +23,7 @@
 " Modified by namutaka 2011
 "
 "
+let g:loaded_smooth_scroll = 1
 if exists('g:loaded_smooth_scroll')
   finish
 endif
@@ -70,8 +71,8 @@ function! SmoothScroll(dir, windiv, factor)
    endwhile
 endfunction
 
-nnoremap <C-D> :call SmoothScroll("d",2, 2)<CR>
-nnoremap <C-U> :call SmoothScroll("u",2, 2)<CR>
-nnoremap <C-F> :call SmoothScroll("d",1, 1)<CR>
-nnoremap <C-B> :call SmoothScroll("u",1, 1)<CR>
+nnoremap <silent><nowait> <C-D> :call SmoothScroll("d",2, 2)<CR>
+nnoremap <silent><nowait> <C-U> :call SmoothScroll("u",2, 2)<CR>
+nnoremap <silent><nowait> <C-F> :call SmoothScroll("d",1, 1)<CR>
+nnoremap <silent><nowait> <C-B> :call SmoothScroll("u",1, 1)<CR>
 
