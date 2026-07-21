@@ -55,12 +55,6 @@ endif
 nmap <silent><nowait> [g <Plug>(coc-diagnostic-prev)
 nmap <silent><nowait> ]g <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation
-nmap <silent><nowait> gd <Plug>(coc-definition)
-nmap <silent><nowait> gy <Plug>(coc-type-definition)
-nmap <silent><nowait> gi <Plug>(coc-implementation)
-nmap <silent><nowait> gr <Plug>(coc-references)
-
 " Use K to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
@@ -123,23 +117,28 @@ let g:which_key_map = {
   \    'c' : ['<Plug>(coc-codeaction-cursor)', 'code action at cursor'],
   \    's' : ['<Plug>(coc-codeaction-source)', 'code action for buffer'],
   \    'l' : ['<Plug>(coc-codelens-action)', 'code lens'],
+  \    'f' : ['<Plug>(coc-fix-current)', 'code fix'],
   \  },
-  \  'f' : {
-  \    'name' : '+format',
+  \  'r' : {
+  \    'name' : '+refactor',
+  \    '*' : ['<Plug>(coc-codeaction-refactor-selected)', 'refactor selected'],
+  \    'e' : ['<Plug>(coc-codeaction-refactor)', 'refactor'],
+  \    'n' : ['<Plug>(coc-rename)', 'rename'],
   \    's' : ['<Plug>(coc-format-selected)', 'format selected'],
   \    'f' : [':call CocActionAsync("format")', 'format all'],
   \    'i' : [':call CocActionAsync("runCommand", "editor.action.organizeImport")', 'organize import'],
   \  },
-  \  'r' : {
-  \    'name' : '+refactor',
-  \    'f' : ['<Plug>(coc-fix-current)', 'code fix'],
-  \    '*': ['<Plug>(coc-codeaction-refactor-selected)', 'refactor selected'],
-  \    'e' : ['<Plug>(coc-codeaction-refactor)', 'refactor'],
-  \    'n' : ['<Plug>(coc-rename)', 'rename'],
-  \  },
+  \  'g' : {
+  \    'name' : '+navigation',
+  \    'd' : ['<Plug>(coc-definition)', 'goto definition'],
+  \    'y' : ['<Plug>(coc-type-definition)', 'goto type definition'],
+  \    'i' : ['<Plug>(coc-implementation)', 'goto implementation'],
+  \    'r' : ['<Plug>(coc-references)', 'goto references'],
+  \  }
   \}
 let g:which_key_map.l = {
   \ 'name' : '+list',
+  \  '<CR>' : [':CocList', 'Show list'],
   \  'a' : [':CocList diagnostics', 'Show all diagnostics'],
   \  'e' : [':CocList extensions', 'Manage extensions'],
   \  'c' : [':CocList commands', 'Show commands'],
@@ -153,6 +152,9 @@ let g:which_key_map.l = {
 call which_key#register('<Space>', "g:which_key_map")
 
 nnoremap <silent> <Space>ls :CocSearch<space>
+
+nmap <silent> <Space>f <Cmd>call ddu#start({})<CR>
+nmap <silent> <Space>b <Cmd>call ddu#start({ 'ui': 'ff', 'sources': [{'name': 'buffer'}] })<CR>
 
 nnoremap <silent><nowait> <Space> :<c-u>WhichKey '<Space>'<CR>
 vnoremap <silent><nowait> <Space> :<c-u>WhichKeyVisual '<Space>'<CR>

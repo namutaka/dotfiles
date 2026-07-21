@@ -33,6 +33,10 @@ hook_add = '''
 let g:fern#disable_default_mappings = 1
 let g:fern#default_hidden = 1
 let g:fern#renderer = "nerdfont"
+" Add dirs and files inside the brackets that need to remain hidden
+let hide_dirs  = '^\%(\.git\|node_modules\)$'  " here you write the dir names
+let hide_files = '\%(\.Ds_Store\)\+'    " here you write the file names
+let g:fern#default_exclude = hide_dirs . '\|' . hide_files  " here you exclude them
 
 nnoremap <silent> <Leader><Leader> :Fern . -drawer -reveal=% -toggle<CR>
 
@@ -56,7 +60,7 @@ function! s:init_fern() abort
   nmap <buffer><nowait> <C-c> <Plug>(fern-action-cancel)
   nmap <buffer><nowait> R     <Plug>(fern-action-reload)
   nmap <buffer><nowait> I     <Plug>(fern-action-hidden)
-  nmap <buffer><nowait> z     <Plug>(fern-action-zoom:full)
+  nmap <buffer><nowait> ZZ     <Plug>(fern-action-zoom:full)
   nmap <buffer><nowait> Z     <Plug>(fern-action-zoom:reset)
   nmap <buffer><nowait> -     <Plug>(fern-action-mark)
   nmap <buffer><nowait> y     <Plug>(fern-action-yank)
@@ -73,8 +77,9 @@ function! s:init_fern() abort
   nmap <buffer><nowait> i     <Plug>(fern-action-reveal)
   nmap <buffer><nowait> h     <Plug>(fern-action-collapse)
   nmap <buffer><nowait> l     <Plug>(fern-action-open-or-expand)
-  nmap <buffer><nowait> o     <Plug>(fern-my-expand-or-collapse)
-  nmap <buffer><nowait> <CR>  <Plug>(fern-action-open-or-enter)
+  nmap <buffer><nowait> o     <Plug>(fern-action-expand)
+  nmap <buffer><nowait> O     <Plug>(fern-action-open-or-enter)
+  nmap <buffer><nowait> <CR>  <Plug>(fern-action-open)
   nmap <buffer><nowait> <BS>  <Plug>(fern-action-leave)
 
   nmap <buffer><nowait> E     <Plug>(fern-action-open:side)
