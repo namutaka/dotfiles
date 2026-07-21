@@ -1,11 +1,15 @@
+# general
+
+# default: 10000000
+scrollback-limit = 20000000
+
 ## theme
 
 #theme = Catppuccin Mocha
 theme = GitHub Dark
 
-font-feature = "-calt"
-font-feature = "-dlig"
-font-feature = "-liga"
+split-divider-color = "#669"
+
 
 ## quick-terminal
 keybind = "global:cmd+backquote=toggle_quick_terminal"
@@ -20,8 +24,17 @@ shell-integration = zsh
 
 ## visual
 
+font-family = JetBrains Mono
+#font-family = BIZ UDGothic
+font-family = "Osaka−等幅"
+
+font-feature = "-calt"
+font-feature = "-dlig"
+font-feature = "-liga"
+
 # フォントサイズ（お好みで調整してください）
-font-size = 14
+font-size = 16
+
 # 行間を少し広げてモダンにする（10%〜20%くらいが人気）
 adjust-cell-height = 10%
 
@@ -40,11 +53,11 @@ mouse-hide-while-typing = true
 
 ## split
 
-# 【重要】Cmd+Enter で「下に」分割
-keybind = cmd+enter=new_split:down
+# window分割
+keybind = cmd+\=new_split:right
+keybind = cmd+shift+\=new_split:down
 
-# Cmd+Shift+Enter で「右に」分割
-keybind = cmd+shift+enter=new_split:right
+keybind = cmd+z=toggle_split_zoom
 
 # Cmd + 矢印キー で分割した画面を「移動」
 keybind = cmd+left=goto_split:left
@@ -52,16 +65,25 @@ keybind = cmd+right=goto_split:right
 keybind = cmd+up=goto_split:top
 keybind = cmd+down=goto_split:bottom
 
-# Cmd + Shift + 矢印キー で分割サイズを「調整」
-keybind = cmd+shift+left=resize_split:left,20
-keybind = cmd+shift+right=resize_split:right,20
-keybind = cmd+shift+up=resize_split:up,20
-keybind = cmd+shift+down=resize_split:down,20
+# 分割サイズを「調整」
+keybind = ctrl+shift+left=resize_split:left,20
+keybind = ctrl+shift+right=resize_split:right,20
+keybind = ctrl+shift+up=resize_split:up,20
+keybind = ctrl+shift+down=resize_split:down,20
 
 # Cmd + W で現在の「ペイン（分割）」を閉じる
 # （デフォルトだとウィンドウごと閉じてしまうことがあるため、ペインを閉じる設定を優先）
 keybind = cmd+w=close_surface
 
+# コピー＆ペースト
+keybind = cmd+shift+c=copy_to_clipboard
+keybind = cmd+shift+v=paste_from_clipboard
+
+# コマンド入力欄への移動
+keybind = cmd+shift+up=jump_to_prompt:-1
+keybind = cmd+shift+down=jump_to_prompt:1
+
+# コマンド実行後に通知を表示する設定
 
 notify-on-command-finish = unfocused
 notify-on-command-finish-action = notify
