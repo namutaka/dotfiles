@@ -1,6 +1,14 @@
 gui:
   nerdFontsVersion: "3"
   showFileTree: false
+  sidePanels:
+    - [status]
+    - [files, worktrees, submodules]
+    - [commits, reflog]
+    - [branches, remotes, tags]
+    - [stash]
+  screenMode: half
+
 git:
   pagers:
     - colorArg: always
@@ -9,4 +17,8 @@ git:
   allBranchesLogCmds:
     - git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0 reverse)%h%Creset %C(cyan)%ad%Creset %C(#dd4814)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' --
 
+keybinding:
+  universal:
+    scrollUpMain: [<pgup>, K, <ctrl+k>]
+    scrollDownMain: [<pgdown>, J, <ctrl+j>]
 
